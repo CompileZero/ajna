@@ -1,7 +1,7 @@
 package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
+
+import androidx.room.Entity;
 
 @Entity(tableName = "immediate_contacts_table")
 public class MyImmediateContactsEntity {
