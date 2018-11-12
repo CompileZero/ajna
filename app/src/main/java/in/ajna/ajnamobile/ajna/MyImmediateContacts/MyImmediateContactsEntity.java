@@ -2,16 +2,36 @@ package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity(tableName = "immediate_contacts_table")
+@Entity(tableName = "my_immediate_contacts_table")
 public class MyImmediateContactsEntity {
 
-    private String name;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-    private String contactNumber;
+    private String nameOfImmediateContact;
 
-    public MyImmediateContactsEntity(String name, String contactNumber) {
-        this.name = name;
-        this.contactNumber = contactNumber;
+    private String contactNumberOfImmediateContact;
+
+    public MyImmediateContactsEntity(String nameOfImmediateContact, String contactNumberOfImmediateContact) {
+        this.nameOfImmediateContact=nameOfImmediateContact;
+        this.contactNumberOfImmediateContact=contactNumberOfImmediateContact;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNameOfImmediateContact() {
+        return nameOfImmediateContact;
+    }
+
+    public String getContactNumberOfImmediateContact() {
+        return contactNumberOfImmediateContact;
     }
 }
