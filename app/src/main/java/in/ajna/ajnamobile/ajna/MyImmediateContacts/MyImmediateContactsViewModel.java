@@ -15,6 +15,22 @@ public class MyImmediateContactsViewModel extends AndroidViewModel {
 
     public MyImmediateContactsViewModel(@NonNull Application application) {
         super(application);
+        repository = new MyImmediateContactsRepository(application);
+        allImmediateContacts = repository.getAllImmediateContacts();
+    }
+
+
+    public void insert(MyImmediateContactsEntity myImmediateContactsEntity){
+        repository.insert(myImmediateContactsEntity);
+    }
+
+    public void delete(MyImmediateContactsEntity myImmediateContactsEntity){
+        repository.delete(myImmediateContactsEntity);
+    }
+
+    public LiveData<List<MyImmediateContactsEntity>> getAllImmediateContacts(){
+
+        return repository.getAllImmediateContacts();
     }
 
 }

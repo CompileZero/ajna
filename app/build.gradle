@@ -32,6 +32,9 @@ dependencies {
     //Card View
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    //Recycler View
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
     //Wave View
     implementation 'me.itangqi.waveloadingview:library:0.3.5'
 
@@ -54,4 +57,9 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.0.0-rc01"
     annotationProcessor "androidx.room:room-compiler:2.0.0-rc01"
+
+
+
+    //Material for custom switches
+    implementation 'com.github.rey5137:material:1.2.5'
 }
