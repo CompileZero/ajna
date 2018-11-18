@@ -31,10 +31,9 @@
             android:textSize="25sp"
             android:gravity="center"/>
 
-
-
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
+        android:id="@+id/fragmentContainerExpanded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -48,6 +47,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvDeviceStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -123,37 +123,69 @@
             android:layout_marginEnd="5dp"
             app:cardCornerRadius="10dp"
             android:clickable="true"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            android:focusable="true">
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/tvMyImmediateContacts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="My Immediate Contacts"
-                android:textColor="#005485"
-                android:textSize="20sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvMyImmediateContacts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Immediate Contacts"
+                        android:textColor="#005485"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="20sp"/>
+
+                    <com.rey.material.widget.ImageView
+                        android:id="@+id/btnExpandMyImmediateContacts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_expand"
+                        app:tint="@color/colorPrimaryDark"
+
+
+                        android:layout_gravity="end"
+                        />
+                </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
+
                 android:layout_height="1dp"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="35dp"
                 android:background="#C4C4C4" />
 
-                <fragment
-                    android:id="@+id/fragment"
-                    android:name="in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragment"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/fragmentContainerMyImmediateContacts"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                </LinearLayout>
+                <com.libizo.CustomEditText
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Enter your name"
+                    app:libIZO_setBorderView="true"
 
-                    tools:layout="@layout/fragment_my_immediate_contacts" />
-
+                    app:libIZO_setStrokeWidth="3dp"
+                    app:libIZO_setBorderColor="@color/colorPrimaryDark"
+                    app:libIZO_setCornerRadius="10dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

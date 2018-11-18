@@ -3,4 +3,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <array name="colorsIcon3">
+        <item>#00363a</item>
+        <item>#870000</item>
+        <item>#003d00</item>
+        <item>#002984</item>
+        <item>#bc5100</item>
+    </array>
 </resources>
