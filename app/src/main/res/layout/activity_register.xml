@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Login.RegisterActivity">
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/etRegisterFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tvLogo"
+        android:layout_centerHorizontal="true"
+
+
+        app:isResponsiveIconColor="true"
+        app:useDenseSpacing="true"
+        app:helperText="Enter your full name"
+        app:labelText="Full Name"
+
+        app:panelBackgroundColor="@color/c3"
+        app:primaryColor="@color/c9"
+        app:errorColor="@color/y1"
+        app:helperTextColor="@color/c6"
+        app:secondaryColor="@color/c9">
+
+    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+        android:id="@+id/extendedEditTextRegisterFullName"
+        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/etRegisterAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/etRegisterFullName"
+        android:layout_centerHorizontal="true"
+
+
+
+        app:isResponsiveIconColor="true"
+        app:useDenseSpacing="true"
+
+        app:helperText="Enter your apartment address"
+        app:labelText="Address"
+
+        app:panelBackgroundColor="@color/c3"
+        app:primaryColor="@color/c9"
+        app:errorColor="@color/y1"
+        app:helperTextColor="@color/c6"
+        app:secondaryColor="@color/c9">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/extendedEditTextRegisterAddress"
+            android:inputType="textPostalAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/etRegisterCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_below="@id/etRegisterAddress"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+
+        app:isResponsiveIconColor="true"
+        app:useDenseSpacing="true"
+
+
+        app:helperText="Enter your city name"
+        app:labelText="City"
+
+        app:panelBackgroundColor="@color/c3"
+        app:primaryColor="@color/c9"
+        app:errorColor="@color/y1"
+        app:helperTextColor="@color/c6"
+        app:secondaryColor="@color/c9">
+    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+        android:id="@+id/extendedEditTextRegisterCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:inputType="text"
+        android:textColor="@android:color/white"
+        />
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/etRegisterCity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
+
+
+        android:text="REGISTER"
+        android:textSize="20sp"
+        android:fontFamily="@font/barlow_semi_condensed_medium"
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:backgroundTint="@color/c4"
+        app:cornerRadius="4dp"
+
+
+        />
+
+</RelativeLayout>

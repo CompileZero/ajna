@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="in.ajna.ajnamobile.ajna">
 
+    <uses-feature android:name="android.hardware.camera"/>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -22,8 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Accounts.AccountsActivity" />
-        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Login.RegisterActivity" />
+        <activity android:name=".Login.VerifyPhoneActivity" />
+        <activity android:name=".Login.QRCodeActivity"></activity>
     </application>
 
 </manifest>

@@ -3,21 +3,31 @@ package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.ramotion.foldingcell.FoldingCell;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.transform.Pivot;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
-import java.util.List;
+import org.w3c.dom.Text;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.MainActivity;
@@ -31,15 +41,22 @@ public class MyImmediateContactsFragmentExpanded extends Fragment {
     private View view;
     MainActivity mainActivity;
 
-
+    FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference myImmediateContactsRef = db.collection("");
+    private CollectionReference myImmediateContactsRef = db.collection("AJNA_12_55_27").document("My Family").collection("members");
 
-
+    private MyImmediateContactsAdapterExpanded adapter;
 
     Button btnBackRvMyImmediateContacts;
 
+
+    private FoldingCell foldingCell;
+
+
+    private DiscreteScrollView picker;
+
+    private TextView tvDisplayName,tvDisplayContactNumber;
 
     public MyImmediateContactsFragmentExpanded() {
         // Required empty public constructor
@@ -52,15 +69,84 @@ public class MyImmediateContactsFragmentExpanded extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_immediate_contacts_fragment_expanded, container, false);
 
+        tvDisplayName=view.findViewById(R.id.tvDisplayName);
+        tvDisplayContactNumber=view.findViewById(R.id.tvDisplayContactNumber);
 
 
-        //Initialise Recycler-View
-        RecyclerView recyclerView = view.findViewById(R.id.rvMyImmediateContacts);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        picker=view.findViewById(R.id.picker);
+        picker.setItemTransformer(new ScaleTransformer.Builder()
+                .setMaxScale(1.65f)
+                .setMinScale(0.8f)
+                .setPivotX(Pivot.X.CENTER)
+                .setPivotY(Pivot.Y.CENTER)
+                .build());
+
+
+        Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact");
+
+
+        FirestoreRecyclerOptions<MyImmediateContacts> options=new FirestoreRecyclerOptions.Builder<MyImmediateContacts>()
+                .setQuery(query,MyImmediateContacts.class)
+                .build();
+
+        adapter = new MyImmediateContactsAdapterExpanded(options);
+        picker.addScrollStateChangeListener(new DiscreteScrollView.ScrollStateChangeListener<RecyclerView.ViewHolder>() {
+            @Override
+            public void onScrollStart(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+            }
+
+            @Override
+            public void onScrollEnd(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                TextView tvName=viewHolder.itemView.findViewById(R.id.tvNameOfImmediateContact);
+                TextView tvContactNumber=viewHolder.itemView.findViewById(R.id.tvContactNumberOfImmediateContact);
+
+                String name=tvName.getText().toString().trim();
+                String contactNumber=tvContactNumber.getText().toString().trim();
+
+                tvDisplayName.setText(name);
+                tvDisplayContactNumber.setText(contactNumber);
+
+            }
+
+            @Override
+            public void onScroll(float v, int i, int i1, @Nullable RecyclerView.ViewHolder viewHolder, @Nullable RecyclerView.ViewHolder t1) {
+
+            }
+        });
+        //recyclerView.setAdapter(adapter);
+        picker.setAdapter(adapter);
+
 
 
         //mandate return view
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+        Log.d("FRAGMENT EXPANDED","on Start");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+        Log.d("FRAGMENT EXPANDED","on Stop");
+
+    }
+    private void setUpRecyclerView() {
+
+
+    }
 }

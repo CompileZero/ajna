@@ -1,5 +1,6 @@
 package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.github.ivbaranov.mli.MaterialLetterIcon;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,28 +23,30 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
 
     @Override
     protected void onBindViewHolder(@NonNull MyImmediateContactsHolder myImmediateContactsHolder, int i, @NonNull MyImmediateContacts myImmediateContacts) {
-        myImmediateContactsHolder.tvNameOfImmediateContact.setText(myImmediateContacts.getNameOfImmediateContact());
-        myImmediateContactsHolder.tvContactNumberOfImmediateContact.setText(myImmediateContacts.getContactNumberOfImmediateContact());
+
+        myImmediateContactsHolder.tvIcon.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,2)));
     }
 
     @NonNull
     @Override
     public MyImmediateContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_my_immediate_contacts_fragment_expanded,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_immediate_contacts_list_item_collapsed,parent,false);
 
         return new MyImmediateContactsHolder(v);
     }
 
     class MyImmediateContactsHolder extends RecyclerView.ViewHolder{
 
-        TextView tvNameOfImmediateContact;
-        TextView tvContactNumberOfImmediateContact;
+
+
+        TextView tvIcon;
 
 
         public MyImmediateContactsHolder(@NonNull View itemView) {
             super(itemView);
-            tvNameOfImmediateContact=itemView.findViewById(R.id.tvNameOfImmediateContact);
-            tvContactNumberOfImmediateContact=itemView.findViewById(R.id.tvContactNumberOfImmediateContact);
+
+
+            tvIcon=itemView.findViewById(R.id.tvIcon);
 
         }
     }

@@ -1,25 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
 
     tools:context=".Login.LoginActivity">
 
-    <com.libizo.CustomEditText
-        android:layout_width="wrap_content"
+    <com.github.florent37.shapeofview.shapes.DiagonalView
+        android:id="@+id/diagonal_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your name"
-        app:libIZO_setBorderView="true"
-        app:libIZO_setBorderColor="#8f1f15"
-        app:libIZO_setCornerRadius="4dp"
+        app:shape_diagonal_angle="10"
+        app:shape_diagonal_position="bottom"
+        app:shape_diagonal_direction="left"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:src="@drawable/ajna"
+            android:adjustViewBounds="true"
+            android:scaleType="matrix"
+            />
+
+
+    </com.github.florent37.shapeofview.shapes.DiagonalView>
+    <RelativeLayout
+        android:id="@+id/layout_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+
+
+            android:tint="#FFFFFF"
+            android:src="@drawable/ic_icon1" />
+
+        <TextView
+            android:id="@+id/tvLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+
+
+
+            android:fontFamily="@font/bc_medium"
+            android:text="AJNA"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+
+
+
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/diagonal_view"
+
+
+        app:isResponsiveIconColor="true"
+        app:useDenseSpacing="true"
+
+        app:maxCharacters="10"
+        app:helperText="Enter your phone number"
+        app:labelText="Phone Number"
+
+
+        app:panelBackgroundColor="@color/c3"
+        app:primaryColor="@color/c9"
+        app:errorColor="@color/y1"
+
+        >
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/extendedEditTextPhoneNumber"
+            android:inputType="phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            app:prefix="+91" />
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/etPhoneNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
+
+
+        android:text="ENTER"
+        android:textSize="20sp"
+        android:fontFamily="@font/bc_extrabold"
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:backgroundTint="@color/c4"
+        app:cornerRadius="4dp"
+
+
         />
 
 
-
-
-
-
-</LinearLayout>
+</RelativeLayout>

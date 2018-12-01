@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +21,6 @@
 
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:navigationIcon="@drawable/ic_icon1">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,164 +29,148 @@
             android:textColor="@android:color/black"
             android:textSize="25sp"
             android:gravity="center"/>
-
     </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
-        android:id="@+id/fragmentContainerExpanded"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Slider goes here"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar1"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/custom_border_home">
+        android:layout_marginBottom="10dp">
 
-
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvDeviceStatus"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+        <RelativeLayout
+            android:id="@+id/fragmentContainerExpanded"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            >
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvDeviceStatus"
                 android:layout_width="match_parent"
-                android:layout_height="181dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
                 <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-
-                    android:text="Device Status"
-                    android:textColor="#005485"
-                    android:textSize="20sp" />
-
-                <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="35dp"
-
-                    android:background="#C4C4C4" />
-
-                <me.itangqi.waveloadingview.WaveLoadingView
-                    android:id="@+id/waveView"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_margin="10dp"
-                    app:wlv_borderColor="#FF9F00"
-                    app:wlv_borderWidth="1dp"
-                    app:wlv_titleCenter="47%"
-                    app:wlv_titleCenterSize="20sp"
-                    app:wlv_titleCenterColor="@android:color/white"
-                    app:wlv_titleCenterStrokeWidth="2dp"
-                    app:wlv_titleCenterStrokeColor="@android:color/black"
-
-
-                    app:wlv_progressValue="55"
-
-                    app:wlv_shapeType="circle"
-
-                    app:wlv_waveColor="#FF7000"></me.itangqi.waveloadingview.WaveLoadingView>
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginStart="10dp"
-                    android:text="30 days
-12 hrs left"
-                    android:fontFamily="@font/barlow_semi_condensed_medium"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="center"/>
-            </LinearLayout>
+                    android:text="Hi I am a card"/>
 
 
-        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvMyImmediateContacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            app:cardCornerRadius="10dp"
-            android:clickable="true"
-            app:cardElevation="5dp"
-            android:focusable="true">
-            <LinearLayout
+            </androidx.cardview.widget.CardView>
+
+            <com.ramotion.foldingcell.FoldingCell
+                xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/folding_cell"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
+
+                android:layout_centerHorizontal="true"
+
+                android:layout_below="@id/cvDeviceStatus"
+                android:layout_margin="10dp"
+
+                android:clipChildren="false"
+                android:clipToPadding="false"
+
+
+                folding-cell:animationDuration="1300"
+                folding-cell:backSideColor="#8b3722"
+                folding-cell:cameraHeight="30">
+
+                <FrameLayout
+                    android:id="@+id/cell_content_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone">
 
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/tvMyImmediateContacts"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/fragmentContainerMyImmediateContacts"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="My Immediate Contacts"
-                        android:textColor="#005485"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="20sp"/>
 
-                    <com.rey.material.widget.ImageView
-                        android:id="@+id/btnExpandMyImmediateContacts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_expand"
-                        app:tint="@color/colorPrimaryDark"
-
-
-                        android:layout_gravity="end"
-                        />
-                </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-
-                android:layout_height="1dp"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="35dp"
-                android:background="#C4C4C4" />
-
-                <LinearLayout
-                    android:id="@+id/fragmentContainerMyImmediateContacts"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center">
+                    </RelativeLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/cell_title_view"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </LinearLayout>
-                <com.libizo.CustomEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:hint="Enter your name"
-                    app:libIZO_setBorderView="true"
+                    <RelativeLayout
+                        android:id="@+id/fragmentContainerMyImmediateContacts3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                    app:libIZO_setStrokeWidth="3dp"
-                    app:libIZO_setBorderColor="@color/colorPrimaryDark"
-                    app:libIZO_setCornerRadius="10dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center">
+                    </RelativeLayout>
+                </FrameLayout>
+            </com.ramotion.foldingcell.FoldingCell>
 
-    </LinearLayout>
-</LinearLayout>
+            <com.ramotion.foldingcell.FoldingCell
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/folding_cell2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/folding_cell">
+                ​<FrameLayout
+                android:id="@+id/cell_content_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_dark"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+            </FrameLayout>
+                ​
+                <FrameLayout
+                    android:id="@+id/cell_title_view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@android:color/holo_blue_dark" />
+                </FrameLayout>
+                ​
+            </com.ramotion.foldingcell.FoldingCell>
+        </RelativeLayout>
+
+
+
+            </ScrollView>
+
+
+
+
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
+

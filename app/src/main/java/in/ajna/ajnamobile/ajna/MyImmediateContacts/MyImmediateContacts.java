@@ -2,18 +2,18 @@ package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 public class MyImmediateContacts {
 
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_CONTACT = "contact";
-
     private String nameOfImmediateContact;
     private String contactNumberOfImmediateContact;
+    private int idOfImmediateContact;
 
     public MyImmediateContacts() {
+        //Required empty constructor
     }
 
-    public MyImmediateContacts(String name, String contact) {
-        this.nameOfImmediateContact = name;
-        this.contactNumberOfImmediateContact = contact;
+    public MyImmediateContacts(String nameOfImmediateContact, String contactNumberOfImmediateContact, int idOfImmediateContact) {
+        this.nameOfImmediateContact = nameOfImmediateContact;
+        this.contactNumberOfImmediateContact = contactNumberOfImmediateContact;
+        this.idOfImmediateContact=idOfImmediateContact;
     }
 
     public String getNameOfImmediateContact() {
@@ -30,5 +30,12 @@ public class MyImmediateContacts {
 
     public void setContactNumberOfImmediateContact(String contactNumberOfImmediateContact) {
         this.contactNumberOfImmediateContact = contactNumberOfImmediateContact;
+    }
+    public int getIdOfImmediateContact() {
+        return idOfImmediateContact;
+    }
+
+    public void setIdOfImmediateContact(int idOfImmediateContact) {
+        this.idOfImmediateContact = idOfImmediateContact;
     }
 }

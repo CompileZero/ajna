@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "210089692185-2nqcis76nigb48t8g192ludusq40ikq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ajna.ajnamobile.ajna",
+            "certificate_hash": "e9a29970ae373da3b243e9a0b6ee07bf52abe980"
+          }
+        },
+        {
           "client_id": "210089692185-3c10jo0a0aij0fqbs07lo67s7a81murn.apps.googleusercontent.com",
           "client_type": 3
         }

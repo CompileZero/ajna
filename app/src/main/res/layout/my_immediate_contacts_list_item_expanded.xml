@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="120dp"
+    android:layout_height="120dp"
 
-    <TextView
-        android:id="@+id/tvNameOfImmediateContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"/>
+    android:layout_marginTop="10dp"
 
-    <TextView
-        android:id="@+id/tvContactNumberOfImmediateContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvNameOfImmediateContact"
-        android:text="Contact"/>
+    >
+        <TextView
+            android:id="@+id/tvIconExpanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/round_gradient3"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
+
+
+            android:gravity="center"
+
+            android:textSize="20sp"
+            android:fontFamily="@font/barlow_semi_condensed_extrabold"
+            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+
+            android:outlineProvider="background"
+            android:elevation="5dp"
+            />
+
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+    android:layout_weight="2"
+    android:layout_below="@id/tvIconExpanded"
+
+    android:visibility="gone"
+android:orientation="vertical">
+<TextView
+    android:id="@+id/tvNameOfImmediateContact"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:text="Name"/>
+
+<TextView
+    android:id="@+id/tvContactNumberOfImmediateContact"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:text="Contact"/>
+</LinearLayout>
 </RelativeLayout>

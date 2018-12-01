@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    android:layout_gravity="center_horizontal"
+
+
+    android:background="@drawable/round_gradient"
+
+
+
+
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context=".MyImmediateContacts.MyImmediateContactsFragmentCollapsed">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMyImmediateContacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/my_immediate_contacts_list_item_collapsed" />
-</LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+
+            android:textSize="25sp"
+            android:text="MY IMMEDIATE \nCONTACTS"
+            android:fontFamily="@font/barlow_semi_condensed_bold"
+
+            android:textColor="#FFFFFF"
+            />
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_below="@id/tv1"
+            android:layout_marginStart="10dp"
+
+            android:textSize="15sp"
+            android:text="These contacts will be sent text messages immediately if some activity takes place when you are not around."
+            android:fontFamily="@font/barlow_semi_condensed_bold"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMyImmediateContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+
+            android:layout_below="@id/tv2"
+
+            android:layout_marginBottom="5dp"
+
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/my_immediate_contacts_list_item_collapsed" />
+
+
+
+
+</RelativeLayout>

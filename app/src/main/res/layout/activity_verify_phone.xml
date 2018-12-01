@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Login.VerifyPhoneActivity">
+
+    <TextView
+        android:id="@+id/tvVerificationCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="VERIFICATION CODE"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"/>
+<TextView
+    android:id="@+id/tvInfo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/tvVerificationCode"
+
+    android:layout_marginTop="10dp"
+
+    android:gravity="center"
+    android:text="We have sent you a verification code. \nThe verification process happens automatically.\nIf nothing happens in the next minute, please enter the OTP manually and click Verify"/>
+    <com.mukesh.OtpView
+        android:id="@+id/otpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/OtpWidget.OtpView"
+
+
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        app:lineColor="@color/colorPrimary"
+        android:itemBackground="@color/colorPrimaryDark"
+        android:focusedByDefault="true"
+        android:textSize="30sp"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/barlow_semi_condensed_bold"
+        app:itemCount="6"/>
+
+    <com.marozzi.roundbutton.RoundButton
+        android:id="@+id/btnVerify"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/otpView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+
+        app:rb_animation_progress_style="circle"
+        app:rb_animation_corner_radius="20dp"
+        app:rb_animation_duration="500"
+
+        android:text="Verify"
+
+
+        app:rb_background_color="@color/colorPrimaryDark"
+        app:rb_text_color="@android:color/white"
+        app:rb_corner_radius="100dp"/>
+
+
+</RelativeLayout>
