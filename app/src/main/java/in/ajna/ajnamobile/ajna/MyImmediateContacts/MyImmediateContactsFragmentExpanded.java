@@ -1,6 +1,8 @@
 package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,40 +42,42 @@ import in.ajna.ajnamobile.ajna.R;
 public class MyImmediateContactsFragmentExpanded extends Fragment {
 
     private View view;
-    MainActivity mainActivity;
 
-    FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private SharedPreferences sp;
 
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference myImmediateContactsRef = db.collection("AJNA_12_55_27").document("My Family").collection("members");
+    private CollectionReference myImmediateContactsRef;
 
     private MyImmediateContactsAdapterExpanded adapter;
 
-    Button btnBackRvMyImmediateContacts;
-
-
     private FoldingCell foldingCell;
-
 
     private DiscreteScrollView picker;
 
+    private Button btnBackRvMyImmediateContacts;
+
     private TextView tvDisplayName,tvDisplayContactNumber;
+
+    private FloatingActionButton btnAddImmediateContact;
 
     public MyImmediateContactsFragmentExpanded() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_immediate_contacts_fragment_expanded, container, false);
 
         tvDisplayName=view.findViewById(R.id.tvDisplayName);
         tvDisplayContactNumber=view.findViewById(R.id.tvDisplayContactNumber);
 
+        btnAddImmediateContact=view.findViewById(R.id.btnAddImmediateContact);
 
+        //Initialise Discrete Scroll view
         picker=view.findViewById(R.id.picker);
         picker.setItemTransformer(new ScaleTransformer.Builder()
                 .setMaxScale(1.65f)
@@ -81,14 +86,17 @@ public class MyImmediateContactsFragmentExpanded extends Fragment {
                 .setPivotY(Pivot.Y.CENTER)
                 .build());
 
-
+        //Get QR Code data and retrieve the device data from Firebase
+        sp=this.getActivity().getSharedPreferences("DEVICE_CODE",Context.MODE_PRIVATE);
+        String code=sp.getString("code","0");
+        myImmediateContactsRef= db.collection(code).document("My Family").collection("members");
         Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact");
-
 
         FirestoreRecyclerOptions<MyImmediateContacts> options=new FirestoreRecyclerOptions.Builder<MyImmediateContacts>()
                 .setQuery(query,MyImmediateContacts.class)
                 .build();
 
+        //Set contents of Firebase on Discrete Scroll View
         adapter = new MyImmediateContactsAdapterExpanded(options);
         picker.addScrollStateChangeListener(new DiscreteScrollView.ScrollStateChangeListener<RecyclerView.ViewHolder>() {
             @Override
@@ -114,9 +122,16 @@ public class MyImmediateContactsFragmentExpanded extends Fragment {
 
             }
         });
-        //recyclerView.setAdapter(adapter);
         picker.setAdapter(adapter);
 
+        btnAddImmediateContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddImmediateContactFragment dialogFrag = AddImmediateContactFragment.newInstance();
+                dialogFrag.setParentFab(btnAddImmediateContact);
+                dialogFrag.show(getFragmentManager(), dialogFrag.getTag());
+            }
+        });
 
 
         //mandate return view
@@ -147,6 +162,6 @@ public class MyImmediateContactsFragmentExpanded extends Fragment {
     }
     private void setUpRecyclerView() {
 
-
     }
+
 }

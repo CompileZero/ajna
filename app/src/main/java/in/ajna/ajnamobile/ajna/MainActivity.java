@@ -4,6 +4,9 @@ package in.ajna.ajnamobile.ajna;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 import es.dmoral.toasty.Toasty;
 import in.ajna.ajnamobile.ajna.Login.LoginActivity;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContacts;
@@ -62,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager=getSupportFragmentManager();
 
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
     private CollectionReference myImmediateContactsRef;
 
@@ -82,41 +87,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Check whether the user has signed in
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null){
-            db = FirebaseFirestore.getInstance();
-            Toasty.success(this,"Sign in successful!",Toast.LENGTH_SHORT,true).show();
-            DocumentReference docRef=db.collection("users").document(user.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
-                        DocumentSnapshot document=task.getResult();
-                        if(document!=null){
-                            if(document.get("fullName")==null || document.get("address")==null || document.get("city")==null){
-                                Toast.makeText(MainActivity.this, "you have not registered yet!(Inner)", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
 
-                            Toast.makeText(MainActivity.this, "you have not registered yet!(Outer)", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });
-            if(db.collection("users").document(user.getUid())==null){
-                Toast.makeText(this, "you have not registered yet!", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else
-        {
-            Toasty.error(this,"Please Sign In!",Toast.LENGTH_SHORT,true).show();
-            Intent intent = new Intent(this,LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        }
 
 
         //Display Main Activity
@@ -326,5 +297,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void animate(View view){
+        ImageView v = (ImageView) view;
+        Drawable d = v.getDrawable();
 
+        if(d instanceof AnimatedVectorDrawableCompat){
+            AnimatedVectorDrawableCompat avd=(AnimatedVectorDrawableCompat) d;
+            avd.start();
+        }
+        else if(d instanceof AnimatedVectorDrawable){
+            AnimatedVectorDrawable avd=(AnimatedVectorDrawable) d;
+            avd.start();
+        }
+    }
 }

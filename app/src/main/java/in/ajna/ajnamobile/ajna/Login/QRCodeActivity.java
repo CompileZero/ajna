@@ -10,6 +10,7 @@ import in.ajna.ajnamobile.ajna.MainActivity;
 import in.ajna.ajnamobile.ajna.R;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -57,6 +58,10 @@ public class QRCodeActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        SharedPreferences sp = getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putString("code",result.getText());
+                        edit.apply();
                         db.collection(result.getText()).document("My Family").set(user);
                         Toast.makeText(QRCodeActivity.this, "Device Registered!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(QRCodeActivity.this, MainActivity.class);

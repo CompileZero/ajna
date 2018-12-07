@@ -9,24 +9,6 @@
 
     tools:context=".Login.LoginActivity">
 
-    <com.github.florent37.shapeofview.shapes.DiagonalView
-        android:id="@+id/diagonal_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:shape_diagonal_angle="10"
-        app:shape_diagonal_position="bottom"
-        app:shape_diagonal_direction="left"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:src="@drawable/ajna"
-            android:adjustViewBounds="true"
-            android:scaleType="matrix"
-            />
-
-
-    </com.github.florent37.shapeofview.shapes.DiagonalView>
     <RelativeLayout
         android:id="@+id/layout_info"
         android:layout_width="match_parent"
@@ -41,7 +23,7 @@
             android:layout_centerHorizontal="true"
 
 
-            android:tint="#FFFFFF"
+            android:tint="#000000"
             android:src="@drawable/ic_icon1" />
 
         <TextView
@@ -56,12 +38,41 @@
 
             android:fontFamily="@font/bc_medium"
             android:text="AJNA"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="30sp" />
 
     </RelativeLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
+        app:passwordToggleDrawable="@color/c3"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+
+        app:hintEnabled="true"
+        android:hint="Please enter your phone number"
+
+
+
+
+        app:boxBackgroundColor="@color/c9"
+
+        app:boxCornerRadiusTopStart="20dp"
+
+        app:boxCornerRadiusTopEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:gravity="center"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -74,7 +85,8 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        android:layout_below="@id/diagonal_view"
+
+        android:visibility="gone"
 
 
         app:isResponsiveIconColor="true"
@@ -116,6 +128,7 @@
         android:layout_marginBottom="20dp"
 
 
+
         android:text="ENTER"
         android:textSize="20sp"
         android:fontFamily="@font/bc_extrabold"
@@ -123,7 +136,7 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
 
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        app:backgroundTint="@color/c4"
+
         app:cornerRadius="4dp"
 
 

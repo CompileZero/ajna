@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="marker_corner_radius">4dp</dimen>
+    <dimen name="marker_height">40dp</dimen>
+    <dimen name="marker_width">32dp</dimen>
+</resources>

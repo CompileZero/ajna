@@ -5,22 +5,22 @@
 
     android:layout_marginTop="2dp">
 
-    <TextView
+   <TextView
         android:id="@+id/tvIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_margin="5dp"
-        android:layout_below="@id/rvMyImmediateContacts"
 
-        android:text="A"
         android:textSize="15sp"
         android:textAllCaps="true"
+       android:textColor="@android:color/white"
 
-        android:textColor="@android:color/white"
         android:gravity="center"
         android:background="@drawable/round_gradient2"
-        android:outlineProvider="background"
+       android:outlineProvider="background"
+       android:elevation="3dp"
+        />
 
-        android:elevation="3dp"/>
+
 </RelativeLayout>

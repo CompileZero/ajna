@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:foregroundGravity="center"
 
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_icon1">
         <TextView
             android:layout_width="wrap_content"
@@ -51,119 +51,116 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/fragmentContainerExpanded"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            >
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvDeviceStatus"
+            <RelativeLayout
+                android:id="@+id/fragmentContainerExpanded"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="15dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp">
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
 
-                <TextView
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDeviceStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hi I am a card"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
 
-
-
-            </androidx.cardview.widget.CardView>
-
-            <com.ramotion.foldingcell.FoldingCell
-                xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/folding_cell"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_centerHorizontal="true"
-
-                android:layout_below="@id/cvDeviceStatus"
-                android:layout_margin="10dp"
-
-                android:clipChildren="false"
-                android:clipToPadding="false"
-
-
-                folding-cell:animationDuration="1300"
-                folding-cell:backSideColor="#8b3722"
-                folding-cell:cameraHeight="30">
-
-                <FrameLayout
-                    android:id="@+id/cell_content_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <RelativeLayout
-                        android:id="@+id/fragmentContainerMyImmediateContacts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center">
-                    </RelativeLayout>
-                </FrameLayout>
-                <FrameLayout
-                    android:id="@+id/cell_title_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RelativeLayout
-                        android:id="@+id/fragmentContainerMyImmediateContacts3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center">
-                    </RelativeLayout>
-                </FrameLayout>
-            </com.ramotion.foldingcell.FoldingCell>
-
-            <com.ramotion.foldingcell.FoldingCell
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/folding_cell2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/folding_cell">
-                ​<FrameLayout
-                android:id="@+id/cell_content_view2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_dark"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp" />
-            </FrameLayout>
-                ​
-                <FrameLayout
-                    android:id="@+id/cell_title_view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@android:color/holo_blue_dark" />
-                </FrameLayout>
-                ​
-            </com.ramotion.foldingcell.FoldingCell>
-        </RelativeLayout>
+                        android:layout_height="wrap_content"
+                        android:text="Hi I am a card" />
 
 
+                </androidx.cardview.widget.CardView>
 
-            </ScrollView>
+                <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/folding_cell"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@id/cvDeviceStatus"
+                    android:layout_marginBottom="10dp"
+
+                    folding-cell:backSideColor="#ffdfc9">
+
+                    <FrameLayout
+                        android:id="@+id/cell_content_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:id="@+id/fragmentContainerMyImmediateContacts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"></RelativeLayout>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/cell_title_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/fragmentContainerMyImmediateContacts3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"></RelativeLayout>
+                    </FrameLayout>
+                </com.ramotion.foldingcell.FoldingCell>
+
+                <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/folding_cell2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/folding_cell"
+
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    ​
+
+                    <FrameLayout
+                        android:id="@+id/cell_content_view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_green_dark"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp" />
+                    </FrameLayout>
+                    ​
+
+                    <FrameLayout
+                        android:id="@+id/cell_title_view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="@android:color/holo_blue_dark" />
+                    </FrameLayout>
+                    ​
+                </com.ramotion.foldingcell.FoldingCell>
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
 
 
 

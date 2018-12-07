@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/barlow_family</item>
         <item name="android:ambientShadowAlpha">0.3</item>
@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">@android:color/background_light</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
+    </style>
 </resources>

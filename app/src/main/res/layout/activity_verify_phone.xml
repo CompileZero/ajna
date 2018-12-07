@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         style="@style/OtpWidget.OtpView"
 
-
+        app:itemRadius="15dp"
         android:inputType="number"
         android:textColor="@android:color/white"
         app:lineColor="@color/colorPrimary"

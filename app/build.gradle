@@ -64,8 +64,6 @@ dependencies {
     //Material for custom switches
     implementation 'com.github.rey5137:material:1.2.5'
 
-    //Material Letter icons
-    implementation 'com.github.ivbaranov:materiallettericon:0.2.3'
 
     //Material UI from Google
     implementation 'com.google.android.material:material:1.1.0-alpha01'
@@ -118,7 +116,14 @@ dependencies {
     //Custom Edit Text
     implementation 'com.libizo:customedittext:1.0.3'
 
+    //Fancy Buttons
+    implementation 'com.rilixtech:materialfancybuttons:1.8.7'
 
+    //Fab layout
+    implementation 'com.allattentionhere:fabulousfilter:0.0.5'
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:2.8.0'
 
 }
 

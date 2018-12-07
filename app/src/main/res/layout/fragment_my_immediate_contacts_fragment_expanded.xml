@@ -1,41 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="2dp"
-    android:elevation="3dp"
+    android:layout_height="400dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerHorizontal="true"
     android:background="@drawable/round_gradient"
     tools:context=".MyImmediateContacts.MyImmediateContactsFragmentExpanded">
 
-    <com.yarolegovich.discretescrollview.DiscreteScrollView
-        android:id="@+id/picker"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
 
 
-        android:foregroundGravity="center">
-    </com.yarolegovich.discretescrollview.DiscreteScrollView>
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+
+        android:layout_centerHorizontal="true"
+
+
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Below contacts will receive a text message as soon as some intrusion activity takes place."
+        android:fontFamily="@font/bc_semibold"
+
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/o1"
-        android:layout_below="@id/picker"/>
+        android:layout_below="@id/tv2"/>
+    <ImageView
+        android:id="@+id/bubbleBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/union2"
+
+        android:tint="@color/c3"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvDisplayName"
+        android:layout_marginTop="15dp"/>
+
     <TextView
         android:id="@+id/tvDisplayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/picker"
-
+        android:layout_below="@id/tv2"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="1dp"
 
+        android:textAllCaps="true"
         android:textSize="20sp"
-        android:text="Name"
+
+        android:textColor="@android:color/white"
         />
     <TextView
         android:id="@+id/tvDisplayContactNumber"
@@ -49,97 +74,51 @@
         android:layout_marginBottom="10dp"
 
         android:textSize="16sp"
-        android:text="Contact"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDeleteImmediateContact"
+        android:textColor="@android:color/white"/>
+
+
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:id="@+id/picker"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/tvDisplayName"/>
+    <!--<ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/tvDisplayContactNumber"
+        android:layout_below="@id/bubbleBack"
         android:layout_centerHorizontal="true"
+
+
         android:background="@drawable/round_gradient2"
+        android:src="@drawable/ic_delete"/>-->
 
-        app:icon="@drawable/ic_delete"
-        android:text="Delete"
-        app:cornerRadius="100dp"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/o1"
-        android:layout_below="@id/btnDeleteImmediateContact"/>
-
-    <com.libizo.CustomEditText
-        android:id="@+id/etAddImmediateContactName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-
-        android:hint="Full name"
-        android:fontFamily="@font/barlow_semi_condensed_bold"
-
-        app:libIZO_setBorderView="true"
-        app:libIZO_setBorderColor="@color/o1"
-        app:libIZO_setCornerRadius="50dp"
-        app:libIZO_setStrokeWidth="3dp"
-        app:libIZO_setClearIconVisible="true"
-
-
-        android:layout_below="@id/btnDeleteImmediateContact"/>
-
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-        android:id="@+id/etAddImmediateContactNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_below="@id/etAddImmediateContactName"
-
-        app:isResponsiveIconColor="true"
-        app:useDenseSpacing="true"
-        app:labelText="Contact Number"
-
-
-        app:primaryColor="@color/o1"
-        app:errorColor="@color/y1"
-        app:helperTextColor="@color/o1"
-        app:secondaryColor="@color/o1"
-        app:maxCharacters="10">
-
-        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/extendedEditTextAddContactNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:prefix="+91"
-
-            />
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddImmediateContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/etAddImmediateContactNumber"
+        android:layout_below="@id/bubbleBack"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/c8"
 
-        app:icon="@drawable/ic_add_circle"
-        android:text="Add"
-        app:cornerRadius="100dp"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+        android:src="@drawable/ic_add_circle"
+
+
+        android:background="@color/c3"
+        android:foregroundGravity="center"
+
+        app:backgroundTint="@android:color/white"
+        app:elevation="0dp"
+
+        />
+
+
+
+
+
 
 
 
