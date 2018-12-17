@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -23,8 +25,9 @@ import com.marozzi.roundbutton.RoundButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextFieldBoxes etPhoneNumber;
-    ExtendedEditText extendedEditTextPhoneNumber;
+
+    TextInputLayout etPhoneNumber;
+    TextInputEditText editTextPhoneNumber;
 
 
     Button btnLogin;
@@ -40,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
-        extendedEditTextPhoneNumber = findViewById(R.id.extendedEditTextPhoneNumber);
+        editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
 
         btnLogin=findViewById(R.id.btnLogin);
 
@@ -48,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber=extendedEditTextPhoneNumber.getText().toString().trim();
+                String phoneNumber=editTextPhoneNumber.getText().toString().trim();
 
                 if(phoneNumber.isEmpty() || phoneNumber.length()<10 || phoneNumber.length()>10){
-                    etPhoneNumber.setError("Please enter a valid phone number!",true);
+                    etPhoneNumber.setError("Please enter a valid phone Number!");
                     return;
                 }
                 String phoneNumberIndia="+91"+phoneNumber;

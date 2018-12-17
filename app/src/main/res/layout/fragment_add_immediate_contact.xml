@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:background="@color/c9"
+        android:background="@android:color/white"
         android:visibility="invisible"
         tools:ignore="MissingPrefix"
         tools:visibility="visible">
@@ -21,18 +21,54 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/c9"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:weightSum="2">
-            <Button
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddImmediateContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Add Contact"
+                app:backgroundTint="@color/c3"
+
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_add_circle"
+                app:strokeColor="@color/c8"
+                app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnClose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Close"/>
+
+                app:icon="@drawable/ic_close"
+
+
+                android:text="Close"
+                app:strokeColor="@color/c8"
+                app:strokeWidth="2dp"
+                app:cornerRadius="50dp"
+
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+
+            android:layout_below="@id/etNameImmediateContact"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="-60dp"
+
+            android:layout_toStartOf="@id/etPhoneNumberImmediateContact"
+            android:text="+91"
+            android:textSize="20sp" />
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etNameImmediateContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -47,15 +83,50 @@
             android:hint="Please enter the name"
             app:helperText="Please enter the name of the contact"
 
-            app:boxCornerRadiusTopStart="100dp"
+
             app:boxBackgroundColor="@color/c3"
             app:passwordToggleDrawable="@drawable/avatar_7"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNameImmediateContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:gravity="center"
 
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPhoneNumberImmediateContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@id/etNameImmediateContact"
+
+            app:hintEnabled="true"
+            android:hint="Please enter the phone number"
+
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+
+            app:helperTextEnabled="true"
+            app:helperText="Please enter the phone number"
+
+
+
+            app:passwordToggleDrawable="@drawable/avatar_7"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPhoneNumberImmediateContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>

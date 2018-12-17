@@ -1,28 +1,26 @@
 package in.ajna.ajnamobile.ajna;
 
 
-import android.animation.AnimatorSet;
-import android.animation.ValueAnimator;
-import android.content.Intent;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
+import android.app.Notification;
+
+import android.graphics.Color;
 import android.os.Build;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
-import es.dmoral.toasty.Toasty;
-import in.ajna.ajnamobile.ajna.Login.LoginActivity;
-import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContacts;
-import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsAdapterExpanded;
+
+import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentCollapsed;
+import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentExpanded;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCollapsed;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentExpanded;
+import in.ajna.ajnamobile.ajna.Notification.App;
+import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentCollapsed;
+import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
 
 
 import android.os.Bundle;
@@ -32,29 +30,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-import com.github.florent37.expansionpanel.ExpansionLayout;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.ramotion.foldingcell.FoldingCell;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private NotificationManagerCompat notificationManager;
     private static final String NAME_KEY = "Name";
 
     private static final String PHONE_KEY = "Phone";
@@ -67,34 +53,16 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager=getSupportFragmentManager();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseFirestore db;
 
 
-
-    private CollectionReference myImmediateContactsRef;
-
-
-    private MyImmediateContactsAdapterExpanded adapter;
-
-
-    private ExpansionLayout expansionLayout;
-
-
-
-
-
+    FloatingActionButton fabExpand1,fabExpand2;
+    FoldingCell fc,fc2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         //Display Main Activity
         setContentView(R.layout.activity_main);
-
-
-
 
         //Set Custom toolbar
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar1);
@@ -107,56 +75,32 @@ public class MainActivity extends AppCompatActivity {
             decor.setSystemUiVisibility(decor.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        notificationManager=NotificationManagerCompat.from(this);
+
+        //Initialise FAB
+        fabExpand1=findViewById(R.id.fabExpand1);
+        fabExpand1.setColorFilter(Color.WHITE);
+        fabExpand2=findViewById(R.id.fabExpand2);
+        fabExpand2.setColorFilter(Color.WHITE);
 
 
-        //Initialise collapsed fragment for Device Status
-        cvDeviceStatus =findViewById(R.id.cvDeviceStatus);
-
-
-        //Initialise collapsed fragment for My Immediate Contacts
-
-
-
-
-        FragmentTransaction fragmentTransaction1=fragmentManager.beginTransaction();
-        fragmentTransaction1.add(R.id.fragmentContainerMyImmediateContacts, new MyImmediateContactsFragmentExpanded())
-                .commit();
-
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction
-                .add(R.id.fragmentContainerMyImmediateContacts3,new MyImmediateContactsFragmentCollapsed(),"Collapsed")
-                .commit();
-
-        final RelativeLayout fragExp=findViewById(R.id.fragmentContainerMyImmediateContacts);
-        final RelativeLayout fragColl=findViewById(R.id.fragmentContainerMyImmediateContacts3);
-
+        //start My Immediate Contacts Fragments
+        initMyImmediateContacts();
+        initRecentMessages();
+        initMyFamily();
 
         //Folding Cell
-        final FoldingCell fc=findViewById(R.id.folding_cell);
-        fc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fc.toggle(false);
-            }
-        });
+        fc=findViewById(R.id.folding_cell);
+        fc2=findViewById(R.id.folding_cell2);
 
-        final FoldingCell fc2=findViewById(R.id.folding_cell2);
-        fc2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fc2.toggle(false);
-            }
-        });
-
-        /*final FoldingCell fc3=findViewById(R.id.folding_cell3);
+        final FoldingCell fc3=findViewById(R.id.folding_cell3);
         fc3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fc3.toggle(false);
             }
         });
-
-        final FoldingCell fc4=findViewById(R.id.folding_cell4);
+        /*final FoldingCell fc4=findViewById(R.id.folding_cell4);
         fc4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,72 +111,61 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initMyImmediateContacts() {
+        FragmentTransaction fragmentTransaction1=fragmentManager.beginTransaction();
+        fragmentTransaction1.add(R.id.fragmentContainerMyImmediateContacts, new MyImmediateContactsFragmentExpanded(),"ImmContactsExpanded")
+                .commit();
+
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction
+                .add(R.id.fragmentContainerMyImmediateContacts3,new MyImmediateContactsFragmentCollapsed(),"ImmContactsCollapsed")
+                .commit();
+    }
+
+    private void initRecentMessages(){
+        FragmentTransaction fragmentTransaction2=fragmentManager.beginTransaction();
+        fragmentTransaction2.add(R.id.fragmentContainerRecentMessages,new RecentMessagesFragmentExpanded(),"RecentMessages")
+                .commit();
+
+        FragmentTransaction fragmentTransaction3=fragmentManager.beginTransaction();
+        fragmentTransaction3.add(R.id.fragmentContainerRecentMessages2,new RecentMessagesFragmentCollapsed(),"RecentMessagesCollapsed")
+                .commit();
+    }
+
+    private void initMyFamily(){
+        FragmentTransaction fragmentTransaction4=fragmentManager.beginTransaction();
+        fragmentTransaction4.add(R.id.fragmentContainerMyFamily, new MyFamilyFragmentExpanded())
+                .commit();
+
+        FragmentTransaction fragmentTransaction5=fragmentManager.beginTransaction();
+        fragmentTransaction5.add(R.id.fragmentContainerMyFamily2, new MyFamilyFragmentCollapsed())
+        .commit();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    private void addNewContact(String name,String contact,int id){
-        MyImmediateContacts newContact = new MyImmediateContacts(name,contact,id);
-        db.collection(mAuth.getCurrentUser().getUid()).document().set(newContact)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Registered", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "ERROR:"+e.getMessage().toString().trim(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
-    private void addNewFamilyMember(){
-        Map<String, Object> newContact=new HashMap< >();
-        newContact.put(NAME_KEY,"Sudharm");
-        newContact.put(PHONE_KEY,"9766760151");
-        db.collection("MyFamily").document("Contacts").set(newContact)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Registered Family", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "ERROR:"+e.getMessage().toString().trim(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -253,61 +186,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void MyFamilyAnimation()
-    {
 
-        RelativeLayout relativeLayout=findViewById(R.id.fragmentContainerExpanded);
-        int height=relativeLayout.getHeight();
-
-        ValueAnimator expand = ValueAnimator.ofInt(cvMyImmediateContacts.getMeasuredHeight(),height);
-
-        expand.setDuration(500);
-        expand.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                final int animated=(int) animation.getAnimatedValue();
-
-                cvMyImmediateContacts.getLayoutParams().height = animated;
-                cvMyImmediateContacts.requestLayout();
-
-            }
-
-        });
-
-
-        ValueAnimator collapse=ValueAnimator.ofInt(cvDeviceStatus.getMeasuredHeight(),0);
-        collapse.setDuration(500);
-        collapse.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                final int animated=(int) animation.getAnimatedValue();
-
-                cvDeviceStatus.getLayoutParams().height=animated;
-                cvDeviceStatus.requestLayout();
-
-                if (cvDeviceStatus.getLayoutParams().height<0.1) {
-                    cvDeviceStatus.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        AnimatorSet set =new AnimatorSet();
-        set.playTogether(expand,collapse);
-        set.start();
+    public void expandImmediateContacts(View view){
+        fc.toggle(false);
+        sendOnChannel1();
 
     }
-
-    public void animate(View view){
-        ImageView v = (ImageView) view;
-        Drawable d = v.getDrawable();
-
-        if(d instanceof AnimatedVectorDrawableCompat){
-            AnimatedVectorDrawableCompat avd=(AnimatedVectorDrawableCompat) d;
-            avd.start();
-        }
-        else if(d instanceof AnimatedVectorDrawable){
-            AnimatedVectorDrawable avd=(AnimatedVectorDrawable) d;
-            avd.start();
-        }
+    public void expandRecentMessages(View view){
+        fc2.toggle(false);
     }
+    public void sendOnChannel1(){
+        Notification notification = new NotificationCompat.Builder(this,App.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_icon1)
+                .setContentTitle("Hello this is a text!")
+                .setContentText("This is the description.")
+                .build();
+        notificationManager.notify(1,notification);
+    }
+
 }

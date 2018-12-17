@@ -66,8 +66,8 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
         //Get QR Code data and retrieve the device data from Firebase
         sp=this.getActivity().getSharedPreferences("DEVICE_CODE",Context.MODE_PRIVATE);
         String code=sp.getString("code","0");
-         myImmediateContactsRef= db.collection(code).document("My Family").collection("members");
-        Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact");
+         myImmediateContactsRef= db.collection(code).document("MyImmediateContacts").collection("members");
+        Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact",Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<MyImmediateContacts> options=new FirestoreRecyclerOptions.Builder<MyImmediateContacts>()
                 .setQuery(query,MyImmediateContacts.class)

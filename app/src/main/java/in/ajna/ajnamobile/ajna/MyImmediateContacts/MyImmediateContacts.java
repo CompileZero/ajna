@@ -4,16 +4,16 @@ public class MyImmediateContacts {
 
     private String nameOfImmediateContact;
     private String contactNumberOfImmediateContact;
-    private int idOfImmediateContact;
+
 
     public MyImmediateContacts() {
         //Required empty constructor
     }
 
-    public MyImmediateContacts(String nameOfImmediateContact, String contactNumberOfImmediateContact, int idOfImmediateContact) {
+    public MyImmediateContacts(String nameOfImmediateContact, String contactNumberOfImmediateContact) {
         this.nameOfImmediateContact = nameOfImmediateContact;
         this.contactNumberOfImmediateContact = contactNumberOfImmediateContact;
-        this.idOfImmediateContact=idOfImmediateContact;
+
     }
 
     public String getNameOfImmediateContact() {
@@ -31,11 +31,5 @@ public class MyImmediateContacts {
     public void setContactNumberOfImmediateContact(String contactNumberOfImmediateContact) {
         this.contactNumberOfImmediateContact = contactNumberOfImmediateContact;
     }
-    public int getIdOfImmediateContact() {
-        return idOfImmediateContact;
-    }
 
-    public void setIdOfImmediateContact(int idOfImmediateContact) {
-        this.idOfImmediateContact = idOfImmediateContact;
-    }
 }

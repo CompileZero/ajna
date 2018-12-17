@@ -12,8 +12,6 @@
     android:background="@drawable/round_gradient"
     tools:context=".MyImmediateContacts.MyImmediateContactsFragmentExpanded">
 
-
-
     <TextView
         android:id="@+id/tv2"
         android:layout_width="wrap_content"
@@ -42,16 +40,18 @@
         android:layout_height="wrap_content"
         android:src="@drawable/union2"
 
+
         android:tint="@color/c3"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvDisplayName"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="35dp"/>
 
     <TextView
         android:id="@+id/tvDisplayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv2"
         android:layout_marginTop="10dp"
@@ -67,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvDisplayName"
 
@@ -81,10 +82,10 @@
     <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/picker"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="220dp"
 
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/tvDisplayName"/>
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv2"/>
     <!--<ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
         android:src="@drawable/ic_delete"/>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddImmediateContact"
+        android:id="@+id/fabAddImmediateContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -105,9 +106,6 @@
         android:layout_centerHorizontal="true"
 
         android:src="@drawable/ic_add_circle"
-
-
-        android:background="@color/c3"
         android:foregroundGravity="center"
 
         app:backgroundTint="@android:color/white"

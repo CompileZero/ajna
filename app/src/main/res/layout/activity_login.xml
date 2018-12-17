@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="57dp"
@@ -43,77 +45,51 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:passwordToggleDrawable="@color/c3"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="20dp"
+
         android:layout_centerInParent="true"
+        android:layout_marginEnd="-40dp"
 
-        app:hintEnabled="true"
-        android:hint="Please enter your phone number"
+        android:layout_toStartOf="@id/etPhoneNumber"
+        android:text="+91"
+        android:textSize="20sp" />
 
-
-
-
-        app:boxBackgroundColor="@color/c9"
-
-        app:boxCornerRadiusTopStart="20dp"
-
-        app:boxCornerRadiusTopEnd="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-
-            android:gravity="center"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
 
-        android:visibility="gone"
+        app:hintEnabled="true"
+        android:hint="Please enter your Phone Number"
+        app:helperTextEnabled="true"
+        app:helperText="Please enter 10 digit phone number"
+
+        android:focusedByDefault="false"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:counterEnabled="true"
 
 
-        app:isResponsiveIconColor="true"
-        app:useDenseSpacing="true"
-
-        app:maxCharacters="10"
-        app:helperText="Enter your phone number"
-        app:labelText="Phone Number"
-
-
-        app:panelBackgroundColor="@color/c3"
-        app:primaryColor="@color/c9"
-        app:errorColor="@color/y1"
+        app:counterMaxLength="10"
+        app:passwordToggleDrawable="@color/c3"
 
         >
 
-        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/extendedEditTextPhoneNumber"
-            android:inputType="phone"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            app:prefix="+91" />
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
+            android:inputType="phone"
 
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"

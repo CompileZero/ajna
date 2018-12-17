@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".Login.RegisterActivity">
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRegisterFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleDrawable="@drawable/round_gradient"
 
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -17,30 +18,29 @@
         android:layout_below="@id/tvLogo"
         android:layout_centerHorizontal="true"
 
+        app:hintEnabled="true"
+        android:hint="Enter your full name"
 
-        app:isResponsiveIconColor="true"
-        app:useDenseSpacing="true"
-        app:helperText="Enter your full name"
-        app:labelText="Full Name"
+        app:helperText="Please enter your full name">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextRegisterFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        app:panelBackgroundColor="@color/c3"
-        app:primaryColor="@color/c9"
-        app:errorColor="@color/y1"
-        app:helperTextColor="@color/c6"
-        app:secondaryColor="@color/c9">
 
-    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-        android:id="@+id/extendedEditTextRegisterFullName"
-        android:inputType="textPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+            android:inputType="textPersonName"
+            android:autofillHints="@string/fui_name_hint"
 
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:gravity="center"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRegisterAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleDrawable="@drawable/round_gradient"
 
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -48,61 +48,52 @@
         android:layout_below="@id/etRegisterFullName"
         android:layout_centerHorizontal="true"
 
+        app:hintEnabled="true"
+        android:hint="Enter your address"
 
-
-        app:isResponsiveIconColor="true"
-        app:useDenseSpacing="true"
-
-        app:helperText="Enter your apartment address"
-        app:labelText="Address"
-
-        app:panelBackgroundColor="@color/c3"
-        app:primaryColor="@color/c9"
-        app:errorColor="@color/y1"
-        app:helperTextColor="@color/c6"
-        app:secondaryColor="@color/c9">
-
-        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/extendedEditTextRegisterAddress"
-            android:inputType="textPostalAddress"
-            android:layout_width="wrap_content"
+        app:helperText="Please enter your full name">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextRegisterAddress"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+
+            android:inputType="textPostalAddress"
+
+            android:gravity="center"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRegisterCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleDrawable="@drawable/round_gradient"
 
-
-        android:layout_below="@id/etRegisterAddress"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/etRegisterAddress"
+        android:layout_centerHorizontal="true"
 
-        app:isResponsiveIconColor="true"
-        app:useDenseSpacing="true"
+        app:hintEnabled="true"
+        android:hint="Enter your city"
+
+        app:helperText="Please enter your city">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextRegisterCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
 
-        app:helperText="Enter your city name"
-        app:labelText="City"
+            android:inputType="textPersonName"
 
-        app:panelBackgroundColor="@color/c3"
-        app:primaryColor="@color/c9"
-        app:errorColor="@color/y1"
-        app:helperTextColor="@color/c6"
-        app:secondaryColor="@color/c9">
-    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-        android:id="@+id/extendedEditTextRegisterCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:gravity="center"
+            />
 
-        android:inputType="text"
-        android:textColor="@android:color/white"
-        />
-    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <com.google.android.material.button.MaterialButton

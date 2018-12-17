@@ -25,7 +25,6 @@ public class MyImmediateContactsAdapterExpanded extends FirestoreRecyclerAdapter
     protected void onBindViewHolder(@NonNull MyImmediateContactsHolder myImmediateContactsHolder, int i, @NonNull MyImmediateContacts myImmediateContacts) {
         myImmediateContactsHolder.tvNameOfImmediateContact.setText(myImmediateContacts.getNameOfImmediateContact());
         myImmediateContactsHolder.tvContactNumberOfImmediateContact.setText(myImmediateContacts.getContactNumberOfImmediateContact());
-
         myImmediateContactsHolder.tvIconExpanded.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,3)));
     }
 

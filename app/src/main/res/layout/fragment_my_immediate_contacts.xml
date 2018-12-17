@@ -8,12 +8,7 @@
 
     android:layout_gravity="center_horizontal"
 
-
     android:background="@drawable/round_gradient"
-
-
-
-
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyImmediateContacts.MyImmediateContactsFragmentCollapsed">

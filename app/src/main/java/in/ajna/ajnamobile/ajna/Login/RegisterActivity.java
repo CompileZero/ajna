@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.marozzi.roundbutton.RoundButton;
@@ -23,18 +25,17 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextFieldBoxes etRegisterFullName,etRegisterAddress,
+    TextInputLayout etRegisterFullName,etRegisterAddress,
             etRegisterCity;
 
-    ExtendedEditText extendedEditTextRegisterFullName,extendedEditTextRegisterAddress,
-            extendedEditTextRegisterCity;
+    TextInputEditText editTextRegisterFullName,editTextRegisterAddress,
+            editTextRegisterCity;
 
     Button btnRegister;
 
     FirebaseAuth mAuth;
 
     FirebaseFirestore db;
-
 
     String phoneNumberIndia;
 
@@ -48,10 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
         etRegisterCity=findViewById(R.id.etRegisterCity);
 
 
-        extendedEditTextRegisterFullName=findViewById(R.id.extendedEditTextRegisterFullName);
-        extendedEditTextRegisterAddress=findViewById(R.id.extendedEditTextRegisterAddress);
-        extendedEditTextRegisterCity=findViewById(R.id.extendedEditTextRegisterCity);
-
+        editTextRegisterFullName=findViewById(R.id.editTextRegisterFullName);
+        editTextRegisterAddress=findViewById(R.id.editTextRegisterAddress);
+        editTextRegisterCity=findViewById(R.id.editTextRegisterCity);
 
         btnRegister=findViewById(R.id.btnRegister);
 
@@ -77,24 +77,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
-
     private void registerUser(){
-        String fullName=extendedEditTextRegisterFullName.getText().toString().trim();
-        String address=extendedEditTextRegisterAddress.getText().toString().trim();
-        String city=extendedEditTextRegisterCity.getText().toString().trim();
+        String fullName=editTextRegisterFullName.getText().toString().trim();
+        String address=editTextRegisterAddress.getText().toString().trim();
+        String city=editTextRegisterCity.getText().toString().trim();
 
 
         if(fullName.isEmpty()){
-            etRegisterFullName.setError("Please enter a valid name",true);
+            etRegisterFullName.setError("Please enter a valid name");
             return;
         }
         if(address.isEmpty()){
-            etRegisterAddress.setError("Please enter a valid address",true);
+            etRegisterAddress.setError("Please enter a valid address");
             return;
         }
         if(city.isEmpty()){
-            etRegisterCity.setError("Please enter a valid city name",true);
+            etRegisterCity.setError("Please enter a valid city name");
             return;
         }
 

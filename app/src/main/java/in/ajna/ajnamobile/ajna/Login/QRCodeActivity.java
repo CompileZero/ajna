@@ -62,7 +62,7 @@ public class QRCodeActivity extends AppCompatActivity {
                         SharedPreferences.Editor edit = sp.edit();
                         edit.putString("code",result.getText());
                         edit.apply();
-                        db.collection(result.getText()).document("My Family").set(user);
+                        db.collection(result.getText()).document("MyFamily").collection("members").document().set(user);
                         Toast.makeText(QRCodeActivity.this, "Device Registered!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(QRCodeActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

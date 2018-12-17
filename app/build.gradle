@@ -125,6 +125,9 @@ dependencies {
     //Lottie
     implementation 'com.airbnb.android:lottie:2.8.0'
 
+    //TimelineView
+    implementation 'com.github.open-android:Timeline:0.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
