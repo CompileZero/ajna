@@ -11,10 +11,15 @@
         android:id="@+id/tvVerificationCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_centerHorizontal="true"
-        android:text="VERIFICATION CODE"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"/>
+
+        android:gravity="center"
+
+        android:fontFamily="@font/bc_bold"
+        android:text="Verification Code"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"/>
 <TextView
     android:id="@+id/tvInfo"
     android:layout_width="wrap_content"
@@ -25,8 +30,13 @@
     android:layout_below="@id/tvVerificationCode"
 
     android:layout_marginTop="10dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
 
     android:gravity="center"
+
+    android:textSize="14sp"
+    android:fontFamily="@font/barlow_semi_condensed_bold"
     android:text="We have sent you a verification code. \nThe verification process happens automatically.\nIf nothing happens in the next minute, please enter the OTP manually and click Verify"/>
     <com.mukesh.OtpView
         android:id="@+id/otpView"
@@ -34,11 +44,11 @@
         android:layout_height="wrap_content"
         style="@style/OtpWidget.OtpView"
 
-        app:itemRadius="15dp"
+        app:itemRadius="8dp"
         android:inputType="number"
         android:textColor="@android:color/white"
-        app:lineColor="@color/colorPrimary"
-        android:itemBackground="@color/colorPrimaryDark"
+
+        android:itemBackground="@color/c10"
         android:focusedByDefault="true"
         android:textSize="30sp"
         android:layout_centerInParent="true"

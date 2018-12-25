@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.CodeScanner;
@@ -25,7 +26,7 @@ import com.google.zxing.Result;
 
 public class QRCodeActivity extends AppCompatActivity {
 
-
+    String fullName,address,city,phoneNumberIndia;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
@@ -42,10 +43,10 @@ public class QRCodeActivity extends AppCompatActivity {
 
         activity=new QRCodeActivity();
         //Get user values and insert to user object
-        String fullName = getIntent().getStringExtra("fullName");
-        String address = getIntent().getStringExtra("address");
-        String city = getIntent().getStringExtra("city");
-        String phoneNumberIndia = getIntent().getStringExtra("phoneNumberIndia");
+        fullName = getIntent().getStringExtra("fullName");
+        address = getIntent().getStringExtra("address");
+        city = getIntent().getStringExtra("city");
+        phoneNumberIndia = getIntent().getStringExtra("phoneNumberIndia");
         final User user = new User(fullName, address, city, phoneNumberIndia);
 
 
@@ -73,11 +74,15 @@ public class QRCodeActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
-
-
-
+    public void goToManualCodeEntry(View view){
+        Intent intent=new Intent(QRCodeActivity.this,ManualCodeEntryActivity.class);
+        intent.putExtra("fullName",fullName);
+        intent.putExtra("address",address);
+        intent.putExtra("city",city);
+        intent.putExtra("phoneNumberIndia",phoneNumberIndia);
+        startActivity(intent);
     }
     @Override
     protected void onResume() {

@@ -27,6 +27,10 @@ import java.util.Locale;
 import javax.annotation.Nullable;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentCollapsed;
+import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentExpanded;
 import in.ajna.ajnamobile.ajna.R;
 
 public class RecentMessagesFragmentCollapsed extends Fragment {
@@ -58,6 +62,8 @@ public class RecentMessagesFragmentCollapsed extends Fragment {
 
         latestMessageRef=db.collection(code).document("RecentMessages");
 
+
+        initMyFamily();
         return view;
     }
 
@@ -90,5 +96,16 @@ public class RecentMessagesFragmentCollapsed extends Fragment {
         String date= android.text.format.DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
 
         return date;
+    }
+
+    private void initMyFamily(){
+        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction4=fragmentManager.beginTransaction();
+        fragmentTransaction4.add(R.id.fragmentContainerMyFamily, new MyFamilyFragmentExpanded())
+                .commit();
+
+        FragmentTransaction fragmentTransaction5=fragmentManager.beginTransaction();
+        fragmentTransaction5.add(R.id.fragmentContainerMyFamily2, new MyFamilyFragmentCollapsed())
+                .commit();
     }
 }

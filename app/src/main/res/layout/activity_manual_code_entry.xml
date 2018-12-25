@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.ManualCodeEntryActivity">
+
+    <TextView
+        android:id="@+id/tvCannotScanQRCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center"
+
+        android:fontFamily="@font/bc_bold"
+        android:text="Cannot scan QR Code?"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvCannotScanQRCode"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+
+        android:gravity="center"
+
+        android:textSize="14sp"
+        android:fontFamily="@font/barlow_semi_condensed_bold"
+        android:text="Please enter the device code which can be seen below the QR code."/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/btnProceed">
+        <com.infideap.blockedittext.BlockEditText
+            android:id="@+id/etBlocks"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"
+
+            app:bet_numberOfBlock="3"
+            app:bet_inputType="Integer"
+            app:bet_defaultLength="2"
+
+            app:bet_separatorCharacter="-"
+            app:bet_separatorTextSize="15sp"
+
+            app:bet_editTextBackground="@drawable/rounded_rectangle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="20sp"
+            android:fontFamily="@font/bc_bold"
+            android:layout_toStartOf="@id/etBlocks"
+            android:layout_centerInParent="true"
+
+            android:gravity="center"
+            android:text="AJNA-  "/>
+
+    </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnProceed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/bc_extrabold"
+        android:text="Proceed"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="#FFFFFF"
+
+        android:textSize="20sp"
+
+        app:backgroundTint="@color/c5"
+        app:cornerRadius="8dp"
+
+        android:onClick="goToHomePage"
+        />
+
+
+</RelativeLayout>

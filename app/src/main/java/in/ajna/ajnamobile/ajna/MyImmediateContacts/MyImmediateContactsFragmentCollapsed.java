@@ -29,6 +29,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.MainActivity;
 import in.ajna.ajnamobile.ajna.R;
+import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentCollapsed;
+import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +46,8 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
     private MyImmediateContactsAdapter adapter;
 
     private SharedPreferences sp;
+
+
 
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -77,8 +81,20 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        initRecentMessages();
+
         //Mandate return
         return view;
+    }
+    private void initRecentMessages(){
+        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction2=fragmentManager.beginTransaction();
+        fragmentTransaction2.add(R.id.fragmentContainerRecentMessages,new RecentMessagesFragmentExpanded(),"RecentMessages")
+                .commit();
+
+        FragmentTransaction fragmentTransaction3=fragmentManager.beginTransaction();
+        fragmentTransaction3.add(R.id.fragmentContainerRecentMessages2,new RecentMessagesFragmentCollapsed(),"RecentMessagesCollapsed")
+                .commit();
     }
 
     @Override

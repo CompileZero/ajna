@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
         //start My Immediate Contacts Fragments
         initMyImmediateContacts();
-        initRecentMessages();
-        initMyFamily();
+
+
 
         //Folding Cell
         fc=findViewById(R.id.folding_cell);
@@ -122,25 +122,9 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void initRecentMessages(){
-        FragmentTransaction fragmentTransaction2=fragmentManager.beginTransaction();
-        fragmentTransaction2.add(R.id.fragmentContainerRecentMessages,new RecentMessagesFragmentExpanded(),"RecentMessages")
-                .commit();
 
-        FragmentTransaction fragmentTransaction3=fragmentManager.beginTransaction();
-        fragmentTransaction3.add(R.id.fragmentContainerRecentMessages2,new RecentMessagesFragmentCollapsed(),"RecentMessagesCollapsed")
-                .commit();
-    }
 
-    private void initMyFamily(){
-        FragmentTransaction fragmentTransaction4=fragmentManager.beginTransaction();
-        fragmentTransaction4.add(R.id.fragmentContainerMyFamily, new MyFamilyFragmentExpanded())
-                .commit();
 
-        FragmentTransaction fragmentTransaction5=fragmentManager.beginTransaction();
-        fragmentTransaction5.add(R.id.fragmentContainerMyFamily2, new MyFamilyFragmentCollapsed())
-        .commit();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

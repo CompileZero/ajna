@@ -64,7 +64,6 @@ dependencies {
     //Material for custom switches
     implementation 'com.github.rey5137:material:1.2.5'
 
-
     //Material UI from Google
     implementation 'com.google.android.material:material:1.1.0-alpha01'
 
@@ -127,6 +126,9 @@ dependencies {
 
     //TimelineView
     implementation 'com.github.open-android:Timeline:0.1.0'
+
+    //Block Edit Text
+    implementation 'com.infideap.blockedittext:block-edittext:0.0.7'
 
 }
 

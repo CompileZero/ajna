@@ -6,6 +6,37 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".Login.RegisterActivity">
+    <TextView
+        android:id="@+id/tvDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center"
+
+        android:fontFamily="@font/bc_bold"
+        android:text="Details"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/tvInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvDetails"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+
+        android:gravity="center"
+
+        android:textSize="14sp"
+        android:fontFamily="@font/barlow_semi_condensed_bold"
+        android:text="Enter your details, so that we get to know you better. All your details are privacy protected."/>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRegisterFullName"
         android:layout_width="match_parent"
@@ -15,13 +46,11 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/tvLogo"
+        android:layout_below="@id/tvInfo2"
         android:layout_centerHorizontal="true"
 
         app:hintEnabled="true"
-        android:hint="Enter your full name"
-
-        app:helperText="Please enter your full name">
+        android:hint="Enter your full name">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextRegisterFullName"
             android:layout_width="match_parent"
@@ -49,9 +78,7 @@
         android:layout_centerHorizontal="true"
 
         app:hintEnabled="true"
-        android:hint="Enter your address"
-
-        app:helperText="Please enter your full name">
+        android:hint="Enter your address">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextRegisterAddress"
             android:layout_width="match_parent"
@@ -78,9 +105,7 @@
         android:layout_centerHorizontal="true"
 
         app:hintEnabled="true"
-        android:hint="Enter your city"
-
-        app:helperText="Please enter your city">
+        android:hint="Enter your city">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextRegisterCity"
             android:layout_width="match_parent"
@@ -103,21 +128,22 @@
 
         android:layout_below="@id/etRegisterCity"
         android:layout_centerHorizontal="true"
+
         android:layout_marginTop="20dp"
         android:layout_marginStart="90dp"
         android:layout_marginEnd="90dp"
         android:layout_marginBottom="20dp"
 
 
-        android:text="REGISTER"
+        android:text="Register"
         android:textSize="20sp"
-        android:fontFamily="@font/barlow_semi_condensed_medium"
+        android:fontFamily="@font/bc_extrabold"
         android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
 
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        app:backgroundTint="@color/c4"
-        app:cornerRadius="4dp"
+        app:backgroundTint="@color/c5"
+        app:cornerRadius="8dp"
 
 
         />
