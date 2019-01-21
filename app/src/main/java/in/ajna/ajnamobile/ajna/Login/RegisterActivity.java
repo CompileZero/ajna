@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,10 +26,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextInputLayout etRegisterFullName,etRegisterAddress,
-            etRegisterCity;
-
-    TextInputEditText editTextRegisterFullName,editTextRegisterAddress,
+    EditText editTextRegisterFullName,editTextRegisterAddress,
             editTextRegisterCity;
 
     Button btnRegister;
@@ -43,11 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        etRegisterFullName=findViewById(R.id.etRegisterFullName);
-        etRegisterAddress=findViewById(R.id.etRegisterAddress);
-        etRegisterCity=findViewById(R.id.etRegisterCity);
-
 
         editTextRegisterFullName=findViewById(R.id.editTextRegisterFullName);
         editTextRegisterAddress=findViewById(R.id.editTextRegisterAddress);
@@ -84,15 +77,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if(fullName.isEmpty()){
-            etRegisterFullName.setError("Please enter a valid name");
+            editTextRegisterFullName.setError("Please enter a valid name");
             return;
         }
         if(address.isEmpty()){
-            etRegisterAddress.setError("Please enter a valid address");
+            editTextRegisterAddress.setError("Please enter a valid address");
             return;
         }
         if(city.isEmpty()){
-            etRegisterCity.setError("Please enter a valid city name");
+            editTextRegisterCity.setError("Please enter a valid city name");
             return;
         }
 

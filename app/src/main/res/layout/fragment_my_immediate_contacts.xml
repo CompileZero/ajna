@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="110dp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
 
@@ -13,22 +13,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyImmediateContacts.MyImmediateContactsFragmentCollapsed">
 
-        <TextView
-            android:id="@+id/tv1"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabExpand1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
 
 
+            android:src="@drawable/ic_more"
+            app:maxImageSize="20dp"
+
+            app:backgroundTint="#4A5292"
+            app:elevation="0dp"
+            app:fabCustomSize="25dp"
+            />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
 
             android:textSize="25sp"
-            android:text="MY IMMEDIATE CONTACTS"
-            android:fontFamily="@font/barlow_semi_condensed_bold"
+            android:text="Immediate Contacts"
+
+            android:fontFamily="@font/r_bold"
 
             android:textColor="#FFFFFF"
             />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMyImmediateContacts"
             android:layout_width="wrap_content"
@@ -37,14 +54,11 @@
             android:orientation="horizontal"
             android:layout_centerHorizontal="true"
 
-            android:layout_below="@id/tv1"
+            android:layout_below="@id/tv2"
 
             android:layout_marginBottom="5dp"
 
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/my_immediate_contacts_list_item_collapsed" />
-
-
-
 
 </RelativeLayout>

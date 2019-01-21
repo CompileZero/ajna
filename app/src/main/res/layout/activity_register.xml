@@ -6,19 +6,199 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".Login.RegisterActivity">
-    <TextView
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
 
-        android:gravity="center"
-
-        android:fontFamily="@font/bc_bold"
-        android:text="Details"
         android:textColor="@android:color/black"
-        android:textSize="40sp"/>
+        android:text="Enter your details"
+        android:textSize="35sp"
+
+        app:customFont="r_bold.ttf"
+        app:colors="@array/gradient"
+
+        app:angle="0"
+        app:speed="1000"
+        app:maxFPS="30"/>
+
+    <LinearLayout
+        android:id="@+id/layout_full_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_below="@id/tvInfo2"
+
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Full name"
+            android:fontFamily="@font/r_medium"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:background="@drawable/edit_text_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+
+            android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
+            android:text="-"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:id="@+id/editTextRegisterFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+
+            android:background="@drawable/edit_text_background"
+
+
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textCapWords|textPersonName"
+
+
+            android:fontFamily="@font/r_medium"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+    <!-- Address Layout -->
+    <LinearLayout
+        android:id="@+id/layout_full_address"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_below="@id/layout_full_name"
+
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Address"
+            android:fontFamily="@font/r_medium"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:background="@drawable/edit_text_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+
+            android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
+            android:text="-"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:id="@+id/editTextRegisterAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+
+            android:background="@drawable/edit_text_background"
+
+
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textPostalAddress"
+
+
+            android:fontFamily="@font/r_medium"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+    <!-- City Layout -->
+    <LinearLayout
+        android:id="@+id/layout_city"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_below="@id/layout_full_address"
+        android:layout_marginBottom="15dp"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="City"
+            android:fontFamily="@font/r_medium"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:background="@drawable/edit_text_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+
+            android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
+            android:text="-"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:id="@+id/editTextRegisterCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+
+            android:background="@drawable/edit_text_background"
+
+
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textPostalAddress"
+
+
+            android:fontFamily="@font/r_medium"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvInfo2"
         android:layout_width="wrap_content"
@@ -28,15 +208,17 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvDetails"
 
-        android:layout_marginTop="10dp"
+
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginBottom="10dp"
 
         android:gravity="center"
 
-        android:textSize="14sp"
-        android:fontFamily="@font/barlow_semi_condensed_bold"
+        android:textSize="17sp"
+        android:fontFamily="@font/r_medium"
         android:text="Enter your details, so that we get to know you better. All your details are privacy protected."/>
+    <!--
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRegisterFullName"
         android:layout_width="match_parent"
@@ -74,7 +256,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/etRegisterFullName"
+        android:layout_below="@id/layout_full_name"
         android:layout_centerHorizontal="true"
 
         app:hintEnabled="true"
@@ -117,11 +299,30 @@
             android:gravity="center"
             />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_below="@id/layout_city"
+        android:text="Proceed"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
+        android:translationZ="4dp"
+
+        android:padding="15dp"/>
 
 
 
-    <com.google.android.material.button.MaterialButton
+    <!--<com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,6 +347,6 @@
         app:cornerRadius="8dp"
 
 
-        />
+        />-->
 
 </RelativeLayout>

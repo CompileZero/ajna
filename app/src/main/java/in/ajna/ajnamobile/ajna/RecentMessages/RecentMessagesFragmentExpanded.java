@@ -83,7 +83,7 @@ public class RecentMessagesFragmentExpanded extends Fragment {
                 .build();
         adapter = new RecentMessagesAdapterExpanded(options);
 
-        RecyclerView recyclerView= view.findViewById(R.id.rvRecentMessages);
+        RecyclerView recyclerView= view.findViewById(R.id.rvRecentMessages2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

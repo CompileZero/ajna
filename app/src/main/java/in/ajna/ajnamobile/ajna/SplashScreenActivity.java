@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 import es.dmoral.toasty.Toasty;
+import in.ajna.ajnamobile.ajna.Login.AgreeContinueActivity;
 import in.ajna.ajnamobile.ajna.Login.LoginActivity;
 import in.ajna.ajnamobile.ajna.Login.RegisterActivity;
 
@@ -58,7 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         if(document!=null){
                             if(document.get("fullName")==null || document.get("address")==null || document.get("city")==null){
                                 Toast.makeText(SplashScreenActivity.this, "you have not registered yet!(Inner)", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SplashScreenActivity.this,RegisterActivity.class);
+                                Intent intent = new Intent(SplashScreenActivity.this, RegisterActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
@@ -78,8 +79,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
         else
         {
-            Toasty.error(this,"Please Sign In!",Toast.LENGTH_SHORT,true).show();
-            Intent intent = new Intent(this,LoginActivity.class);
+            //TODO:insert a toast
+            Intent intent = new Intent(this,AgreeContinueActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 

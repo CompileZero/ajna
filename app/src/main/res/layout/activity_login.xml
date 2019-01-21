@@ -9,120 +9,128 @@
 
     tools:context=".Login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-
-
-        android:tint="#000000"
-        android:src="@drawable/ic_icon1" />
-    <TextView
-        android:id="@+id/tvLogo"
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
+        android:id="@+id/tvLets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_above="@id/tvTerms"
         android:layout_centerHorizontal="true"
 
-        android:fontFamily="@font/bc_bold"
-        android:text="AJNA"
         android:textColor="@android:color/black"
-        android:textSize="30sp"/>
+        android:text="Let's get Started"
+        android:textSize="25sp"
+
+        app:customFont="r_bold.ttf"
+        app:colors="@array/gradient"
+
+        app:angle="0"
+        app:speed="1000"
+        app:maxFPS="30"/>
     <TextView
-        android:id="@+id/tvTerms"
+        android:id="@+id/tvWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvLets"
 
         android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:text="By continuing, you agree to our Terms of Service and Privacy Policy. Ajna will periodically send your contacts and location to Ajna. People with your number can connect with you across various  services and see your public information like name and photo."
-        android:fontFamily="@font/barlow_semi_condensed_bold"
-        android:textSize="12sp"/>
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+        android:text="Please enter your mobile number to continue"
+        android:fontFamily="@font/r_medium"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnLogin">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPhoneNumber"
-            android:layout_width="match_parent"
+        android:layout_above="@+id/layout_text"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+
+        android:text="PHONE NUMBER"
+        android:textSize="12sp"
+        android:fontFamily="@font/r_medium"
+        android:textColor="@color/g1"
+        />
+    <LinearLayout
+        android:id="@+id/layout_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_above="@id/btnLogin"
+        android:layout_marginBottom="15dp"
+
+
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
 
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="+91"
+            android:fontFamily="@font/r_medium"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_background"/>
 
-
-            app:hintEnabled="true"
-            android:hint="Please enter your Phone Number"
-
-            android:focusedByDefault="false"
-
-
-            android:layout_marginEnd="30dp"
-            app:counterEnabled="true"
-
-
-            app:counterMaxLength="10"
-            app:passwordToggleDrawable="@color/c3"
-
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPhoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="phone"
-                android:textSize="20sp"
-                android:gravity="center" />
-        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_gravity="center"
 
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="-40dp"
+            android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
 
-            android:layout_toStartOf="@id/etPhoneNumber"
-            android:text="+91"
-            android:textSize="20sp" />
-    </RelativeLayout>
-    <com.google.android.material.button.MaterialButton
+            android:text="-"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+
+            android:background="@drawable/edit_text_background"
+
+
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="phone"
+            android:maxLength="10"
+
+            android:fontFamily="@font/r_medium"
+            android:textSize="17sp"
+            />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
 
         android:layout_centerInParent="true"
-
-        android:layout_marginStart="90dp"
-        android:layout_marginEnd="90dp"
-
-
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/bc_extrabold"
         android:text="Get OTP"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="#FFFFFF"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
 
-        android:textSize="20sp"
-
-        app:backgroundTint="@color/c5"
-        app:cornerRadius="8dp"
-
-
-        />
-
-
+        android:padding="15dp"/>
 </RelativeLayout>

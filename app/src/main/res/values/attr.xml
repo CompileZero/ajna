@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="gradient">
+
+        <item>@color/b1</item>
+        <item>@color/b2</item>
+    </array>
+</resources>

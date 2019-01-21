@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
@@ -26,6 +25,7 @@
         app:maskColor="#77000000"/>
 
     <TextView
+        android:id="@+id/tvScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -34,6 +34,15 @@
 
         android:text="Please scan the QR Code at the back of your device"
         android:textColor="@android:color/white"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_scale="0.5"
+        app:lottie_fileName="qr_anim.json"
+        android:layout_below="@+id/tvScan"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,6 +67,6 @@
         android:onClick="goToManualCodeEntry"
         android:textSize="20sp"
         android:text="@string/click_here"
-        android:fontFamily="@font/bc_bold"
+        android:fontFamily="@font/r_bold"
         android:textColor="@android:color/white"/>
 </RelativeLayout>

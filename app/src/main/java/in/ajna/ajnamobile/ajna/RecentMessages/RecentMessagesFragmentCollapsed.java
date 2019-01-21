@@ -3,6 +3,7 @@ package in.ajna.ajnamobile.ajna.RecentMessages;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,6 +43,10 @@ public class RecentMessagesFragmentCollapsed extends Fragment {
     private SharedPreferences sp;
     private DocumentReference latestMessageRef;
 
+    FloatingActionButton fabExpand3;
+
+
+
     TextView tvTime;
     TextView tvRecentMessage;
     public RecentMessagesFragmentCollapsed() {
@@ -59,6 +65,16 @@ public class RecentMessagesFragmentCollapsed extends Fragment {
 
         sp=this.getActivity().getSharedPreferences("DEVICE_CODE",Context.MODE_PRIVATE);
         String code=sp.getString("code","0");
+
+        fabExpand3=view.findViewById(R.id.fabExpand3);
+        fabExpand3.setColorFilter(Color.WHITE);
+
+        fabExpand3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandRecentMessages();
+            }
+        });
 
         latestMessageRef=db.collection(code).document("RecentMessages");
 
@@ -89,23 +105,24 @@ public class RecentMessagesFragmentCollapsed extends Fragment {
 
     }
 
-
     private String getDate(Long timestamp){
         Calendar cal=Calendar.getInstance(Locale.getDefault());
-        cal.setTimeInMillis(timestamp*1000);
-        String date= android.text.format.DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
+        cal.setTimeInMillis(timestamp);
+        String date= android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss a",cal).toString();
 
         return date;
     }
 
     private void initMyFamily(){
         FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction4=fragmentManager.beginTransaction();
-        fragmentTransaction4.add(R.id.fragmentContainerMyFamily, new MyFamilyFragmentExpanded())
-                .commit();
-
         FragmentTransaction fragmentTransaction5=fragmentManager.beginTransaction();
         fragmentTransaction5.add(R.id.fragmentContainerMyFamily2, new MyFamilyFragmentCollapsed())
                 .commit();
+    }
+
+    public void expandRecentMessages(){
+        BottomSheetRecentMessages bottomSheet= new BottomSheetRecentMessages();
+        bottomSheet.show(getFragmentManager(),"bottomSheetRecentMessages");
+
     }
 }

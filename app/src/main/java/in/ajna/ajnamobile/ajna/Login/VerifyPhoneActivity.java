@@ -8,6 +8,7 @@ import in.ajna.ajnamobile.ajna.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -32,13 +33,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
     private String verificationId;
 
-    RoundButton btnVerify;
+    Button btnVerify;
 
     FirebaseAuth mAuth;
 
     OtpView otpView;
-
-
 
     String phoneNumberIndia;
 
@@ -64,12 +63,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnVerify.startAnimation();
+
                 String code=otpView.getText().toString().trim();
 
 
                 if(code.isEmpty() || code.length()<6){
-                    btnVerify.setResultState(RoundButton.ResultState.FAILURE);
                     Toasty.error(VerifyPhoneActivity.this,"Please enter a valid OTP!",Toast.LENGTH_SHORT,true).show();
                 }
                 verifyCode(code);
@@ -90,7 +88,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            btnVerify.setResultState(RoundButton.ResultState.SUCCESS);
+
                             Toasty.success(VerifyPhoneActivity.this,"Verification Succesful!",Toast.LENGTH_SHORT,true).show();
 
 

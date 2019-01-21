@@ -68,13 +68,19 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha01'
 
     //Firebase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+
+    //Firebase RealtimeDatabase
+    implementation 'com.google.firebase:firebase-database:16.0.5'
 
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.1'
 
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
+
+    //Firebase Messaging
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
     //Round button
     implementation 'com.marozzi.roundbutton:round-button:1.0.7'
@@ -94,26 +100,11 @@ dependencies {
     //expandable layout
     implementation 'com.github.florent37:expansionpanel:1.2.2'
 
-    //Expandable Cardview
-    implementation 'com.alespero:expandable-cardview:0.8'
-
-    //Shape of View
-    implementation 'com.github.florent37:shapeofview:1.4.5'
-
-    //barcode Scanner
-    implementation 'com.github.nisrulz:qreader:2.1.2'
-
     //scanner 2
     implementation 'com.budiyev.android:code-scanner:2.0.1'
 
     //Scroll View
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
-
-    //Material Shadows
-    implementation 'com.sdsmdg.harjot:materialshadows:1.2.5'
-
-    //Custom Edit Text
-    implementation 'com.libizo:customedittext:1.0.3'
 
     //Fancy Buttons
     implementation 'com.rilixtech:materialfancybuttons:1.8.7'
@@ -129,6 +120,33 @@ dependencies {
 
     //Block Edit Text
     implementation 'com.infideap.blockedittext:block-edittext:0.0.7'
+
+    //Animated Gradient Text
+    implementation 'com.github.Mursaat:AnimatedGradientTextView:v0.0.6'
+
+    //Fancy Alert Dialog
+    implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.1'
+
+    //Custom Toggle Button
+    implementation 'com.jackandphantom.android:customtogglebutton:1.0.0'
+
+    //Switch button
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+
+    //circular reveal
+    implementation 'com.hendraanggrian:reveallayout:0.5.3'
+
+    //countdownview
+    implementation 'com.github.alexfu:CountDownView:0.1.0'
+
+    //preferences
+    implementation 'com.github.daniel-stoneuk:material-about-library:2.4.2'
+
+    //navigation graph and view
+    def nav_version = "1.0.0-alpha09"
+
+    implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui:$nav_version" // use -ktx for Kotlin
 
 }
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.LoginOptions">
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
+        android:id="@+id/tvAre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        android:textColor="@android:color/black"
+        android:text="Are you setting the device for the first time?"
+        android:textSize="35sp"
+
+        app:customFont="sf_pro_d_bold.otf"
+        app:colors="@array/gradient"
+
+        app:angle="0"
+        app:speed="1000"
+        app:maxFPS="30"/>
+
+    <TextView
+        android:id="@+id/tvIf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvAre"
+
+        android:gravity="center"
+
+        android:text="If you are setting the device for the first time, click on Set up device, else go to the home page directly."
+        android:fontFamily="@font/r_medium"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSetupDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/btnHomepage"
+
+        android:text="Set up device"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
+
+        android:padding="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnHomepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_centerInParent="true"
+        android:text="Go to Homepage"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
+
+        android:padding="15dp"/>
+
+</RelativeLayout>

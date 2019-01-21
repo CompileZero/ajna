@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="120dp"
-    android:layout_height="150dp"
-    android:layout_centerHorizontal="true">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+
+    android:layout_margin="10dp"
+    android:background="@drawable/grey_card">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDeleteImmediateContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/folding_cell2"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+
+        android:src="@drawable/ic_close"
+        app:maxImageSize="20dp"
+
+        app:backgroundTint="#FF4E3D"
+        app:fabCustomSize="25dp"
+        app:elevation="0dp"
+        android:onClick="expandRecentMessages"/>
         <TextView
             android:id="@+id/tvIconExpanded"
             android:layout_width="wrap_content"
@@ -10,17 +31,14 @@
 
             android:background="@drawable/round_gradient3"
 
+            android:layout_marginTop="20dp"
 
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="41dp"
-
-
 
             android:gravity="center"
 
             android:textSize="20sp"
-            android:fontFamily="@font/barlow_semi_condensed_extrabold"
+            android:fontFamily="@font/r_medium"
             android:textColor="@android:color/white"
             android:textAllCaps="true"
 
@@ -32,9 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_above="@id/tvContactNumberOfImmediateContact"
+        android:layout_below="@id/tvIconExpanded"
         android:layout_centerHorizontal="true"
 
+        android:fontFamily="@font/r_medium"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
         android:text="Name"/>
 
     <TextView
@@ -44,7 +65,11 @@
 
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:layout_above="@id/tvIconExpanded"
+        android:layout_below="@id/tvNameOfImmediateContact"
+
+        android:fontFamily="@font/r_medium"
+        android:textSize="14sp"
+        android:textColor="#3D3D3D"
         android:text="Contact"/>
 
 </RelativeLayout>

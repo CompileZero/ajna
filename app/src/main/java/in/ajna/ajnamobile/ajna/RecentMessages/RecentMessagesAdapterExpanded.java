@@ -51,6 +51,7 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
             tvMessage=itemView.findViewById(R.id.tvMessage);
 
             timelineView=itemView.findViewById(R.id.timeMarker);
+
             timelineView.initLine(viewType);
 
         }
@@ -63,8 +64,8 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
 
     private String getDate(Long timestamp){
         Calendar cal=Calendar.getInstance(Locale.getDefault());
-        cal.setTimeInMillis(timestamp*1000);
-        String date= android.text.format.DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
+        cal.setTimeInMillis(timestamp);
+        String date= android.text.format.DateFormat.format("dd-MMM \nhh:mm:ss a",cal).toString();
 
         return date;
     }

@@ -3,6 +3,7 @@ package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,10 +37,15 @@ import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyImmediateContactsFragmentCollapsed extends Fragment {
+public class MyImmediateContactsFragmentCollapsed extends Fragment implements BottomSheetMyImmediateContacts.BottomSheetListener {
+    @Override
+    public void onButtonClicked(String text) {
 
+    }
     //Objects
     private View view;
+
+    private FloatingActionButton fabExpand1;
 
     private MainActivity mainActivity;
 
@@ -46,8 +53,6 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
     private MyImmediateContactsAdapter adapter;
 
     private SharedPreferences sp;
-
-
 
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -67,31 +72,25 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
         recyclerView = view.findViewById(R.id.rvMyImmediateContacts);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
-        //Get QR Code data and retrieve the device data from Firebase
-        sp=this.getActivity().getSharedPreferences("DEVICE_CODE",Context.MODE_PRIVATE);
-        String code=sp.getString("code","0");
-         myImmediateContactsRef= db.collection(code).document("MyImmediateContacts").collection("members");
-        Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact",Query.Direction.ASCENDING);
+        fabExpand1=view.findViewById(R.id.fabExpand1);
+        fabExpand1.setColorFilter(Color.WHITE);
 
-        FirestoreRecyclerOptions<MyImmediateContacts> options=new FirestoreRecyclerOptions.Builder<MyImmediateContacts>()
-                .setQuery(query,MyImmediateContacts.class)
-                .build();
-
-        adapter = new MyImmediateContactsAdapter(options);
-
-        recyclerView.setAdapter(adapter);
+        //retrieve the device data from Firebase
+        setUpRecyclerView();
 
         initRecentMessages();
 
+        fabExpand1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandImmediateContacts();
+            }
+        });
         //Mandate return
         return view;
     }
     private void initRecentMessages(){
         FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction2=fragmentManager.beginTransaction();
-        fragmentTransaction2.add(R.id.fragmentContainerRecentMessages,new RecentMessagesFragmentExpanded(),"RecentMessages")
-                .commit();
-
         FragmentTransaction fragmentTransaction3=fragmentManager.beginTransaction();
         fragmentTransaction3.add(R.id.fragmentContainerRecentMessages2,new RecentMessagesFragmentCollapsed(),"RecentMessagesCollapsed")
                 .commit();
@@ -112,6 +111,25 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment {
         Log.d("FRAGMENT COLLAPSED","on Stop");
         //getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 
+    }
+    public void expandImmediateContacts(){
+        BottomSheetMyImmediateContacts bottomSheet= new BottomSheetMyImmediateContacts();
+        bottomSheet.show(getFragmentManager(),"bottomSheetMyImmediateContacts");
+    }
+
+    private void setUpRecyclerView(){
+        sp=this.getActivity().getSharedPreferences("DEVICE_CODE",Context.MODE_PRIVATE);
+        String code=sp.getString("code","0");
+        myImmediateContactsRef= db.collection(code).document("MyImmediateContacts").collection("members");
+        Query query=myImmediateContactsRef.orderBy("nameOfImmediateContact",Query.Direction.ASCENDING);
+
+        FirestoreRecyclerOptions<MyImmediateContacts> options=new FirestoreRecyclerOptions.Builder<MyImmediateContacts>()
+                .setQuery(query,MyImmediateContacts.class)
+                .build();
+
+        adapter = new MyImmediateContactsAdapter(options);
+
+        recyclerView.setAdapter(adapter);
     }
 
 }

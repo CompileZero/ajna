@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:override="true">
     <color name="colorPrimary">#3272D1</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#2F80ED</color>
     <color name="titleColour">#263238</color>
     <color name="c1">#1565C0</color>
     <color name="c2">#111E6C</color>
@@ -20,6 +20,15 @@
     <color name="o1">#782e00</color>
 
     <color name="r1">#ce0000</color>
+
+    <color name="b1">#1A28B7</color>
+    <color name="b2">#3C9DD1</color>
+
+    <color name="g1">#7A7A7A</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
 
 
 

@@ -15,7 +15,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RecentMessages.RecentMessagesFragmentCollapsed">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabExpand3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/folding_cell3"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+
+        android:src="@drawable/ic_more"
+        app:maxImageSize="20dp"
+
+        app:backgroundTint="#233352"
+        app:fabCustomSize="25dp"
+        app:elevation="0dp"
+        />
 
     <TextView
         android:id="@+id/tv3"
@@ -28,7 +44,7 @@
 
         android:textSize="25sp"
         android:text="RECENT MESSAGES"
-        android:fontFamily="@font/barlow_semi_condensed_bold"
+        android:fontFamily="@font/r_bold"
 
         android:textColor="#FFFFFF"
         />
@@ -42,7 +58,7 @@
         android:textSize="20sp"
         android:textColor="@color/c2"
         android:text="Time"
-        android:fontFamily="@font/barlow_semi_condensed_semibold"
+        android:fontFamily="@font/r_medium"
         android:layout_below="@id/tv3"/>
     <TextView
         android:id="@+id/tvRecentMessage"

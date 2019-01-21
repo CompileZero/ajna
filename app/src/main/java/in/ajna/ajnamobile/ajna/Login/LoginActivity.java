@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,8 +27,8 @@ import com.marozzi.roundbutton.RoundButton;
 public class LoginActivity extends AppCompatActivity {
 
 
-    TextInputLayout etPhoneNumber;
-    TextInputEditText editTextPhoneNumber;
+
+    EditText editTextPhoneNumber;
 
 
     Button btnLogin;
@@ -41,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
-        etPhoneNumber = findViewById(R.id.etPhoneNumber);
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
 
         btnLogin=findViewById(R.id.btnLogin);
@@ -54,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 String phoneNumber=editTextPhoneNumber.getText().toString().trim();
 
                 if(phoneNumber.isEmpty() || phoneNumber.length()<10 || phoneNumber.length()>10){
-                    etPhoneNumber.setError("Please enter a valid phone Number!");
+
+                    editTextPhoneNumber.setError("Please enter a valid phone Number!");
                     return;
                 }
                 String phoneNumberIndia="+91"+phoneNumber;

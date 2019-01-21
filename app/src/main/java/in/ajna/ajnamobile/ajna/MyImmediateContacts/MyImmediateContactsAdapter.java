@@ -18,15 +18,10 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
 
 
     public MyImmediateContactsAdapter(@NonNull FirestoreRecyclerOptions<MyImmediateContacts> options) {
-        super(options);
-    }
-
+        super(options); }
     @Override
     protected void onBindViewHolder(@NonNull MyImmediateContactsHolder myImmediateContactsHolder, int i, @NonNull MyImmediateContacts myImmediateContacts) {
-
-        myImmediateContactsHolder.tvIcon.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,2)));
-    }
-
+        myImmediateContactsHolder.tvIconImm.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,2))); }
     @NonNull
     @Override
     public MyImmediateContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,16 +32,11 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
 
     class MyImmediateContactsHolder extends RecyclerView.ViewHolder{
 
-
-
-        TextView tvIcon;
-
+        TextView tvIconImm;
 
         public MyImmediateContactsHolder(@NonNull View itemView) {
             super(itemView);
-
-
-            tvIcon=itemView.findViewById(R.id.tvIcon);
+            tvIconImm=itemView.findViewById(R.id.tvIconImm);
 
         }
     }

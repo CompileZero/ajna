@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvMyFamily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Family"
+
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="7dp"
+
+        android:fontFamily="@font/r_bold"
+        android:textColor="#3c3c3c"
+        android:textSize="19sp"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8c8c8c"
+        android:layout_below="@id/tvMyFamily"/>
+
+    <TextView
+        android:id="@+id/tvDetails2"
+        android:layout_below="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/r_medium"
+        android:text="Details"/>
+
+</RelativeLayout>
