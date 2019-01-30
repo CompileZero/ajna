@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class App extends Application {
+
     public static final String CHANNEL_1_ID="SampleChannel";
     public static final String CHANNEL_2_ID="AlwaysOnService";
 
@@ -36,7 +37,7 @@ public class App extends Application {
             NotificationChannel AlwaysOnServiceChannel=new NotificationChannel(
                     CHANNEL_2_ID,
                     "AlwaysOnService",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
             );
 
             NotificationManager manager=getSystemService(NotificationManager.class);

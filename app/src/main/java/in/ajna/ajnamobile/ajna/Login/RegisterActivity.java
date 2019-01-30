@@ -1,5 +1,6 @@
 package in.ajna.ajnamobile.ajna.Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,11 +15,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.marozzi.roundbutton.RoundButton;
 
 import java.util.HashMap;
@@ -35,7 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
+    CollectionReference collRef;
+
+    User user;
     String phoneNumberIndia;
+
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
-
     private void registerUser(){
         String fullName=editTextRegisterFullName.getText().toString().trim();
         String address=editTextRegisterAddress.getText().toString().trim();
@@ -93,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(fullName,address,city,phoneNumberIndia);
         db.collection("users").document(mAuth.getCurrentUser().getUid()).set(user);
 
-
         Intent intent=new Intent(RegisterActivity.this,QRCodeActivity.class);
         intent.putExtra("fullName",fullName);
         intent.putExtra("address",address);
@@ -101,6 +108,5 @@ public class RegisterActivity extends AppCompatActivity {
         intent.putExtra("phoneNumberIndia",phoneNumberIndia);
         startActivity(intent);
     }
-
 
 }

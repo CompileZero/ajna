@@ -25,26 +25,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SplashScreenActivity extends AppCompatActivity {
-
-
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash_screen);
-        //((AnimatedVectorDrawable) getWindow().getDecorView().getBackground()).start();
-        /*Drawable d = getWindow().getDecorView().findViewById(R.id.toggle2);
-
-        if(d instanceof AnimatedVectorDrawableCompat){
-            AnimatedVectorDrawableCompat avd=(AnimatedVectorDrawableCompat) d;
-            avd.start();
-        }
-        else if(d instanceof AnimatedVectorDrawable){
-            AnimatedVectorDrawable avd=(AnimatedVectorDrawable) d;
-            avd.start();
-        }*/
-
         //Check whether the user has signed in
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null){

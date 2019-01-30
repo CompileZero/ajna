@@ -66,7 +66,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_more_vert_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_people_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -76,12 +76,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="109" />
-                            <entry key="outputName" value="timeline_card2" />
+                            <entry key="outputName" value="ic_my_family" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Omen\Downloads\timeline.svg" />
-                            <entry key="width" value="582" />
                           </map>
                         </option>
                       </PersistentState>

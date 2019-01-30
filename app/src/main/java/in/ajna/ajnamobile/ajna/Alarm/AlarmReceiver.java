@@ -10,6 +10,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Vibrator;
+import android.provider.AlarmClock;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,9 +26,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Intent ringer = new Intent(context,AlarmActivity.class);
+        /*Intent ringer = new Intent(context,AlarmActivity.class);
         ringer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(ringer);
+        context.startActivity(ringer);*/
+
+        Intent intent1= new Intent(AlarmClock.ACTION_SET_ALARM);
+
 
 
     }

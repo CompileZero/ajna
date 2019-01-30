@@ -41,6 +41,10 @@ public class AlarmActivity extends AppCompatActivity {
     private DatabaseReference deviceRef;
 
     private int detectedStatus;
+
+    private int ringerMode;
+
+    AudioManager audioManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +57,19 @@ public class AlarmActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+                //set the ringer mode to normal(loud)
+                audioManager=(AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+                ringerMode = audioManager.getRingerMode();
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+
                 //setup ringtone
                 Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                 ringtone = RingtoneManager.getRingtone(AlarmActivity.this, alarmUri);
+
                 ringtone.play();
 
-                AudioManager audioManager=(AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                //TODO:
+
 
                 //setup vibration
                 // add this in manifest - <uses-permission android:name="android.permission.VIBRATE" />
@@ -115,11 +125,15 @@ public class AlarmActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        //reset the ringer mode to the user's previous ringer mode
+        audioManager.setRingerMode(ringerMode);
+
         if(handler!=null)
             handler.removeCallbacks(runnable);
 
         if(ringtone.isPlaying())
             ringtone.stop();
+
             v.cancel();
     }
     private void getSpecificPreferences() {

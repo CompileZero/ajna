@@ -1,17 +1,21 @@
 package in.ajna.ajnamobile.ajna;
 
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 
 import android.app.Notification;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -32,10 +36,12 @@ import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCo
 import in.ajna.ajnamobile.ajna.Notification.AlwaysOnService;
 import in.ajna.ajnamobile.ajna.RecentMessages.BottomSheetRecentMessages;
 import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessages;
+import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
 
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 
 import android.view.MenuItem;
@@ -56,15 +62,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.ramotion.foldingcell.FoldingCell;
 import com.suke.widget.SwitchButton;
 
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements BottomSheetMyImmediateContacts.BottomSheetListener, BottomSheetRecentMessages.BottomSheetListener, ConnectivityReceiver.ConnectivityReceiverListener {
+public class MainActivity extends AppCompatActivity implements BottomSheetMyImmediateContacts.BottomSheetListener, BottomSheetRecentMessages.BottomSheetListener{
     @Override
     public void onButtonClicked(String text) {
 
     }
     private NotificationManagerCompat notificationManager;
     public static final String MESSAGES_EXTRA="messageExtra";
+    public static final String TITLE_EXTRA="titleExtra";
     private static final String NAME_KEY = "Name";
 
     private static final String PHONE_KEY = "Phone";
@@ -89,11 +97,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
     private String fullName;
     private String code;
-    private int status,detectedStatus;
+
+    private int status;
 
     private static MainActivity inst;
-
-    private BroadcastReceiver networkReceiver;
 
     FoldingCell fc2;
 
@@ -102,14 +109,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //if(isConnected(MainActivity.this))
-         //{
-            Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_main);
             //Set Custom toolbar
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+            Toolbar toolbar =findViewById(R.id.toolbar1);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
             //To set a light status bar with grey icons
@@ -120,10 +124,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
             notificationManager = NotificationManagerCompat.from(this);
 
-            networkReceiver=new ConnectivityReceiver();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        }
 
             //Get Shared Preferences
             getSpecificPreferences();
@@ -184,44 +184,13 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             }
         });*/
 
-            ValueEventListener statusListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    try {
-                        status = dataSnapshot.getValue(Status.class).getStatus();
-                        detectedStatus = dataSnapshot.getValue(IntrusionDetected.class).getDetectedStatus();
-                    } catch (Exception e) {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        deviceRef.child("status").setValue(0);
-                        deviceRef.child("detectedStatus").setValue(0);
-                    }
-
-                    if (status == 1) {
-                        btnSwitch.setChecked(true);
-                    } else {
-                        btnSwitch.setChecked(false);
-                    }
-                    if (detectedStatus == 1) {
-                        startAlarm();
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            };
-            deviceRef.addValueEventListener(statusListener);
-            startService();
+            if(!isMyServiceRunning(AlwaysOnService.class)) startService();
 
 
         //}
         //else buildDialog(MainActivity.this).show();
     }
-
-
 
     private void initMyImmediateContacts() {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
@@ -244,15 +213,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     @Override
     protected void onResume() {
         super.onResume();
-        App.getInstance().setConnectivityListener(this);
     }
 
-    @Override
-    public void onNetworkConnectionChanged(boolean isConnected) {
-        if(!isConnected)
-        buildDialog(MainActivity.this).show();
-
-    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -271,12 +233,17 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId()==R.id.btnHelp){
+            stopService();
+            Toast.makeText(this, "SignedOut and Exiting", Toast.LENGTH_SHORT).show();
             mAuth.signOut();
-            Toast.makeText(this, "SignedOut", Toast.LENGTH_SHORT).show();
+
+            finishAndRemoveTask();
         }
         else if(item.getItemId()==R.id.btnSettings){
 
             Toast.makeText(this, "Signed In", Toast.LENGTH_SHORT).show();
+            Intent intenet= new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intenet);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -291,10 +258,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
         notificationManager.notify(2,notification);
     }
     public void startService(){
-        String message="Your home is safe!";
 
         Intent serviceIntent = new Intent(this,AlwaysOnService.class);
-        serviceIntent.putExtra(MESSAGES_EXTRA,message);
         startService(serviceIntent);
     }
 
@@ -341,20 +306,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
     }
-    public boolean isConnected(Context context) {
 
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-
-        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
-            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null & wifi.isConnectedOrConnecting())) return true;
-        else return false;
-        } else
-        return false;
-    }
     public AlertDialog.Builder buildDialog(Context c) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
@@ -369,5 +321,41 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
         });
         return builder;
     }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void addAutoStartup() {
+
+        try {
+            Intent intent = new Intent();
+            String manufacturer = android.os.Build.MANUFACTURER;
+            if ("xiaomi".equalsIgnoreCase(manufacturer)) {
+                intent.setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
+            } else if ("oppo".equalsIgnoreCase(manufacturer)) {
+                intent.setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.permission.startup.StartupAppListActivity"));
+            } else if ("vivo".equalsIgnoreCase(manufacturer)) {
+                intent.setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
+            } else if ("Letv".equalsIgnoreCase(manufacturer)) {
+                intent.setComponent(new ComponentName("com.letv.android.letvsafe", "com.letv.android.letvsafe.AutobootManageActivity"));
+            } else if ("Honor".equalsIgnoreCase(manufacturer)) {
+                intent.setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.optimize.process.ProtectActivity"));
+            }
+
+            List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            if  (list.size() > 0) {
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            Log.e("exc" , String.valueOf(e));
+        }
+    }
+
 
 }
