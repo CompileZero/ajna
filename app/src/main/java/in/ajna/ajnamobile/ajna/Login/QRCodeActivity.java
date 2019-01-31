@@ -88,12 +88,10 @@ public class QRCodeActivity extends AppCompatActivity {
 
                             edit.putString("code",code);
                             edit.putString("fullName",fullName);
+                            edit.putString("isSignedIn","1");
                             edit.apply();
 
-
-
                             checkForExistingAccount();
-
 
                             Intent intent = new Intent(QRCodeActivity.this, LoginOptions.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

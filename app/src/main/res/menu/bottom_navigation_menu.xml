@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Status"
+    <item
+        android:id="@+id/navigation_status"
+        android:title="Status"
         android:icon="@drawable/ic_device_status"
         />
-    <item android:title="Contacts"
+    <item
+        android:id="@+id/navigation_contacts"
+        android:title="Contacts"
         android:icon="@drawable/ic_emergency_contacts"
         />
-    <item android:title="Activity"
+    <item
+        android:id="@+id/navigation_activity"
+        android:title="Activity"
         android:icon="@drawable/ic_recent_messages"
        />
-    <item android:title="Family"
+    <item
+        android:id="@+id/navigation_family"
+        android:title="Family"
         android:icon="@drawable/ic_my_family"
         />
 

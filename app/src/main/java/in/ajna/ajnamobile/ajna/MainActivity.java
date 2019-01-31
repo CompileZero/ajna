@@ -27,15 +27,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import in.ajna.ajnamobile.ajna.Alarm.AlarmReceiver;
+import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentCollapsed;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.BottomSheetMyImmediateContacts;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCollapsed;
 import in.ajna.ajnamobile.ajna.Notification.AlwaysOnService;
 import in.ajna.ajnamobile.ajna.RecentMessages.BottomSheetRecentMessages;
 import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessages;
+import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
 import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
 
 
@@ -51,6 +54,7 @@ import android.widget.Toast;
 
 
 import com.alexfu.countdownview.CountDownView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -65,7 +69,7 @@ import com.suke.widget.SwitchButton;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements BottomSheetMyImmediateContacts.BottomSheetListener, BottomSheetRecentMessages.BottomSheetListener{
+public class MainActivity extends AppCompatActivity implements BottomSheetMyImmediateContacts.BottomSheetListener, BottomSheetRecentMessages.BottomSheetListener, BottomNavigationView.OnNavigationItemSelectedListener {
     @Override
     public void onButtonClicked(String text) {
 
@@ -123,13 +127,15 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             }
 
             notificationManager = NotificationManagerCompat.from(this);
+        BottomNavigationView bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
             //Get Shared Preferences
             getSpecificPreferences();
 
             //start My Immediate Contacts Fragments
-            initMyImmediateContacts();
+            //initMyImmediateContacts();
 
             //Folding Cell
             fc2 = findViewById(R.id.folding_cell2);
@@ -233,8 +239,13 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId()==R.id.btnHelp){
+            SharedPreferences sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("isSignedIn","0");
+            edit.apply();
             stopService();
             Toast.makeText(this, "SignedOut and Exiting", Toast.LENGTH_SHORT).show();
+
             mAuth.signOut();
 
             finishAndRemoveTask();
@@ -358,4 +369,39 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.navigation_status:
+                break;
+
+            case R.id.navigation_contacts:
+                fragment = new MyImmediateContactsFragmentCollapsed();
+                break;
+
+            case R.id.navigation_activity:
+                fragment = new RecentMessagesFragmentExpanded();
+                break;
+
+            case R.id.navigation_family:
+                fragment = new MyFamilyFragmentCollapsed();
+                break;
+        }
+
+        return loadFragment(fragment);
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
 }

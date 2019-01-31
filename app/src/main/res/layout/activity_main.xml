@@ -12,12 +12,44 @@
         android:id="@+id/toolbar1"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFFFFF"
+        android:background="@drawable/background_gradient"
         app:title="Ajna"
-        app:titleTextColor="@android:color/black"
-        android:translationZ="1dp"
+        app:titleTextColor="@android:color/white"
+        android:translationZ="0dp"
         android:gravity="center"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/background_gradient"
+        android:layout_above="@id/bottomNavigationView"
+        android:layout_below="@id/toolbar1">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@drawable/bottom_sheet_background"
+            android:outlineProvider="background"
+            android:translationZ="10dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            >
+
+            <RelativeLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerHorizontal="true">
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <in.ajna.ajnamobile.ajna.SwipeButton
         android:id="@+id/btnSwipe"
@@ -104,14 +136,13 @@
 
         android:layout_below="@id/layoutCountdown"
 
-
+        android:visibility="gone"
 
         android:layout_marginBottom="10dp">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/fragmentContainerExpanded"
@@ -230,6 +261,7 @@
 
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 

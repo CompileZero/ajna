@@ -11,6 +11,7 @@ import in.ajna.ajnamobile.ajna.Login.RegisterActivity;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,11 +26,30 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SplashScreenActivity extends AppCompatActivity {
+
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db;
+
+    private SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+        String flagSignedIn = sp.getString("isSignedIn","0");
+
+        if(flagSignedIn.equals("1")){
+            Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+        else if(flagSignedIn.equals("0")){
+            Intent intent = new Intent(this,AgreeContinueActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+        /*
         //Check whether the user has signed in
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null){
@@ -69,7 +89,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 
-        }
+        }*/
 
     }
 }
