@@ -1,4 +1,4 @@
-package in.ajna.ajnamobile.ajna.RecentMessages;
+package in.ajna.ajnamobile.ajna.Activity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +9,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.vipulasri.timelineview.TimelineView;
 
-import java.sql.Time;
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -65,7 +63,7 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
     private String getDate(Long timestamp){
         Calendar cal=Calendar.getInstance(Locale.getDefault());
         cal.setTimeInMillis(timestamp);
-        String date= android.text.format.DateFormat.format("dd-MMM \nhh:mm:ss a",cal).toString();
+        String date= android.text.format.DateFormat.format("dd-MMM hh:mm:ss a",cal).toString();
 
         return date;
     }

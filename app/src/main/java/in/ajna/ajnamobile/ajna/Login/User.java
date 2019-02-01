@@ -22,4 +22,8 @@ public class User {
         return fullName;
     }
 
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+
 }

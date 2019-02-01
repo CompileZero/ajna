@@ -40,7 +40,7 @@ public class MyFamilyAdapter extends FirestoreRecyclerAdapter<User,MyFamilyAdapt
         public MyFamilyHolder(@NonNull View itemView) {
             super(itemView);
             tvIconFam=itemView.findViewById(R.id.tvIconFam);
-            Log.d("Hello","hello");
+
         }
     }
 }

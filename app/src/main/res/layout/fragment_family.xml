@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+
+    android:layout_centerHorizontal="true"
+
+    tools:context=".MyFamily.FamilyFragment">
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Family"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/r_medium"/>
+
+    <TextView
+        android:id="@+id/tv7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tv6"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="14sp"
+        android:text="Once a user scans the QR code on the device, he/she will be visible over here."
+        android:textColor="#727272"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFamily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+
+        android:layout_below="@id/tv7"
+
+        android:layout_marginBottom="5dp"
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="false"
+        tools:listitem="@layout/family_list_item"/>
+
+    <ImageView
+        android:id="@+id/ic_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:src="@drawable/ic_help"
+        android:layout_below="@id/rvFamily"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/rvFamily"
+        android:layout_toEndOf="@id/ic_help"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="#727272"
+        android:textSize="12sp"
+        android:text="To change your account details, tap the “Settings” icon"/>
+
+</RelativeLayout>

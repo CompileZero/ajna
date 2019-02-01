@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,18 +20,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.util.List;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.MainActivity;
 import in.ajna.ajnamobile.ajna.R;
-import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentCollapsed;
-import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
+import in.ajna.ajnamobile.ajna.Activity.RecentMessagesFragmentCollapsed;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,4 +1,4 @@
-package in.ajna.ajnamobile.ajna.RecentMessages;
+package in.ajna.ajnamobile.ajna.Activity;
 
 
 import android.content.Context;
@@ -13,15 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firestore.v1beta1.Document;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -32,7 +28,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentCollapsed;
-import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentExpanded;
 import in.ajna.ajnamobile.ajna.R;
 
 public class RecentMessagesFragmentCollapsed extends Fragment {

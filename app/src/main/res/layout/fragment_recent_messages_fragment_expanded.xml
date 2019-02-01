@@ -9,15 +9,52 @@
     android:layout_marginEnd="5dp"
 
     android:layout_centerHorizontal="true"
-    android:background="@drawable/round_gradient4"
-    tools:context=".RecentMessages.RecentMessagesFragmentExpanded">
+    tools:context=".Activity.RecentMessagesFragmentExpanded">
+    <TextView
+        android:id="@+id/tv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Activity"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/r_medium"/>
+
+    <TextView
+        android:id="@+id/tv9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tv8"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="14sp"
+        android:text="All the recent activities related to the device are shown here."
+        android:textColor="#727272"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClearHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tv9"
+        android:layout_alignParentEnd="true"
+
+
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:fontFamily="@font/r_medium"
+        android:textSize="13sp"
+        android:text="CLEAR HISTORY"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecentMessages2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_margin="20dp"
-        ></androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@id/btnClearHistory"
+
+        android:scrollbars="vertical"/>
 
 </RelativeLayout>

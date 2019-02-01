@@ -1,4 +1,4 @@
-package in.ajna.ajnamobile.ajna.RecentMessages;
+package in.ajna.ajnamobile.ajna.Activity;
 
 public class RecentMessages {
 

@@ -66,6 +66,7 @@ public class ManualCodeEntryActivity extends AppCompatActivity {
 
             SharedPreferences sp = getSharedPreferences("DEVICE_CODE", MODE_PRIVATE);
             SharedPreferences.Editor edit = sp.edit();
+            edit.putString("isSignedIn","1");
             edit.putString("code", code);
             edit.apply();
 

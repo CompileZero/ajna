@@ -5,27 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="2dp">
-
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:fontFamily="@font/barlow_semi_condensed_semibold"
-            android:textSize="15sp"
-            android:textColor="@color/c1"
-            android:text="Time"/>
-
-    </RelativeLayout>
-
     <com.github.vipulasri.timelineview.TimelineView
 
         android:id="@+id/timeMarker"
@@ -39,35 +18,61 @@
         app:linePadding="3dp"
         app:marker="@drawable/ic_marker"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-
-        android:gravity="center_vertical"
-
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/timeline_card2"
-        android:outlineProvider="background"
-        android:translationZ="10dp"
-        android:elevation="10dp">
-
-        <TextView
-            android:id="@+id/tvMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="30dp"
 
 
-            android:fontFamily="@font/r_bold"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
-            android:text="Message"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:layout_margin="10dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardPreventCornerOverlap="true"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:id="@+id/tvMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="5dp"
 
 
-    </RelativeLayout>
+                    android:fontFamily="@font/r_medium"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:text="Message"/>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@id/tvMessage"
+                    android:layout_marginStart="5dp"
+
+                    android:fontFamily="@font/r_regular"
+                    android:textSize="12sp"
+                    android:textColor="#686868"
+                    android:text="Time"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
 
 
 

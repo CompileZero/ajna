@@ -7,17 +7,14 @@ import android.app.AlarmManager;
 import android.app.Notification;
 
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -25,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -32,14 +30,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import in.ajna.ajnamobile.ajna.Alarm.AlarmReceiver;
-import in.ajna.ajnamobile.ajna.MyFamily.MyFamilyFragmentCollapsed;
+import in.ajna.ajnamobile.ajna.MyFamily.FamilyFragment;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.BottomSheetMyImmediateContacts;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCollapsed;
 import in.ajna.ajnamobile.ajna.Notification.AlwaysOnService;
-import in.ajna.ajnamobile.ajna.RecentMessages.BottomSheetRecentMessages;
-import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessages;
-import in.ajna.ajnamobile.ajna.RecentMessages.RecentMessagesFragmentExpanded;
+import in.ajna.ajnamobile.ajna.Activity.BottomSheetRecentMessages;
+import in.ajna.ajnamobile.ajna.Activity.RecentMessages;
+import in.ajna.ajnamobile.ajna.Activity.RecentMessagesFragmentExpanded;
 import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
+import pl.droidsonroids.gif.GifImageView;
 
 
 import android.os.Bundle;
@@ -50,17 +49,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 
 import com.alexfu.countdownview.CountDownView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ramotion.foldingcell.FoldingCell;
@@ -85,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    private SwipeButton btnSwipe;
-
     private SwitchButton btnSwitch;
 
     private CountDownView tvCountdown;
@@ -102,11 +98,15 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     private String fullName;
     private String code;
 
-    private int status;
+    private int status,status2=0;
 
     private static MainActivity inst;
 
     FoldingCell fc2;
+
+    GifImageView gifImageView;
+
+    CoordinatorLayout layout_main;
 
 
     @Override
@@ -119,12 +119,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-
-            //To set a light status bar with grey icons
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                View decor = getWindow().getDecorView();
-                decor.setSystemUiVisibility(decor.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
 
             notificationManager = NotificationManagerCompat.from(this);
         BottomNavigationView bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottomNavigationView);
@@ -140,11 +138,34 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             //Folding Cell
             fc2 = findViewById(R.id.folding_cell2);
 
-            btnSwipe = findViewById(R.id.btnSwipe);
-
             btnSwitch = findViewById(R.id.btnSwitch);
 
             tvCountdown = findViewById(R.id.tvCountdown);
+
+            layout_main=findViewById(R.id.layout_main);
+
+            gifImageView=(GifImageView)findViewById(R.id.gifImageView);
+            gifImageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    if(status2==0){
+                        startFadeTransition(false);
+                        status2=1;
+                    }
+                    else{
+                        startFadeTransition(true);
+                        status2=0;
+                    }
+                    return true;
+                }
+            });
+            gifImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
             deviceRef = dbRealtime.getReference(code);
 
@@ -170,18 +191,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
             });
 
-            btnSwipe.setOnFinishListener(new SwipeButton.OnFinishListener() {
-                @Override
-                public void onFinish() {
-                    Toast.makeText(MainActivity.this, "Armed!", Toast.LENGTH_SHORT).show();
-                }
-            });
-            btnSwipe.setOnReverseListener(new SwipeButton.OnReverseListener() {
-                @Override
-                public void onReverse() {
-                    Toast.makeText(MainActivity.this, "Disarmed!", Toast.LENGTH_SHORT).show();
-                }
-            });
         /*final FoldingCell fc4=findViewById(R.id.folding_cell4);
         fc4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,6 +205,17 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
         //}
         //else buildDialog(MainActivity.this).show();
+    }
+
+    private void startFadeTransition(Boolean reverseAnimation) {
+        TransitionDrawable transition = (TransitionDrawable) layout_main.getBackground();
+        if(!reverseAnimation){
+            transition.startTransition(1000);
+        }
+        else{
+            transition.reverseTransition(1000);
+        }
+
     }
 
     private void initMyImmediateContacts() {
@@ -386,7 +406,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
                 break;
 
             case R.id.navigation_family:
-                fragment = new MyFamilyFragmentCollapsed();
+                fragment = new FamilyFragment();
                 break;
         }
 
@@ -399,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
+                    .setCustomAnimations(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left)
                     .commit();
             return true;
         }
