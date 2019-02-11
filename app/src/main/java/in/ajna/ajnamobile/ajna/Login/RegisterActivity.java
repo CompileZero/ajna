@@ -32,8 +32,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText editTextRegisterFullName,editTextRegisterAddress,
-            editTextRegisterCity;
+    EditText editTextRegisterFullName, editTextRegisterCity;
 
     Button btnRegister;
 
@@ -54,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         editTextRegisterFullName=findViewById(R.id.editTextRegisterFullName);
-        editTextRegisterAddress=findViewById(R.id.editTextRegisterAddress);
+
         editTextRegisterCity=findViewById(R.id.editTextRegisterCity);
 
         btnRegister=findViewById(R.id.btnRegister);
@@ -64,10 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
         db=FirebaseFirestore.getInstance();
 
         phoneNumberIndia=getIntent().getStringExtra("phoneNumberIndia");
-
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{android.Manifest.permission.CAMERA}, 50);
-        }
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +75,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void registerUser(){
         String fullName=editTextRegisterFullName.getText().toString().trim();
-        String address=editTextRegisterAddress.getText().toString().trim();
         String city=editTextRegisterCity.getText().toString().trim();
 
 
         if(fullName.isEmpty()){
             editTextRegisterFullName.setError("Please enter a valid name");
-            return;
-        }
-        if(address.isEmpty()){
-            editTextRegisterAddress.setError("Please enter a valid address");
             return;
         }
         if(city.isEmpty()){
@@ -98,12 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         //Add details to "users" database
-        User user = new User(fullName,address,city,phoneNumberIndia);
+        User user = new User(fullName,city,phoneNumberIndia);
         db.collection("users").document(mAuth.getCurrentUser().getUid()).set(user);
 
-        Intent intent=new Intent(RegisterActivity.this,QRCodeActivity.class);
+        Intent intent=new Intent(RegisterActivity.this,QRCodePermissionsActivity.class);
         intent.putExtra("fullName",fullName);
-        intent.putExtra("address",address);
         intent.putExtra("city",city);
         intent.putExtra("phoneNumberIndia",phoneNumberIndia);
         startActivity(intent);

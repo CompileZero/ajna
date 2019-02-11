@@ -9,6 +9,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.vipulasri.timelineview.TimelineView;
 
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -17,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.R;
 
-public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<RecentMessages,RecentMessagesAdapterExpanded.RecentMessagesHolder> {
+public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<RecentMessages,RecentMessagesAdapterExpanded.RecentMessagesHolder>{
 
 
     public RecentMessagesAdapterExpanded(@NonNull FirestoreRecyclerOptions<RecentMessages> options) {
@@ -37,6 +38,7 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
         ,parent,false);
         return new RecentMessagesHolder(v,viewType);
     }
+
 
     class RecentMessagesHolder extends RecyclerView.ViewHolder{
         TimelineView timelineView;

@@ -55,6 +55,14 @@
           }
         },
         {
+          "client_id": "210089692185-6lv66d3s9660428pdj1ft0gufpjvtt0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ajna.ajnamobile.ajna",
+            "certificate_hash": "ff590110b71122dc59932d87af9ea6639c28ee71"
+          }
+        },
+        {
           "client_id": "210089692185-3c10jo0a0aij0fqbs07lo67s7a81murn.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -74,6 +82,13 @@
             {
               "client_id": "210089692185-3c10jo0a0aij0fqbs07lo67s7a81murn.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "210089692185-g1dg9govhpqnqige0snhndu40thlp2ne.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "in.ajna.ajnamobile.ajna"
+              }
             }
           ]
         },

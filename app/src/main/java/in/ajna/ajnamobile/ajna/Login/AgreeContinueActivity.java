@@ -12,6 +12,7 @@ import android.widget.Button;
 public class AgreeContinueActivity extends AppCompatActivity {
 
     Button btnAgree;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,6 @@ public class AgreeContinueActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgreeContinueActivity.this, LoginActivity.class);
-
                 startActivity(intent);
             }
         });

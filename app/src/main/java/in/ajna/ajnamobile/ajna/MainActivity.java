@@ -15,14 +15,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -31,10 +29,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import in.ajna.ajnamobile.ajna.Alarm.AlarmReceiver;
 import in.ajna.ajnamobile.ajna.MyFamily.FamilyFragment;
-import in.ajna.ajnamobile.ajna.MyImmediateContacts.BottomSheetMyImmediateContacts;
 import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCollapsed;
 import in.ajna.ajnamobile.ajna.Notification.AlwaysOnService;
-import in.ajna.ajnamobile.ajna.Activity.BottomSheetRecentMessages;
 import in.ajna.ajnamobile.ajna.Activity.RecentMessages;
 import in.ajna.ajnamobile.ajna.Activity.RecentMessagesFragmentExpanded;
 import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
@@ -51,11 +47,13 @@ import android.view.View;
 
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-import com.alexfu.countdownview.CountDownView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -67,11 +65,8 @@ import com.suke.widget.SwitchButton;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements BottomSheetMyImmediateContacts.BottomSheetListener, BottomSheetRecentMessages.BottomSheetListener, BottomNavigationView.OnNavigationItemSelectedListener {
-    @Override
-    public void onButtonClicked(String text) {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    }
     private NotificationManagerCompat notificationManager;
     public static final String MESSAGES_EXTRA="messageExtra";
     public static final String TITLE_EXTRA="titleExtra";
@@ -84,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private SwitchButton btnSwitch;
-
-    private CountDownView tvCountdown;
 
     private SharedPreferences sp;
 
@@ -106,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
     GifImageView gifImageView;
 
-    CoordinatorLayout layout_main;
-
+    RelativeLayout layout_main,bottomSheetLayout;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +112,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
             notificationManager = NotificationManagerCompat.from(this);
         BottomNavigationView bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottomNavigationView);
@@ -140,23 +133,32 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
 
             btnSwitch = findViewById(R.id.btnSwitch);
 
-            tvCountdown = findViewById(R.id.tvCountdown);
+
 
             layout_main=findViewById(R.id.layout_main);
+            bottomSheetLayout=findViewById(R.id.bottomSheetLayout);
 
-            gifImageView=(GifImageView)findViewById(R.id.gifImageView);
+            bottomSheetBehavior=BottomSheetBehavior.from(bottomSheetLayout);
+
+            gifImageView= findViewById(R.id.gifImageView);
+            gifImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
             gifImageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
 
-                    if(status2==0){
-                        startFadeTransition(false);
-                        status2=1;
-                    }
-                    else{
-                        startFadeTransition(true);
-                        status2=0;
-                    }
+                    changeColor();
+
+
+
+                    gifImageView.setBackground(getResources().getDrawable(R.drawable.loading2));
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
                     return true;
                 }
             });
@@ -174,16 +176,12 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
                 public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                     if (isChecked == true) {
                         if (status == 0) {
-                            tvCountdown.start();
                             sendArmedMessage();
-
                         }
 
                     } else if (isChecked == false) {
                         if (status == 1) {
                             sendDisarmedMessage();
-                            tvCountdown.stop();
-                            tvCountdown.reset();
                         }
                     }
                 }
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
         });*/
 
 
-            if(!isMyServiceRunning(AlwaysOnService.class)) startService();
+            //if(!isMyServiceRunning(AlwaysOnService.class)) startService();
 
 
         //}
@@ -272,7 +270,6 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
         }
         else if(item.getItemId()==R.id.btnSettings){
 
-            Toast.makeText(this, "Signed In", Toast.LENGTH_SHORT).show();
             Intent intenet= new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intenet);
         }
@@ -393,6 +390,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
 
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
         switch (item.getItemId()) {
             case R.id.navigation_status:
                 break;
@@ -424,5 +423,20 @@ public class MainActivity extends AppCompatActivity implements BottomSheetMyImme
             return true;
         }
         return false;
+    }
+
+    private void changeColor(){
+        if(status2==0){
+            startFadeTransition(false);
+            status2=1;
+            gifImageView.setImageResource(R.drawable.loading2);
+            sendArmedMessage();
+        }
+        else{
+            startFadeTransition(true);
+            status2=0;
+            gifImageView.setImageResource(R.drawable.loading);
+            sendDisarmedMessage();
+        }
     }
 }

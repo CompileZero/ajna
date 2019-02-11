@@ -26,14 +26,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        /*Intent ringer = new Intent(context,AlarmActivity.class);
+        Intent ringer = new Intent(context,AlarmActivity.class);
         ringer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(ringer);*/
-
-        Intent intent1= new Intent(AlarmClock.ACTION_SET_ALARM);
-
-
-
+        context.startActivity(ringer);
     }
 
 

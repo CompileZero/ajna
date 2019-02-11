@@ -48,13 +48,14 @@
         android:fontFamily="@font/r_medium"
         android:textSize="13sp"
         android:text="CLEAR HISTORY"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecentMessages2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         android:layout_below="@id/btnClearHistory"
-
-        android:scrollbars="vertical"/>
+        android:nestedScrollingEnabled="true"
+        />
 
 </RelativeLayout>

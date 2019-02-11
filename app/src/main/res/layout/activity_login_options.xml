@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Login.LoginOptions">
 
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
     <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvAre"
         android:layout_width="wrap_content"
@@ -13,6 +18,7 @@
 
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:layout_below="@id/viewStatus"
 
         android:textColor="@android:color/black"
         android:text="Are you setting the device for the first time?"

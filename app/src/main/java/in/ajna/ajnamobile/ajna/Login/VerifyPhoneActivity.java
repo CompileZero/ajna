@@ -7,8 +7,10 @@ import in.ajna.ajnamobile.ajna.R;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -23,6 +25,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.marozzi.roundbutton.RoundButton;
+import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
 
 import java.util.HashMap;
@@ -31,55 +34,48 @@ import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
 
-    private String verificationId;
 
-    Button btnVerify;
+    private OtpView otpView;
+    private TextView tvTimer;
+    private Button btnVerify;
 
-    FirebaseAuth mAuth;
+    private String phoneNumberIndia, verificationId, code;
 
-    OtpView otpView;
-
-    String phoneNumberIndia;
-
+    private FirebaseAuth mAuth;
+    private PhoneAuthCredential credential;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone);
 
-        btnVerify=findViewById(R.id.btnVerify);
         otpView=findViewById(R.id.otpView);
+        tvTimer=findViewById(R.id.tvTimer);
+        btnVerify=findViewById(R.id.btnVerify);
 
         mAuth=FirebaseAuth.getInstance();
 
-
-
-
         phoneNumberIndia=getIntent().getStringExtra("phoneNumberIndia");
-
 
         sendVerificationCode(phoneNumberIndia);
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                code=otpView.getText().toString().trim();
 
-                String code=otpView.getText().toString().trim();
-
-
-                if(code.isEmpty() || code.length()<6){
-                    Toasty.error(VerifyPhoneActivity.this,"Please enter a valid OTP!",Toast.LENGTH_SHORT,true).show();
-                }
                 verifyCode(code);
-
             }
         });
-
     }
     private void verifyCode(String code){
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
-        signInWithCredential(credential);
-        
+        try{
+            credential = PhoneAuthProvider.getCredential(verificationId,code);
+            signInWithCredential(credential);
+        }
+        catch (Exception e){
+            Toast.makeText(this, "Error: Please enter a valid OTP and try again", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void signInWithCredential(PhoneAuthCredential credential) {
@@ -110,6 +106,19 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     }
 
     private void sendVerificationCode(String number){
+
+        //start the minute timer
+        new CountDownTimer(60000,1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText((millisUntilFinished/1000)+"s");
+            }
+
+            @Override
+            public void onFinish() {
+                btnVerify.setEnabled(true);
+            }
+        }.start();
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,
@@ -145,7 +154,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         }
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(VerifyPhoneActivity.this, "Error: Please enter a valid number and try again", Toast.LENGTH_SHORT).show();
 
 
         }

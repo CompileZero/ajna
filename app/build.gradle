@@ -137,10 +137,25 @@ dependencies {
     implementation 'com.hendraanggrian:reveallayout:0.5.3'
 
     //countdownview
-    implementation 'com.github.alexfu:CountDownView:0.1.0'
+    implementation 'com.github.iwgang:countdownview:2.1.6'
 
     //preferences
     implementation 'com.github.daniel-stoneuk:material-about-library:2.4.2'
+
+    //chips layout manager
+    implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7'
+
+    //Material dialogs
+    implementation 'com.afollestad.material-dialogs:core:2.0.0-rc10'
+
+    //Android preferences
+    implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+
+    //fancy dialog
+    implementation 'com.geniusforapp.fancydialog:FancyDialog:0.1.4'
+
+    //Material dialogs
+    implementation 'com.afollestad.material-dialogs:core:2.0.0'
 
     //navigation graph and view
     def nav_version = "1.0.0-alpha11"

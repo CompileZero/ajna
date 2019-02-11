@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -29,6 +31,8 @@ import in.ajna.ajnamobile.ajna.Alarm.AlarmActivity;
 import in.ajna.ajnamobile.ajna.Alarm.AlarmReceiver;
 
 public class MessageService extends FirebaseMessagingService {
+
+
     public MessageService() {
     }
 
@@ -36,10 +40,12 @@ public class MessageService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if(remoteMessage.getData()!=null){
-            sendNotification(remoteMessage);
-
-
+            //sendNotification(remoteMessage);
+            Intent intent = new Intent(this,AlarmActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
+
     }
 
     @Override
@@ -56,13 +62,21 @@ public class MessageService extends FirebaseMessagingService {
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
 
+                        SharedPreferences sp = getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putString("token",token);
+                        edit.apply();
+
                         // Log and toast
                         String msg = getString(R.string.default_web_client_id,token);
+                        Log.d("TOKEN",token);
                         Log.d("MESSAGINGSERVICE", msg);
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Hello"+msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
     private void sendNotification(RemoteMessage remoteMessage){
         Map<String, String> data= remoteMessage.getData();
         String title=data.get("title");
@@ -97,5 +111,13 @@ public class MessageService extends FirebaseMessagingService {
         notificationManager.notify(1,notificationBuilder.build());
 
 
+    }
+
+    public void startAlarm()
+    {
+        Intent i = new Intent(this, AlarmReceiver.class);
+        PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
     }
 }

@@ -23,7 +23,7 @@ import com.infideap.blockedittext.BlockEditText;
 
 public class ManualCodeEntryActivity extends AppCompatActivity {
 
-    String fullName,address,city,phoneNumberIndia;
+    String fullName,city,phoneNumberIndia;
 
     BlockEditText etBlocks;
     Button btnProceed;
@@ -48,10 +48,9 @@ public class ManualCodeEntryActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         fullName = getIntent().getStringExtra("fullName");
-        address = getIntent().getStringExtra("address");
         city = getIntent().getStringExtra("city");
         phoneNumberIndia = getIntent().getStringExtra("phoneNumberIndia");
-        user = new User(fullName, address, city, phoneNumberIndia);
+        user = new User(fullName, city, phoneNumberIndia);
 
     }
 
@@ -67,6 +66,7 @@ public class ManualCodeEntryActivity extends AppCompatActivity {
             SharedPreferences sp = getSharedPreferences("DEVICE_CODE", MODE_PRIVATE);
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("isSignedIn","1");
+            edit.putString("fullName",fullName);
             edit.putString("code", code);
             edit.apply();
 

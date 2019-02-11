@@ -20,7 +20,6 @@ public class DeviceSetupSelection extends AppCompatActivity {
 
     View revealView,revealView2;
     SwitchButton btnSwitchWall,btnSwitchDoor;
-
     TextView tvWall,tv4,tvDoor,tv5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

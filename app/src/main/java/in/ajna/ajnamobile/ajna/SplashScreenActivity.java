@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,9 +36,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
-        String flagSignedIn = sp.getString("isSignedIn","0");
+        final String flagSignedIn = sp.getString("isSignedIn","0");
 
         if(flagSignedIn.equals("1")){
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
@@ -45,10 +45,11 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else if(flagSignedIn.equals("0")){
-            Intent intent = new Intent(this,AgreeContinueActivity.class);
+            Intent intent = new Intent(SplashScreenActivity.this,AgreeContinueActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
+
         /*
         //Check whether the user has signed in
         FirebaseUser user = mAuth.getCurrentUser();

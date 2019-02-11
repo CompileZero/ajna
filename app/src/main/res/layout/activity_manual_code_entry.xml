@@ -6,36 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Login.ManualCodeEntryActivity">
 
-    <TextView
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvCannotScanQRCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-
         android:gravity="center"
+        android:layout_below="@id/viewStatus"
 
-        android:fontFamily="@font/r_bold"
-        android:text="Cannot scan QR Code?"
         android:textColor="@android:color/black"
-        android:textSize="40sp"/>
+        android:text="Cannot scan QR code?"
+        android:textSize="25sp"
+
+        app:customFont="sf_pro_d_bold.otf"
+        app:colors="@array/gradient"
+
+        app:angle="0"
+        app:speed="1000"
+        app:maxFPS="30"/>
     <TextView
         android:id="@+id/tvInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvCannotScanQRCode"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-
         android:gravity="center"
 
-        android:textSize="14sp"
-        android:fontFamily="@font/sf_cd_semibold"
+        android:fontFamily="@font/r_medium"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
         android:text="Please enter the device code which can be seen below the QR code."/>
     <RelativeLayout
         android:layout_width="wrap_content"

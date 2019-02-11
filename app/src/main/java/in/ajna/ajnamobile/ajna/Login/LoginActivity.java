@@ -26,50 +26,35 @@ import com.marozzi.roundbutton.RoundButton;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private EditText editTextPhoneNumber;
+    private Button btnLogin;
 
-
-    EditText editTextPhoneNumber;
-
-
-    Button btnLogin;
-
-
-    FirebaseAuth mAuth;
+    private String phoneNumberIndia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
-
         btnLogin=findViewById(R.id.btnLogin);
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber=editTextPhoneNumber.getText().toString().trim();
+                phoneNumberIndia="+91"+editTextPhoneNumber.getText().toString().trim();
 
-                if(phoneNumber.isEmpty() || phoneNumber.length()<10 || phoneNumber.length()>10){
+                if(phoneNumberIndia.length()==13){
 
+                    Intent intent=new Intent(LoginActivity.this,VerifyPhoneActivity.class);
+                    intent.putExtra("phoneNumberIndia",phoneNumberIndia);
+                    startActivity(intent);
+                }
+                else{
                     editTextPhoneNumber.setError("Please enter a valid phone Number!");
                     return;
                 }
-                String phoneNumberIndia="+91"+phoneNumber;
-
-                Intent intent=new Intent(LoginActivity.this,VerifyPhoneActivity.class);
-                intent.putExtra("phoneNumberIndia",phoneNumberIndia);
-                startActivity(intent);
             }
         });
-
-
-
-
-
-
-
     }
 }

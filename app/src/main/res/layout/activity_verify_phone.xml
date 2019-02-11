@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".Login.VerifyPhoneActivity">
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
 
     <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvVerificationCode"
@@ -13,6 +17,7 @@
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/viewStatus"
 
         android:textColor="@android:color/black"
         android:text="Verify your number"
@@ -25,6 +30,7 @@
         app:speed="1000"
         app:maxFPS="30"/>
 
+
 <TextView
     android:id="@+id/tvInfo"
     android:layout_width="wrap_content"
@@ -34,13 +40,13 @@
     android:layout_centerHorizontal="true"
     android:layout_below="@id/tvVerificationCode"
 
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="40dp"
-    android:layout_marginEnd="40dp"
+
+    android:layout_marginStart="60dp"
+    android:layout_marginEnd="60dp"
 
     android:gravity="center"
 
-    android:textSize="17sp"
+    android:textSize="15sp"
     android:textColor="@android:color/black"
     android:fontFamily="@font/r_medium"
     android:text="We have sent you a verification code. The verification process happens automatically."/>
@@ -58,6 +64,16 @@
 
             android:layout_centerVertical="true"
             android:text="Waiting for OTP"/>
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/tvWait"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="59s"/>
+
 
     </RelativeLayout>
     <ProgressBar
@@ -65,7 +81,8 @@
         android:layout_height="wrap_content"
 
         android:layout_toEndOf="@+id/otpView"
-        android:layout_above="@id/btnVerify"
+        android:layout_centerInParent="true"
+
         android:layout_marginStart="5dp"
         android:layout_marginBottom="3dp"
         />
@@ -75,8 +92,9 @@
         android:layout_height="wrap_content"
         style="@style/OtpWidget.OtpView"
 
-        android:layout_above="@id/btnVerify"
+
         android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
 
         app:viewType="line"
         app:lineWidth="2dp"
@@ -89,29 +107,10 @@
 
         android:focusedByDefault="true"
         android:textSize="20sp"
-        android:layout_centerInParent="true"
+
         android:fontFamily="@font/r_medium"
-        app:itemCount="6"/>
-    <!--
-    <com.marozzi.roundbutton.RoundButton
-        android:id="@+id/btnVerify"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/otpView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-
-        app:rb_animation_progress_style="circle"
-        app:rb_animation_corner_radius="20dp"
-        app:rb_animation_duration="500"
-
-        android:text="Verify"
-
-
-        app:rb_background_color="@color/colorPrimaryDark"
-        app:rb_text_color="@android:color/white"
-        app:rb_corner_radius="100dp"/> -->
+        app:itemCount="6"
+        />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnVerify"
         android:layout_width="match_parent"
@@ -119,15 +118,16 @@
 
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/otpView"
 
-        android:layout_centerInParent="true"
         android:text="Verify"
         android:fontFamily="@font/r_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         android:textSize="15sp"
         android:textColor="@android:color/white"
         android:background="@drawable/button_rectangle"
-        android:padding="15dp"/>
 
-
+        android:padding="15dp"
+        />
 </RelativeLayout>

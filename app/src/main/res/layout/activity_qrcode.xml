@@ -8,10 +8,18 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
+        android:layout_below="@id/viewStatus"
+
         app:autoFocusButtonColor="@android:color/white"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@android:color/white"
@@ -48,13 +56,14 @@
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-       android:layout_above="@+id/tvClickHere"
+       android:layout_above="@+id/btnClickHere"
 
         android:textSize="15sp"
         android:textColor="@android:color/white"
         android:text="Cannot scan QR Code?"/>
-    <TextView
-        android:id="@+id/tvClickHere"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClickHere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -62,11 +71,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
 
-        android:clickable="true"
 
-        android:onClick="goToManualCodeEntry"
-        android:textSize="20sp"
-        android:text="@string/click_here"
-        android:fontFamily="@font/r_bold"
-        android:textColor="@android:color/white"/>
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:fontFamily="@font/r_medium"
+        android:textSize="17sp"
+        android:text="CLICK HERE"
+        android:textColor="@color/white"/>
 </RelativeLayout>

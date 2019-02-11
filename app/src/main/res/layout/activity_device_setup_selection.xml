@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Login.DeviceSetupSelection">
 
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
     <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/viewStatus"
 
         android:textColor="@android:color/black"
         android:text="Select your location"

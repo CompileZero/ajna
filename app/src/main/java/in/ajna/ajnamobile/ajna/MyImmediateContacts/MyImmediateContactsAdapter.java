@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.chip.Chip;
 
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,10 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
         super(options); }
     @Override
     protected void onBindViewHolder(@NonNull MyImmediateContactsHolder myImmediateContactsHolder, int i, @NonNull MyImmediateContacts myImmediateContacts) {
-        myImmediateContactsHolder.tvIconImm.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,2))); }
+        myImmediateContactsHolder.tvIconImm.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact().substring(0,2)));
+        myImmediateContactsHolder.chipContact.setText(String.valueOf(myImmediateContacts.getNameOfImmediateContact()));
+
+    }
     @NonNull
     @Override
     public MyImmediateContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,11 +37,23 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
     class MyImmediateContactsHolder extends RecyclerView.ViewHolder{
 
         TextView tvIconImm;
+        Chip chipContact;
 
         public MyImmediateContactsHolder(@NonNull View itemView) {
             super(itemView);
             tvIconImm=itemView.findViewById(R.id.tvIconImm);
+            chipContact=itemView.findViewById(R.id.chipContact);
+
+            chipContact.setOnCloseIconClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteItem(getAdapterPosition());
+                }
+            });
 
         }
+    }
+    public void deleteItem(int position){
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 }
