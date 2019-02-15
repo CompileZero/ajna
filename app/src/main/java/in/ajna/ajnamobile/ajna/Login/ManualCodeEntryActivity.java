@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,7 +25,7 @@ import com.infideap.blockedittext.BlockEditText;
 
 public class ManualCodeEntryActivity extends AppCompatActivity {
 
-    String fullName,city,phoneNumberIndia;
+    String fullName,city,phoneNumberIndia,token;
 
     BlockEditText etBlocks;
     Button btnProceed;
@@ -50,7 +52,8 @@ public class ManualCodeEntryActivity extends AppCompatActivity {
         fullName = getIntent().getStringExtra("fullName");
         city = getIntent().getStringExtra("city");
         phoneNumberIndia = getIntent().getStringExtra("phoneNumberIndia");
-        user = new User(fullName, city, phoneNumberIndia);
+        token=getIntent().getStringExtra("token");
+        user = new User(fullName,phoneNumberIndia,token);
 
     }
 
@@ -71,6 +74,8 @@ public class ManualCodeEntryActivity extends AppCompatActivity {
             edit.apply();
 
             checkForExistingAccount();
+            DatabaseReference db2 = FirebaseDatabase.getInstance().getReference();
+            db2.child(code).child("tokens").child(fullName).setValue(token);
             Intent intent = new Intent(ManualCodeEntryActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

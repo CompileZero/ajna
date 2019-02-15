@@ -1,20 +1,17 @@
 package in.ajna.ajnamobile.ajna.Login;
 
-import com.google.firebase.firestore.Exclude;
-
 public class User {
 
-    public String fullName,city,phoneNumber;
+    public String fullName,phoneNumber,token;
 
     public User(){
 
     }
 
-
-    public User(String fullName,String city, String phoneNumber) {
+    public User(String fullName,String phoneNumber,String token) {
         this.fullName = fullName;
-        this.city = city;
         this.phoneNumber=phoneNumber;
+        this.token=token;
     }
 
     public String getFullName(){

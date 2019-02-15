@@ -2,4 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Please check the details of the contact:"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/label1"
+        android:text="Name"
+        android:fontFamily="@font/r_bold"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/tvContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tvName"
+        android:text="Contact"
+        android:fontFamily="@font/r_bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tvContact"
+        android:text="Is this OK, or would you like to edit this number?"
+        android:textColor="@color/black"/>
 </RelativeLayout>

@@ -2,9 +2,14 @@ package in.ajna.ajnamobile.ajna.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import in.ajna.ajnamobile.ajna.R;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 
@@ -34,4 +39,25 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+     public static class SettingsFragment extends PreferenceFragmentCompat {
+
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.settings, rootKey);
+        }
+
+    }
+
+    private static Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            String stringValue = newValue.toString();
+
+            return false;
+        }
+    };
+
+
 }

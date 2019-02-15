@@ -1,18 +1,29 @@
 package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
 import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver;
@@ -32,11 +43,15 @@ import in.ajna.ajnamobile.ajna.R;
  */
 public class MyImmediateContactsFragmentCollapsed extends Fragment{
 
+    private int CONTACT_PERMISSION_CODE=1;
+
     private View view;
 
 
     private RecyclerView recyclerView;
     private MyImmediateContactsAdapter adapter;
+
+    private AddContactListener addContactListener;
 
     MaterialButton btnAddContact;
 
@@ -94,7 +109,14 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
         btnAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+                    requestContactPermission();
+                }
+                else {
+                    Intent it = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                    startActivityForResult(it, 7);
+                }
             }
         });
 
@@ -141,4 +163,81 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
         recyclerView.setAdapter(adapter);
     }
 
+
+    @Override
+    public void onActivityResult(int RequestCode, int ResultCode, Intent ResultIntent) {
+
+        super.onActivityResult(RequestCode, ResultCode, ResultIntent);
+
+        switch (RequestCode) {
+
+            case (7):
+                if (ResultCode == Activity.RESULT_OK) {
+
+                    Uri uri;
+                    Cursor cursor1, cursor2;
+                    String TempNameHolder, TempNumberHolder, TempContactID, IDresult = "" ;
+                    int IDresultHolder ;
+
+                    uri = ResultIntent.getData();
+
+                    cursor1 = getActivity().getContentResolver().query(uri, null, null, null, null);
+
+                    if (cursor1.moveToFirst()) {
+
+                        TempNameHolder = cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        TempContactID = cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts._ID));
+                        IDresult = cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                        IDresultHolder = Integer.valueOf(IDresult) ;
+
+                        if (IDresultHolder == 1) {
+
+                            cursor2 = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + TempContactID, null, null);
+
+                            if(cursor2.moveToNext()){
+                                startDialog();
+                            }
+
+                            while (cursor2.moveToNext()) {
+
+                                TempNumberHolder = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                                Toast.makeText(getContext(), "Name: "+TempNameHolder+" Contact: "+TempNumberHolder, Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+
+                    }
+                }
+                break;
+        }
+    }
+
+    private void requestContactPermission(){
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CONTACTS}, CONTACT_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == CONTACT_PERMISSION_CODE) {
+
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent it = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(it, 7);
+            }
+            else getActivity().finishAndRemoveTask();
+
+        }
+    }
+
+    private void startDialog(){
+        AddContactDialog addContactDialog=new AddContactDialog();
+        addContactDialog.show(getFragmentManager(),"Add Contact Dialog");
+    }
+
+    public interface AddContactListener{
+        void getContact();
+
+    }
 }

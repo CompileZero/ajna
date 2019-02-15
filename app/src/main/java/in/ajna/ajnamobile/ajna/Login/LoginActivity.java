@@ -26,7 +26,7 @@ import com.marozzi.roundbutton.RoundButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editTextPhoneNumber;
+    private EditText editTextPhoneNumber,editTextRegisterFullName;
     private Button btnLogin;
 
     private String phoneNumberIndia;
@@ -37,21 +37,29 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
+        editTextRegisterFullName=findViewById(R.id.editTextRegisterFullName);
         btnLogin=findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneNumberIndia="+91"+editTextPhoneNumber.getText().toString().trim();
+                String phoneNumber=editTextPhoneNumber.getText().toString().trim();
+                String fullName=editTextRegisterFullName.getText().toString().trim();
 
-                if(phoneNumberIndia.length()==13){
-
+                if(phoneNumber.length() == 10 && !phoneNumber.contains("+") && !fullName.isEmpty()){
+                    phoneNumberIndia="+91"+phoneNumber;
                     Intent intent=new Intent(LoginActivity.this,VerifyPhoneActivity.class);
                     intent.putExtra("phoneNumberIndia",phoneNumberIndia);
+                    intent.putExtra("fullName",fullName);
                     startActivity(intent);
                 }
                 else{
-                    editTextPhoneNumber.setError("Please enter a valid phone Number!");
+                    if(fullName.isEmpty()){
+                        editTextRegisterFullName.setError("Please enter a valid name");
+                    }
+                    if(phoneNumber.length()!=10 || phoneNumber.contains("+")){
+                        editTextPhoneNumber.setError("Please enter a valid phone Number");
+                    }
                     return;
                 }
             }

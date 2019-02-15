@@ -9,7 +9,9 @@
     <View
         android:id="@+id/viewStatus"
         android:layout_width="match_parent"
-        android:layout_height="25dp"/>
+        android:layout_height="25dp"
+        android:visibility="gone"
+        android:background="@drawable/background_gradient"/>
 
     <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvSelect"
@@ -21,9 +23,9 @@
 
         android:textColor="@android:color/black"
         android:text="Select your location"
-        android:textSize="35sp"
+        android:textSize="25sp"
 
-        app:customFont="sf_pro_d_bold.otf"
+        app:customFont="r_bold.ttf"
         app:colors="@array/gradient"
 
         app:angle="0"
@@ -45,40 +47,41 @@
         android:text="Select the place where you want to set up your device"
         android:fontFamily="@font/r_medium"
         android:textColor="@android:color/black"
-        android:textSize="17sp"/>
+        android:textSize="15sp"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+
+        android:layout_below="@id/tv2"
+
+        android:layout_centerHorizontal="true"
+
+        android:src="@drawable/setup_wall" />
     <RelativeLayout
+        android:id="@+id/switchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_below="@id/gifImageView"
+        android:layout_marginBottom="10dp"
         android:layout_centerInParent="true">
 
         <RelativeLayout
             android:id="@+id/layout_wall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-
             android:layout_marginTop="10dp">
             <View
                 android:layout_width="400dp"
-                android:layout_height="200dp"
+                android:layout_height="110dp"
 
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+
+                android:visibility="gone"
 
                 android:background="@drawable/device_setup_bg"/>
-            <View
-                android:id="@+id/revealView"
-                android:layout_width="400dp"
-                android:layout_height="200dp"
-
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-
-                android:background="@drawable/device_setup_bg1"
-
-                android:visibility="invisible"
-                android:layout_alignParentEnd="true"/>
 
             <TextView
                 android:id="@+id/tvWall"
@@ -88,7 +91,7 @@
                 android:layout_centerHorizontal="true"
 
                 android:text="ON THE WALL"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/r_bold"
 
                 android:textColor="@color/c6"/>
@@ -98,15 +101,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/tvWall"
 
 
                 android:gravity="center"
                 android:text="The device should be placed on a wall at a height of about 6 feet from the ground."
-                android:textColor="@android:color/black"
+                android:textColor="#727272"
                 android:fontFamily="@font/r_regular"/>
 
 
@@ -115,10 +118,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/tv4"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="50dp"/>
+                app:sb_checked="true"
+                android:layout_marginTop="10dp"/>
 
 
 
@@ -133,24 +136,13 @@
 
             <View
                 android:layout_width="400dp"
-                android:layout_height="200dp"
+                android:layout_height="110dp"
 
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
 
                 android:background="@drawable/device_setup_bg"/>
-
-            <View
-                android:id="@+id/revealView2"
-                android:layout_width="400dp"
-                android:layout_height="200dp"
-
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/device_setup_bg2"
-
-                android:visibility="invisible"
-                android:layout_alignParentEnd="true"/>
 
             <TextView
                 android:id="@+id/tvDoor"
@@ -160,7 +152,7 @@
                 android:layout_centerHorizontal="true"
 
                 android:text="ON THE DOOR/WINDOW"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/r_bold"
 
                 android:textColor="@color/c6"/>
@@ -170,15 +162,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/tvDoor"
 
 
                 android:gravity="center"
-                android:text="The device should be placed on a door/window on the corner which has a movable side."
-                android:textColor="@android:color/black"
+                android:text="The device should be placed on a door/window on the corner."
+                android:textColor="#727272"
                 android:fontFamily="@font/r_regular"/>
 
 
@@ -187,16 +179,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/tv5"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="50dp"/>
+
+                android:layout_marginTop="10dp"/>
 
 
 
         </RelativeLayout>
 
     </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_below="@id/switchLayout"
+        android:text="Next"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
+
+        android:padding="15dp"/>
 
 
 

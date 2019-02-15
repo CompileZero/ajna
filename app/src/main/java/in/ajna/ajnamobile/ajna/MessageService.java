@@ -40,10 +40,11 @@ public class MessageService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if(remoteMessage.getData()!=null){
-            //sendNotification(remoteMessage);
-            Intent intent = new Intent(this,AlarmActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            sendNotification(remoteMessage);
+            startAlarm();
+            //Intent intent = new Intent(this,AlarmActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //startActivity(intent);
         }
 
     }

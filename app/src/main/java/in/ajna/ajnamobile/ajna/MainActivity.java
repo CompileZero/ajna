@@ -51,7 +51,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,6 +60,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ramotion.foldingcell.FoldingCell;
 import com.suke.widget.SwitchButton;
 
@@ -258,20 +260,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         if(item.getItemId()==R.id.btnHelp){
             SharedPreferences sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+            String phoneNumberIndia = sp.getString("phoneNumber","0");
             SharedPreferences.Editor edit = sp.edit();
+            edit.putString("fullName",null);
+            edit.putString("code",null);
+            edit.putString("phoneNumber",null);
             edit.putString("isSignedIn","0");
             edit.apply();
-            stopService();
-            Toast.makeText(this, "SignedOut and Exiting", Toast.LENGTH_SHORT).show();
 
             mAuth.signOut();
-
+            Toast.makeText(MainActivity.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+            stopService();
             finishAndRemoveTask();
         }
         else if(item.getItemId()==R.id.btnSettings){
 
-            Intent intenet= new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intenet);
+            Intent intent= new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

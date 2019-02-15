@@ -22,9 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Login.QRCodePermissionsActivity">
 
-        </activity>
+        <activity android:name=".Login.QRCodePermissionsActivity"/>
 
         <service
             android:name=".MessageService"
@@ -55,25 +54,24 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.VerifyPhoneActivity" />
         <activity android:name=".Login.QRCodeActivity" />
-        <activity
-            android:name=".SplashScreenActivity"
+        <activity android:name=".SplashScreenActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Login.ManualCodeEntryActivity" />
         <activity android:name=".Login.LoginOptions" />
 
         <service android:name=".Notification.AlwaysOnService" />
 
-        <activity android:name=".Login.DeviceSetupSelection" />
+        <activity android:name=".Login.DeviceSetupSelection"
+            android:screenOrientation="portrait">
+
+        </activity>
 
         <receiver android:name=".Alarm.AlarmReceiver" />
         <receiver

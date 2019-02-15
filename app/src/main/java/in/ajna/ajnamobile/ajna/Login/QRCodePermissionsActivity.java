@@ -55,20 +55,7 @@ public class QRCodePermissionsActivity extends AppCompatActivity {
     }
 
     private void requestCameraPermission() {
-        FancyAlertDialog.Builder alert = new FancyAlertDialog.Builder(QRCodePermissionsActivity.this)
-                .setimageResource(R.drawable.camera)
-                .setTextTitle("PERMISSION REQUIRED")
-                .setTextSubTitle("To scan QR Code")
-                .setBody("Please grant the permission to access the camera so that you can scan the QR code")
-                .setPositiveButtonText("OK")
-                .setCancelable(false)
-                .setOnPositiveClicked(new FancyAlertDialog.OnPositiveClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-                        ActivityCompat.requestPermissions(QRCodePermissionsActivity.this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-                    }
-                }).build();
-        alert.show();
+        ActivityCompat.requestPermissions(QRCodePermissionsActivity.this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -80,9 +67,8 @@ public class QRCodePermissionsActivity extends AppCompatActivity {
                 intent.putExtra("phoneNumberIndia",phoneNumberIndia);
                 startActivity(intent);
             }
-            else{
-                finishAndRemoveTask();
-            }
+            else finishAndRemoveTask();
+
         }
     }
 }

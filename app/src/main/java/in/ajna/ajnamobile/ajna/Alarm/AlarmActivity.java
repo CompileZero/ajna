@@ -58,9 +58,9 @@ public class AlarmActivity extends AppCompatActivity {
             public void run() {
 
                 //set the ringer mode to normal(loud)
-                audioManager=(AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-                ringerMode = audioManager.getRingerMode();
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                //audioManager=(AudioManager)getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+                //ringerMode = audioManager.getRingerMode();
+                //audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 
                 //setup ringtone
                 Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -126,7 +126,7 @@ public class AlarmActivity extends AppCompatActivity {
         super.onDestroy();
 
         //reset the ringer mode to the user's previous ringer mode
-        audioManager.setRingerMode(ringerMode);
+        //audioManager.setRingerMode(ringerMode);
 
         if(handler!=null)
             handler.removeCallbacks(runnable);

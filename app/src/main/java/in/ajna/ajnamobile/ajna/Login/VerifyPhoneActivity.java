@@ -39,7 +39,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private TextView tvTimer;
     private Button btnVerify;
 
-    private String phoneNumberIndia, verificationId, code;
+    private String phoneNumberIndia, verificationId, code,fullName;
 
     private FirebaseAuth mAuth;
     private PhoneAuthCredential credential;
@@ -56,6 +56,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
 
         phoneNumberIndia=getIntent().getStringExtra("phoneNumberIndia");
+        fullName=getIntent().getStringExtra("fullName");
 
         sendVerificationCode(phoneNumberIndia);
 
@@ -87,10 +88,10 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
                             Toasty.success(VerifyPhoneActivity.this,"Verification Succesful!",Toast.LENGTH_SHORT,true).show();
 
-
-                            //Go to register page
-                            Intent intent = new Intent(VerifyPhoneActivity.this,RegisterActivity.class);
+                            //Go to QR permission page
+                            Intent intent = new Intent(VerifyPhoneActivity.this,QRCodePermissionsActivity.class);
                             intent.putExtra("phoneNumberIndia",phoneNumberIndia);
+                            intent.putExtra("fullName",fullName);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
