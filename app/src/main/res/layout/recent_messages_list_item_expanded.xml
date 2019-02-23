@@ -44,20 +44,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
+                    android:layout_below="@id/tvTime"
                     android:layout_marginStart="5dp"
 
 
-                    android:fontFamily="@font/r_medium"
-                    android:textSize="15sp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:text="Message"/>
+
+                <TextView
+                    android:id="@+id/tvPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@id/tvMessage"
+                    android:layout_marginStart="5dp"
+
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/barlow_semi_condensed_semibold"
+                    android:text="Person"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_below="@id/tvMessage"
+
                     android:layout_marginStart="5dp"
 
                     android:fontFamily="@font/r_regular"

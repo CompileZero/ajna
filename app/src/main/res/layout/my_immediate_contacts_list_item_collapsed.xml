@@ -21,7 +21,8 @@
        app:closeIconEnabled="true"
        android:text="Atharva Kulkarni"
        android:textSize="20sp"
-       app:closeIconSize="20dp"/>
+       app:closeIconSize="20dp"
+       android:textAppearance="@style/BarlowNavigation"/>
 
    <TextView
         android:id="@+id/tvIconImm"

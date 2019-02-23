@@ -35,15 +35,14 @@
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gifImageView"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
 
                 android:layout_below="@id/toolbar1"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
 
-                android:src="@drawable/loading"
-                android:background="@drawable/loading"/>
+                android:src="@drawable/disarmed"/>
         </RelativeLayout>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -59,6 +58,14 @@
             android:background="@drawable/bottom_sheet_background"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_peekHeight="50dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/divider"
+
+                android:layout_marginBottom="4dp"
+                android:layout_centerHorizontal="true"/>
 
             <RelativeLayout
                 android:id="@+id/fragment_container"
@@ -239,13 +246,13 @@
 
         app:itemIconSize="20dp"
 
-
         app:itemIconTint="@drawable/item_selected"
         app:itemTextColor="@drawable/item_selected"
 
         app:menu="@menu/bottom_navigation_menu"
         app:labelVisibilityMode="labeled"
-
+        app:itemTextAppearanceActive="@style/BarlowNavigation"
+        app:itemTextAppearanceInactive="@style/BarlowNavigation"
         app:elevation="0.5dp"
 
         />

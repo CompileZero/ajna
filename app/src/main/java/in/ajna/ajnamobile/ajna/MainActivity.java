@@ -39,10 +39,13 @@ import pl.droidsonroids.gif.GifImageView;
 
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Window;
@@ -51,16 +54,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.ramotion.foldingcell.FoldingCell;
 import com.suke.widget.SwitchButton;
 
@@ -93,7 +96,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private String fullName;
     private String code;
 
-    private int status,status2=0;
+    private boolean isLongPress=false;
+    private int longClickDuration=1260;
+    private long then;
+
+    private int status,status2=0,flag=0;
 
     private static MainActivity inst;
 
@@ -135,43 +142,66 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             btnSwitch = findViewById(R.id.btnSwitch);
 
-
-
             layout_main=findViewById(R.id.layout_main);
             bottomSheetLayout=findViewById(R.id.bottomSheetLayout);
 
             bottomSheetBehavior=BottomSheetBehavior.from(bottomSheetLayout);
 
             gifImageView= findViewById(R.id.gifImageView);
-            gifImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-            gifImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            gifImageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                        isLongPress = true;
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        changeButtonTransitionState();
+                        then = System.currentTimeMillis();
+                    }
+                        else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        if ((System.currentTimeMillis() - then) > longClickDuration) {
+                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(100);
 
-                    changeColor();
-
-
-
-                    gifImageView.setBackground(getResources().getDrawable(R.drawable.loading2));
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
+                            changeColor();
+                            flag=1;
+                            return false;
+                        } else {
+                            restoreColor();
+                            return false;
+                        }
+                    }
                     return true;
-                }
-            });
-            gifImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
                 }
             });
 
             deviceRef = dbRealtime.getReference(code);
+
+            deviceRef.child("status").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int a =Integer.parseInt(dataSnapshot.getValue().toString());
+                    if(a==0 && flag==0){
+                        startFadeTransition(true);
+                        status2=0;
+                        gifImageView.setImageResource(R.drawable.disarmed);
+                    }
+                    else if (a==1 && flag==0){
+                        startFadeTransition(false);
+                        status2=1;
+                        gifImageView.setImageResource(R.drawable.armed);
+                    }
+                    else if(flag==1){
+                        flag=0;
+                    }
+                    Log.d("DATACHANGEMAINACTIVITY", String.valueOf(a));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             btnSwitch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
                 @Override
@@ -423,7 +453,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .setCustomAnimations(R.anim.fui_slide_in_right,R.anim.fui_slide_out_left)
                     .commit();
             return true;
         }
@@ -434,14 +463,32 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if(status2==0){
             startFadeTransition(false);
             status2=1;
-            gifImageView.setImageResource(R.drawable.loading2);
+            gifImageView.setImageResource(R.drawable.armed);
             sendArmedMessage();
         }
         else{
             startFadeTransition(true);
             status2=0;
-            gifImageView.setImageResource(R.drawable.loading);
+            gifImageView.setImageResource(R.drawable.disarmed);
             sendDisarmedMessage();
         }
     }
+    private void changeButtonTransitionState(){
+        if(status2==0){
+            gifImageView.setImageResource(R.drawable.trans_arm);
+
+        }
+        else{
+            gifImageView.setImageResource(R.drawable.trans_disarm);
+        }
+    }
+    private void restoreColor(){
+        if(status2==0){
+            gifImageView.setImageResource(R.drawable.disarmed);
+        }
+        else{
+            gifImageView.setImageResource(R.drawable.armed);
+        }
+    }
+
 }

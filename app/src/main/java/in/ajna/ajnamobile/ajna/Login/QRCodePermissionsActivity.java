@@ -67,7 +67,7 @@ public class QRCodePermissionsActivity extends AppCompatActivity {
                 intent.putExtra("phoneNumberIndia",phoneNumberIndia);
                 startActivity(intent);
             }
-            else finishAndRemoveTask();
+
 
         }
     }

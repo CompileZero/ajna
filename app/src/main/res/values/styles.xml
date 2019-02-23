@@ -11,7 +11,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
 
 
-
+        <item name="alertDialogTheme">@style/CustomAlertDialog</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -38,4 +38,17 @@
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
 
+
+    <style name="CustomAlertDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
+        <item name="dialogCornerRadius">14dp</item>
+        <item name="colorPrimary">@color/b1</item>
+        <item name="textAppearanceButton">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/barlow_semi_condensed_semibold</item>
+    </style>
+
+    <style name="BarlowNavigation" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/barlow_semi_condensed_semibold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

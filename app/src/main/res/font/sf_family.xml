@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:app="http://schemas.android.com/apk/res-auto">
-    <font app:fontStyle="normal" app:font="@font/r_medium"/>
-    <font app:fontStyle="italic" app:font="@font/r_medium" />
+    <font app:fontStyle="normal" app:font="@font/barlow_semi_condensed_semibold"/>
+    <font app:fontStyle="italic" app:font="@font/barlow_semi_condensed_semibold" />
 </font-family>

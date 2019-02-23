@@ -2,7 +2,7 @@ package in.ajna.ajnamobile.ajna.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
+
 import in.ajna.ajnamobile.ajna.R;
 
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,14 +23,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.marozzi.roundbutton.RoundButton;
-import com.mukesh.OnOtpCompletionListener;
+
 import com.mukesh.OtpView;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
@@ -38,6 +34,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private OtpView otpView;
     private TextView tvTimer;
     private Button btnVerify;
+    private ProgressBar progressCircular;
 
     private String phoneNumberIndia, verificationId, code,fullName;
 
@@ -52,6 +49,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         otpView=findViewById(R.id.otpView);
         tvTimer=findViewById(R.id.tvTimer);
         btnVerify=findViewById(R.id.btnVerify);
+        progressCircular=findViewById(R.id.progressCircular);
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -63,6 +61,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressCircular.setVisibility(View.VISIBLE);
                 code=otpView.getText().toString().trim();
 
                 verifyCode(code);
@@ -85,8 +84,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
-                            Toasty.success(VerifyPhoneActivity.this,"Verification Succesful!",Toast.LENGTH_SHORT,true).show();
+                            Toast.makeText(VerifyPhoneActivity.this, "Verification Succesful!", Toast.LENGTH_SHORT).show();
 
                             //Go to QR permission page
                             Intent intent = new Intent(VerifyPhoneActivity.this,QRCodePermissionsActivity.class);
@@ -97,7 +95,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
                         }
                         else {
-                            Toasty.error(VerifyPhoneActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT,true).show();
+                            Toast.makeText(VerifyPhoneActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
 
                         }
                     }
@@ -146,6 +145,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
             String code = phoneAuthCredential.getSmsCode();
             if(code!=null){
+                progressCircular.setVisibility(View.VISIBLE);
                 otpView.setText(code);
                 verifyCode(code);
             }

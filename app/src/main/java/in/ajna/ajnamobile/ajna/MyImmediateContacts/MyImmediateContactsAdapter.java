@@ -1,6 +1,10 @@
 package in.ajna.ajnamobile.ajna.MyImmediateContacts;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,9 @@ import com.google.android.material.chip.Chip;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.R;
 
@@ -39,14 +46,20 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
         TextView tvIconImm;
         Chip chipContact;
 
-        public MyImmediateContactsHolder(@NonNull View itemView) {
+        public MyImmediateContactsHolder(@NonNull final View itemView) {
             super(itemView);
             tvIconImm=itemView.findViewById(R.id.tvIconImm);
             chipContact=itemView.findViewById(R.id.chipContact);
-
+            chipContact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startContactDialog(getAdapterPosition());
+                }
+            });
             chipContact.setOnCloseIconClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //startDeleteDialog();
                     deleteItem(getAdapterPosition());
                 }
             });
@@ -55,5 +68,12 @@ public class MyImmediateContactsAdapter extends FirestoreRecyclerAdapter<MyImmed
     }
     public void deleteItem(int position){
         getSnapshots().getSnapshot(position).getReference().delete();
+    }
+    private void startContactDialog(int position){
+        AddContactDialog addContactDialog=new AddContactDialog();
+        Bundle args = new Bundle();
+        args.putString("name",getItem(position).getNameOfImmediateContact());
+        args.putString("contact",getItem(position).getContactNumberOfImmediateContact());
+        addContactDialog.setArguments(args);
     }
 }

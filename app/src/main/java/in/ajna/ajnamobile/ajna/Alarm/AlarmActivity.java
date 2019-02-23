@@ -3,6 +3,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import in.ajna.ajnamobile.ajna.IntrusionDetected;
 import in.ajna.ajnamobile.ajna.R;
+import pl.droidsonroids.gif.GifImageView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +33,7 @@ public class AlarmActivity extends AppCompatActivity {
     Ringtone ringtone;
     Vibrator v;
 
-    Button btnCancel;
+    GifImageView gifCancel;
 
     private SharedPreferences sp;
     private String code;
@@ -50,8 +51,7 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
-        btnCancel=findViewById(R.id.btnCancel);
-
+        gifCancel=findViewById(R.id.gifCancel);
         handler=new Handler();
         runnable=new Runnable() {
             @Override
@@ -99,13 +99,15 @@ public class AlarmActivity extends AppCompatActivity {
         };
         deviceRef.addValueEventListener(detectedListener);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        gifCancel.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 deviceRef.child("detectedStatus").setValue(0);
                 finish();
+                return true;
             }
         });
+
     }
     @Override
     public void onAttachedToWindow() {

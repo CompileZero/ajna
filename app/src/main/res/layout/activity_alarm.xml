@@ -4,25 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Alarm.AlarmActivity">
+    tools:context=".Alarm.AlarmActivity"
+    android:background="@drawable/background_gradient3">
 
     <TextView
+        android:id="@+id/label4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
 
-        android:text="INTRUSION DETECTED!"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"/>
-    <Button
-        android:id="@+id/btnCancel"
+        android:fontFamily="@font/r_bold"
+        android:text="Movement Detected"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/label6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_centerInParent="true"
-        android:text="CANCEL"
-        />
+        android:layout_below="@id/label4"
+        android:layout_centerHorizontal="true"
+
+
+        android:text="Ensure everyone is safe"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifCancel"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+
+        android:layout_below="@id/label4"
+
+        android:layout_centerHorizontal="true"
+
+        android:src="@drawable/loading"
+        android:background="@drawable/loading"/>
+    <TextView
+        android:id="@+id/label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/gifCancel"
+        android:layout_centerHorizontal="true"
+
+        android:text="Press and hold to disarm"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:text="Notify Immediate Contacts"
+        android:fontFamily="@font/r_bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_rectangle"
+
+        android:padding="15dp"/>
 
 </RelativeLayout>

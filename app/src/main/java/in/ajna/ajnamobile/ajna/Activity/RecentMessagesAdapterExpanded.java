@@ -43,15 +43,15 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
     class RecentMessagesHolder extends RecyclerView.ViewHolder{
         TimelineView timelineView;
         TextView tvTime;
-        TextView tvMessage;
+        TextView tvMessage,tvPerson;
 
         public RecentMessagesHolder(@NonNull View itemView,int viewType) {
             super(itemView);
             tvTime=itemView.findViewById(R.id.tvTime);
             tvMessage=itemView.findViewById(R.id.tvMessage);
+            tvPerson=itemView.findViewById(R.id.tvPerson);
 
             timelineView=itemView.findViewById(R.id.timeMarker);
-
             timelineView.initLine(viewType);
 
         }

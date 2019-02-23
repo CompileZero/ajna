@@ -19,9 +19,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Emergency Contacts"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/r_medium"/>
+            android:fontFamily="@font/r_bold"/>
 
         <TextView
             android:id="@+id/tv11"
@@ -33,6 +33,7 @@
             android:layout_marginEnd="20dp"
             android:textSize="14sp"
             android:text="If all family members fail to receive the alarm in case of an intrusion, these contacts will be immediately notified of the intrusion via text message."
+            android:fontFamily="@font/barlow_semibold"
             android:textColor="#727272"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@
 
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/my_immediate_contacts_list_item_collapsed" />
+
 
     <LinearLayout
         android:id="@+id/layout_help"

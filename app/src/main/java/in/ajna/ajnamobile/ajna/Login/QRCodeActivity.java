@@ -123,7 +123,7 @@ public class QRCodeActivity extends AppCompatActivity {
 
     public void checkForExistingAccount(){
 
-        collRef=db.collection(code).document("MyFamily").collection("members");
+        collRef=db.collection(code).document("family").collection("members");
         collRef.whereEqualTo("phoneNumber",phoneNumberIndia)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

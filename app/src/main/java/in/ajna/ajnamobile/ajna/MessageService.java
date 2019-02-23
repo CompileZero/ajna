@@ -119,6 +119,12 @@ public class MessageService extends FirebaseMessagingService {
         Intent i = new Intent(this, AlarmReceiver.class);
         PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
+        }
+        else{
+            am.setExact(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
+        }
+
     }
 }

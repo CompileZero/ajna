@@ -26,8 +26,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.test:runner:1.1.0'
-    implementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation 'androidx.test:runner:1.1.1'
+    implementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     //Card View
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -39,30 +39,13 @@ dependencies {
     implementation 'me.itangqi.waveloadingview:library:0.3.5'
 
     //Firebase Realtime Database
-    implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-database:16.0.6'
 
     //Firebase core
-    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
 
     //FireStore
-    implementation 'com.google.firebase:firebase-firestore:17.1.3'
-
-
-    def lifecycle_version = "2.0.0"
-
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
-
-
-    def room_version = "2.1.0-alpha02"
-    //Room
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
-    //Material for custom switches
-    implementation 'com.github.rey5137:material:1.2.5'
+    implementation 'com.google.firebase:firebase-firestore:18.0.1'
 
     //Material UI from Google
     implementation 'com.google.android.material:material:1.1.0-alpha01'
@@ -70,29 +53,17 @@ dependencies {
     //Firebase Auth
     implementation 'com.google.firebase:firebase-auth:16.1.0'
 
-    //Firebase RealtimeDatabase
-    implementation 'com.google.firebase:firebase-database:16.0.5'
-
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.1'
 
-    // FirebaseUI for Firebase Auth
-    implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
-
     //Firebase Messaging
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
-
-    //Round button
-    implementation 'com.marozzi.roundbutton:round-button:1.0.7'
 
     //material Text Box
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
 
     //PinView for OTP
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.0'
-
-    //Toasty
-    implementation 'com.github.GrenderG:Toasty:1.3.0'
 
     //Ramotion Expnadable View
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.2'
@@ -145,9 +116,6 @@ dependencies {
     //chips layout manager
     implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7'
 
-    //Material dialogs
-    implementation 'com.afollestad.material-dialogs:core:2.0.0-rc10'
-
     //Android preferences
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
 
@@ -156,12 +124,6 @@ dependencies {
 
     //Material dialogs
     implementation 'com.afollestad.material-dialogs:core:2.0.0'
-
-    //navigation graph and view
-    def nav_version = "1.0.0-alpha11"
-
-    implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui:$nav_version" // use -ktx for Kotlin
 
 
 }

@@ -23,7 +23,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
 import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver;
@@ -35,6 +35,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+
 import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.R;
 
@@ -45,13 +46,15 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
 
     private int CONTACT_PERMISSION_CODE=1;
 
-    private View view;
+    private View view,emptyView;
 
-
+    private TextView tvNothing;
     private RecyclerView recyclerView;
     private MyImmediateContactsAdapter adapter;
 
-    private AddContactListener addContactListener;
+
+    String TempNameHolder, TempNumberHolder;
+    private ChipsLayoutManager chipsLayoutManager;
 
     MaterialButton btnAddContact;
 
@@ -74,7 +77,7 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
         view= inflater.inflate(R.layout.fragment_my_immediate_contacts, container, false);
         recyclerView = view.findViewById(R.id.rvMyImmediateContacts);
 
-        ChipsLayoutManager chipsLayoutManager = ChipsLayoutManager.newBuilder(getContext())
+        chipsLayoutManager = ChipsLayoutManager.newBuilder(getContext())
                 //set vertical gravity for all items in a row. Default = Gravity.CENTER_VERTICAL
                 .setChildGravity(Gravity.TOP)
                 //whether RecyclerView can scroll. TRUE by default
@@ -104,6 +107,7 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
                 .build();
 
         recyclerView.setLayoutManager(chipsLayoutManager);
+        emptyView = getLayoutInflater().inflate(R.layout.view_empty,recyclerView,false);
         btnAddContact=view.findViewById(R.id.btnAddContact);
 
         btnAddContact.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +127,6 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
 
         //retrieve the device data from Firebase
         setUpRecyclerView();
-
 
 
         //Mandate return
@@ -159,8 +162,8 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
                 .build();
 
         adapter = new MyImmediateContactsAdapter(options);
-
         recyclerView.setAdapter(adapter);
+
     }
 
 
@@ -176,7 +179,7 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
 
                     Uri uri;
                     Cursor cursor1, cursor2;
-                    String TempNameHolder, TempNumberHolder, TempContactID, IDresult = "" ;
+                    String TempContactID, IDresult = "" ;
                     int IDresultHolder ;
 
                     uri = ResultIntent.getData();
@@ -195,17 +198,19 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
                             cursor2 = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + TempContactID, null, null);
 
                             if(cursor2.moveToNext()){
+                                TempNumberHolder = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                                 startDialog();
+
                             }
 
-                            while (cursor2.moveToNext()) {
+                            /*while (cursor2.moveToNext()) {
 
-                                TempNumberHolder = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
 
                                 Toast.makeText(getContext(), "Name: "+TempNameHolder+" Contact: "+TempNumberHolder, Toast.LENGTH_SHORT).show();
 
 
-                            }
+                            }*/
                         }
 
                     }
@@ -215,29 +220,29 @@ public class MyImmediateContactsFragmentCollapsed extends Fragment{
     }
 
     private void requestContactPermission(){
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CONTACTS}, CONTACT_PERMISSION_CODE);
+        requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, CONTACT_PERMISSION_CODE);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == CONTACT_PERMISSION_CODE) {
 
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Intent it = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 startActivityForResult(it, 7);
             }
-            else getActivity().finishAndRemoveTask();
+
 
         }
     }
 
     private void startDialog(){
         AddContactDialog addContactDialog=new AddContactDialog();
+        Bundle args = new Bundle();
+        args.putString("name",TempNameHolder);
+        args.putString("contact",TempNumberHolder);
+        addContactDialog.setArguments(args);
         addContactDialog.show(getFragmentManager(),"Add Contact Dialog");
-    }
-
-    public interface AddContactListener{
-        void getContact();
-
     }
 }

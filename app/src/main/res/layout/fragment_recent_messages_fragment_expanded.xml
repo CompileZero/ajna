@@ -17,10 +17,10 @@
 
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Activity"
+        android:text="Recent Activity"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/r_medium"/>
+        android:fontFamily="@font/r_bold"/>
 
     <TextView
         android:id="@+id/tv9"
@@ -31,7 +31,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="20dp"
         android:textSize="14sp"
-        android:fontFamily="@font/r_medium"
+        android:fontFamily="@font/barlow_semibold"
         android:text="All the recent activities related to the device are shown here."
         android:textColor="#727272"/>
 
