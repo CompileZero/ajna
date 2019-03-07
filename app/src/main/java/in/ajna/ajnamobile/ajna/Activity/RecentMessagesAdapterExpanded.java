@@ -1,8 +1,11 @@
 package in.ajna.ajnamobile.ajna.Activity;
 
+import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -28,7 +31,11 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
     @Override
     protected void onBindViewHolder(@NonNull RecentMessagesHolder recentMessagesHolder, int i, @NonNull RecentMessages recentMessages) {
         recentMessagesHolder.tvMessage.setText(recentMessages.getMessage());
-        recentMessagesHolder.tvTime.setText(getDate(recentMessages.getTime()));
+        recentMessagesHolder.tvDate.setText(getDate(recentMessages.getTime()));
+        recentMessagesHolder.tvMember.setText(recentMessages.getMember());
+        recentMessagesHolder.tvTime.setText(getTime(recentMessages.getTime()));
+        if(recentMessages.getMessage().contains("Device Disarmed")) recentMessagesHolder.ivSecurity.setBackground(recentMessagesHolder.context.getDrawable(R.drawable.ic_no_security));
+        else if(recentMessages.getMessage().contains("Device Armed"))recentMessagesHolder.ivSecurity.setBackground(recentMessagesHolder.context.getDrawable(R.drawable.ic_security));
     }
 
     @NonNull
@@ -42,14 +49,19 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
 
     class RecentMessagesHolder extends RecyclerView.ViewHolder{
         TimelineView timelineView;
-        TextView tvTime;
-        TextView tvMessage,tvPerson;
-
+        TextView tvTime,tvDate;
+        TextView tvMessage,tvMember;
+        ImageView ivSecurity;
+        Context context;
         public RecentMessagesHolder(@NonNull View itemView,int viewType) {
             super(itemView);
+
+            context = itemView.getContext();
+            tvDate=itemView.findViewById(R.id.tvDate);
             tvTime=itemView.findViewById(R.id.tvTime);
             tvMessage=itemView.findViewById(R.id.tvMessage);
-            tvPerson=itemView.findViewById(R.id.tvPerson);
+            tvMember=itemView.findViewById(R.id.tvMember);
+            ivSecurity=itemView.findViewById(R.id.ivSecurity);
 
             timelineView=itemView.findViewById(R.id.timeMarker);
             timelineView.initLine(viewType);
@@ -65,7 +77,14 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
     private String getDate(Long timestamp){
         Calendar cal=Calendar.getInstance(Locale.getDefault());
         cal.setTimeInMillis(timestamp);
-        String date= android.text.format.DateFormat.format("dd-MMM hh:mm:ss a",cal).toString();
+        String date= android.text.format.DateFormat.format("dd-MMM",cal).toString();
+
+        return date;
+    }
+    private String getTime(Long timestamp){
+        Calendar cal=Calendar.getInstance(Locale.getDefault());
+        cal.setTimeInMillis(timestamp);
+        String date= android.text.format.DateFormat.format("hh:mm a",cal).toString();
 
         return date;
     }

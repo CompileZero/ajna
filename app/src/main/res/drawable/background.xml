@@ -5,12 +5,8 @@
         <color android:color="#FFFFFF"/>
     </item>
 
-    <item android:gravity="center"
-        android:height="71.42dp"
-        android:width="50dp">
-
-        <bitmap android:src="@drawable/g18"/>
-
+    <item android:gravity="center">
+        <bitmap android:src="@drawable/g18" android:dither="true"/>
     </item>
 
 

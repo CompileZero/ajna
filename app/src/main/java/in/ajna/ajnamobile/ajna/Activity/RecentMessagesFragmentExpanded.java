@@ -54,25 +54,19 @@ public class RecentMessagesFragmentExpanded extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_recent_messages_fragment_expanded, container, false);
-
         btnClearHistory=view.findViewById(R.id.btnClearHistory);
-
         setUpRecyclerView();
-
         btnClearHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDialog();
             }
         });
-
-
         return view;
     }
 
@@ -117,13 +111,11 @@ public class RecentMessagesFragmentExpanded extends Fragment {
         RecyclerView recyclerView= view.findViewById(R.id.rvRecentMessages2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);}
 
 
-    }
     private void startDialog(){
         ClearHistoryDialog addContactDialog=new ClearHistoryDialog();
-
         addContactDialog.show(getFragmentManager(),"Clear History Dialog");
     }
 

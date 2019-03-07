@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Recent Activity"
         android:textSize="18sp"
         android:textColor="@color/black"
@@ -31,7 +31,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="20dp"
         android:textSize="14sp"
-        android:fontFamily="@font/barlow_semibold"
+        android:fontFamily="@font/r_medium"
         android:text="All the recent activities related to the device are shown here."
         android:textColor="#727272"/>
 
@@ -46,7 +46,7 @@
 
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:fontFamily="@font/r_medium"
+        android:fontFamily="@font/r_bold"
         android:textSize="13sp"
         android:text="CLEAR HISTORY"/>
 

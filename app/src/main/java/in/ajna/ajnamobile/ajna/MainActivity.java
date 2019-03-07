@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
     private void sendArmedMessage() {
         recentMessagesRef=db.collection(code).document("RecentMessages").collection("Messages");
-        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName+" armed the device!");
+        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName,"Device Armed");
 
         db.collection(code).document("RecentMessages").set(message);
         recentMessagesRef.document().set(message);
@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void sendDisarmedMessage(){
 
         recentMessagesRef=db.collection(code).document("RecentMessages").collection("Messages");
-        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName+" disarmed the device!");
+        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName,"Device Disarmed");
 
         db.collection(code).document("RecentMessages").set(message);
         recentMessagesRef.document().set(message);

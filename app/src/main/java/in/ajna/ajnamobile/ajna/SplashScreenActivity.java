@@ -3,6 +3,7 @@ package in.ajna.ajnamobile.ajna;
 import androidx.appcompat.app.AppCompatActivity;
 import in.ajna.ajnamobile.ajna.Login.AgreeContinueActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,17 +22,20 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+
         final String flagSignedIn = sp.getString("isSignedIn","0");
 
         if(flagSignedIn.equals("1")){
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
         else if(flagSignedIn.equals("0")){
             Intent intent = new Intent(SplashScreenActivity.this,AgreeContinueActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
 
         /*

@@ -17,11 +17,11 @@
         android:layout_height="wrap_content"
 
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Family"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/r_medium"/>
+        android:fontFamily="@font/r_bold"/>
 
     <TextView
         android:id="@+id/tv7"
@@ -32,6 +32,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="20dp"
         android:textSize="14sp"
+        android:fontFamily="@font/r_medium"
         android:text="Once a user scans the QR code on the device, he/she will be visible over here."
         android:textColor="#727272"/>
 

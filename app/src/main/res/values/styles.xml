@@ -6,16 +6,23 @@
         <item name="android:fontFamily">@font/sf_family</item>
         <item name="android:ambientShadowAlpha">0.15</item>
         <item name="android:spotShadowAlpha">0.15</item>
-
+        <!--
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation">true</item> -->
 
-
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
         <item name="alertDialogTheme">@style/CustomAlertDialog</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -48,7 +55,11 @@
     </style>
 
     <style name="BarlowNavigation" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/barlow_semi_condensed_semibold</item>
+        <item name="android:fontFamily">@font/r_medium</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">15sp</item>
     </style>
 </resources>
