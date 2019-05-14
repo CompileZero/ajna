@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"/>
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-5dp"
+        android:src="@drawable/design" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarSettings"
         android:layout_width="match_parent"
@@ -38,7 +46,28 @@
             <TextView android:id="@android:id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="26sp"/>
+                android:textSize="15sp" />
     </RelativeLayout>
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
+        android:id="@+id/tvLets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+
+        android:text="Made in Bharat"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+
+        app:angle="0"
+        app:colors="@array/gradient"
+
+        app:customFont="barlow_semi_condensed_semibold.ttf"
+        app:maxFPS="30"
+        app:speed="1000" />
+
 
 </RelativeLayout>

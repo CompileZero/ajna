@@ -19,12 +19,14 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_below="@id/viewStatus"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
 
         android:textColor="@android:color/black"
         android:text="Are you setting the device for the first time?"
-        android:textSize="35sp"
+        android:textSize="25sp"
 
-        app:customFont="sf_pro_d_bold.otf"
+        app:customFont="r_bold.ttf"
         app:colors="@array/gradient"
 
         app:angle="0"
@@ -46,15 +48,14 @@
         android:text="If you are setting the device for the first time, click on Set up device, else go to the home page directly."
         android:fontFamily="@font/r_medium"
         android:textColor="@android:color/black"
-        android:textSize="17sp"/>
+        android:textSize="12sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSetupDevice"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:layout_above="@id/btnHomepage"
 
@@ -64,25 +65,88 @@
         android:textSize="15sp"
         android:textColor="@android:color/white"
         android:background="@drawable/button_rectangle"
+        android:enabled="false"
 
         android:padding="15dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnHomepage"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-
         android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:text="Go to Homepage"
         android:fontFamily="@font/r_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         android:textSize="15sp"
         android:textColor="@android:color/white"
         android:background="@drawable/button_rectangle"
+        android:enabled="false"
 
         android:padding="15dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressCircular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnHomepage"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/white"
+        android:tint="#ffFFFF"
+
+        app:borderWidth="0dp"
+        app:fabCustomSize="30dp"
+        app:srcCompat="@drawable/ic_help" />
+
+    <RelativeLayout
+        android:id="@+id/layout_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnSetupDevice"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="60dp"
+
+            android:layout_toStartOf="@+id/tv1"
+            android:src="@drawable/ic_info" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
+
+            android:text="The device has already been set up previously. To reconfigure the device, go to settings in Homepage" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-5dp"
+        android:src="@drawable/design" />
 
 </RelativeLayout>

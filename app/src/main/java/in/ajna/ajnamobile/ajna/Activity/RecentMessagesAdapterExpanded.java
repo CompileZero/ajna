@@ -1,24 +1,21 @@
 package in.ajna.ajnamobile.ajna.Activity;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.vipulasri.timelineview.TimelineView;
 
-
 import java.util.Calendar;
 import java.util.Locale;
 
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import in.ajna.ajnamobile.ajna.R;
 
 public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<RecentMessages,RecentMessagesAdapterExpanded.RecentMessagesHolder>{
@@ -34,8 +31,7 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
         recentMessagesHolder.tvDate.setText(getDate(recentMessages.getTime()));
         recentMessagesHolder.tvMember.setText(recentMessages.getMember());
         recentMessagesHolder.tvTime.setText(getTime(recentMessages.getTime()));
-        if(recentMessages.getMessage().contains("Device Disarmed")) recentMessagesHolder.ivSecurity.setBackground(recentMessagesHolder.context.getDrawable(R.drawable.ic_no_security));
-        else if(recentMessages.getMessage().contains("Device Armed"))recentMessagesHolder.ivSecurity.setBackground(recentMessagesHolder.context.getDrawable(R.drawable.ic_security));
+
     }
 
     @NonNull
@@ -46,12 +42,11 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
         return new RecentMessagesHolder(v,viewType);
     }
 
-
     class RecentMessagesHolder extends RecyclerView.ViewHolder{
         TimelineView timelineView;
         TextView tvTime,tvDate;
         TextView tvMessage,tvMember;
-        ImageView ivSecurity;
+
         Context context;
         public RecentMessagesHolder(@NonNull View itemView,int viewType) {
             super(itemView);
@@ -61,7 +56,6 @@ public class RecentMessagesAdapterExpanded extends FirestoreRecyclerAdapter<Rece
             tvTime=itemView.findViewById(R.id.tvTime);
             tvMessage=itemView.findViewById(R.id.tvMessage);
             tvMember=itemView.findViewById(R.id.tvMember);
-            ivSecurity=itemView.findViewById(R.id.ivSecurity);
 
             timelineView=itemView.findViewById(R.id.timeMarker);
             timelineView.initLine(viewType);

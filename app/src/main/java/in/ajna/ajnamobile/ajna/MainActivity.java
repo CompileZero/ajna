@@ -1,91 +1,59 @@
 package in.ajna.ajnamobile.ajna;
 
 
-import android.app.ActivityManager;
-import android.app.AlarmManager;
-
-import android.app.Notification;
-
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.TransitionDrawable;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import in.ajna.ajnamobile.ajna.Alarm.AlarmReceiver;
-import in.ajna.ajnamobile.ajna.MyFamily.FamilyFragment;
-import in.ajna.ajnamobile.ajna.MyImmediateContacts.MyImmediateContactsFragmentCollapsed;
-import in.ajna.ajnamobile.ajna.Notification.AlwaysOnService;
-import in.ajna.ajnamobile.ajna.Activity.RecentMessages;
-import in.ajna.ajnamobile.ajna.Activity.RecentMessagesFragmentExpanded;
-import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
-import pl.droidsonroids.gif.GifImageView;
-
-
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
-
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
+import com.androidstudy.networkmanager.Monitor;
+import com.androidstudy.networkmanager.Tovuti;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.ramotion.foldingcell.FoldingCell;
-import com.suke.widget.SwitchButton;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
+
+import in.ajna.ajnamobile.ajna.Activity.RecentMessages;
+import in.ajna.ajnamobile.ajna.Activity.RecentMessagesFragmentExpanded;
+import in.ajna.ajnamobile.ajna.MyFamily.FamilyFragment;
+import in.ajna.ajnamobile.ajna.Settings.SettingsActivity;
+import pl.droidsonroids.gif.GifImageView;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    private NotificationManagerCompat notificationManager;
-    public static final String MESSAGES_EXTRA="messageExtra";
-    public static final String TITLE_EXTRA="titleExtra";
-    private static final String NAME_KEY = "Name";
-
-    private static final String PHONE_KEY = "Phone";
-
-    private FragmentManager fragmentManager=getSupportFragmentManager();
-
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-    private SwitchButton btnSwitch;
-
-    private SharedPreferences sp;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -96,24 +64,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private String fullName;
     private String code;
 
-    private boolean isLongPress=false;
     private int longClickDuration=1260;
     private long then;
 
-    private int status,status2=0,flag=0;
-
-    private static MainActivity inst;
-
-    FoldingCell fc2;
+    RelativeLayout bottomSheetLayout;
 
     GifImageView gifImageView;
-
-    RelativeLayout layout_main,bottomSheetLayout;
+    PleaseWaitDialog pleaseWaitDialog = new PleaseWaitDialog();
     private BottomSheetBehavior bottomSheetBehavior;
+    private int status2 = 0, flag = 0;
+    private TextView tvStatus;
+    private RelativeLayout layout_1, layout_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("MAINACT", "onCreate called");
 
             setContentView(R.layout.activity_main);
             //Set Custom toolbar
@@ -125,35 +92,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-
-            notificationManager = NotificationManagerCompat.from(this);
-        BottomNavigationView bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
 
             //Get Shared Preferences
             getSpecificPreferences();
 
-            //start My Immediate Contacts Fragments
-            //initMyImmediateContacts();
+        layout_1 = findViewById(R.id.layout_1);
+        layout_2 = findViewById(R.id.layout_2);
 
-            //Folding Cell
-            fc2 = findViewById(R.id.folding_cell2);
-
-            btnSwitch = findViewById(R.id.btnSwitch);
-
-            layout_main=findViewById(R.id.layout_main);
             bottomSheetLayout=findViewById(R.id.bottomSheetLayout);
 
             bottomSheetBehavior=BottomSheetBehavior.from(bottomSheetLayout);
 
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        loadFragment(new FamilyFragment());
+
             gifImageView= findViewById(R.id.gifImageView);
+        tvStatus = findViewById(R.id.tvStatus);
 
             gifImageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if(event.getAction()==MotionEvent.ACTION_DOWN) {
-                        isLongPress = true;
+
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         changeButtonTransitionState();
                         then = System.currentTimeMillis();
@@ -175,6 +137,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 }
             });
 
+        final DocumentReference docRef = db.collection(code).document("RecentMessages");
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    String message = snapshot.get("message", String.class);
+                    tvStatus.setText(message);
+                } else {
+                    Log.d("MAIN_ACT", "Current data: null");
+                }
+            }
+        });
+
             deviceRef = dbRealtime.getReference(code);
 
             deviceRef.child("status").addValueEventListener(new ValueEventListener() {
@@ -182,14 +163,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     int a =Integer.parseInt(dataSnapshot.getValue().toString());
                     if(a==0 && flag==0){
-                        startFadeTransition(true);
+                        //startFadeTransition(true);
                         status2=0;
                         gifImageView.setImageResource(R.drawable.disarmed);
+
                     }
                     else if (a==1 && flag==0){
-                        startFadeTransition(false);
+                        //startFadeTransition(false);
                         status2=1;
                         gifImageView.setImageResource(R.drawable.armed);
+
                     }
                     else if(flag==1){
                         flag=0;
@@ -203,56 +186,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 }
             });
 
-            btnSwitch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                    if (isChecked == true) {
-                        if (status == 0) {
-                            sendArmedMessage();
-                        }
-
-                    } else if (isChecked == false) {
-                        if (status == 1) {
-                            sendDisarmedMessage();
-                        }
-                    }
-                }
-
-
-            });
-
-        /*final FoldingCell fc4=findViewById(R.id.folding_cell4);
-        fc4.setOnClickListener(new View.OnClickListener() {
+        Tovuti.from(this).monitor(new Monitor.ConnectivityListener() {
             @Override
-            public void onClick(View v) {
-                fc4.toggle(false);
+            public void onConnectivityChanged(int connectionType, boolean isConnected, boolean isFast) {
+                if (!isConnected) {
+                    layout_1.setVisibility(View.GONE);
+                    layout_2.setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "No Internet!!!", Toast.LENGTH_SHORT).show();
+                } else if (isConnected) {
+                    layout_2.setVisibility(View.GONE);
+                    layout_1.setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Connected!", Toast.LENGTH_SHORT).show();
+                }
             }
-        });*/
-
-
-            //if(!isMyServiceRunning(AlwaysOnService.class)) startService();
-
-
-        //}
-        //else buildDialog(MainActivity.this).show();
-    }
-
-    private void startFadeTransition(Boolean reverseAnimation) {
-        TransitionDrawable transition = (TransitionDrawable) layout_main.getBackground();
-        if(!reverseAnimation){
-            transition.startTransition(1000);
-        }
-        else{
-            transition.reverseTransition(1000);
-        }
-
-    }
-
-    private void initMyImmediateContacts() {
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction
-                .add(R.id.fragmentContainerMyImmediateContacts,new MyImmediateContactsFragmentCollapsed(),"ImmContactsCollapsed")
-                .commit();
+        });
     }
 
     @Override
@@ -264,11 +211,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onStart() {
         super.onStart();
-        inst=this;
     }
     @Override
     protected void onResume() {
         super.onResume();
+        Tovuti.from(this).start();
     }
 
     @Override
@@ -279,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onStop() {
         super.onStop();
+        Tovuti.from(this).stop();
     }
 
     @Override
@@ -289,19 +237,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId()==R.id.btnHelp){
-            SharedPreferences sp=getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
-            String phoneNumberIndia = sp.getString("phoneNumber","0");
-            SharedPreferences.Editor edit = sp.edit();
-            edit.putString("fullName",null);
-            edit.putString("code",null);
-            edit.putString("phoneNumber",null);
-            edit.putString("isSignedIn","0");
-            edit.apply();
 
-            mAuth.signOut();
-            Toast.makeText(MainActivity.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
-            stopService();
-            finishAndRemoveTask();
         }
         else if(item.getItemId()==R.id.btnSettings){
 
@@ -310,91 +246,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void sendOnChannel1(){
-        Notification notification = new NotificationCompat.Builder(this,App.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_icon1)
-                .setContentTitle("Hello this is a text!")
-                .setContentText("This is the description.")
-                .build();
-        notificationManager.notify(2,notification);
-    }
-    public void startService(){
-
-        Intent serviceIntent = new Intent(this,AlwaysOnService.class);
-        startService(serviceIntent);
-    }
-
-    public void stopService(){
-        Intent serviceIntent = new Intent(this,AlwaysOnService.class);
-        stopService(serviceIntent);
-
-    }
-    private void sendArmedMessage() {
-        recentMessagesRef=db.collection(code).document("RecentMessages").collection("Messages");
-        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName,"Device Armed");
-
-        db.collection(code).document("RecentMessages").set(message);
-        recentMessagesRef.document().set(message);
-        deviceRef.child("status").setValue(1);
-    }
-
-    private void sendDisarmedMessage(){
-
-        recentMessagesRef=db.collection(code).document("RecentMessages").collection("Messages");
-        RecentMessages message=new RecentMessages(System.currentTimeMillis(),fullName,"Device Disarmed");
-
-        db.collection(code).document("RecentMessages").set(message);
-        recentMessagesRef.document().set(message);
-
-
-        deviceRef.child("status").setValue(0);
-
-    }
     private void getSpecificPreferences() {
-        sp=this.getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
+
+        SharedPreferences sp = this.getSharedPreferences("DEVICE_CODE", MODE_PRIVATE);
         fullName=sp.getString("fullName","User");
         code=sp.getString("code","0");
     }
 
-    public static MainActivity instance() {
-        return inst;
-    }
-
-    public void startAlarm()
-    {
-        Intent i = new Intent(MainActivity.this, AlarmReceiver.class);
-        PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),pi);
-    }
-
-    public AlertDialog.Builder buildDialog(Context c) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(c);
-        builder.setTitle("No Internet Connection");
-        builder.setMessage("You need to have Mobile Data or wifi to access this. Press ok to Exit");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        return builder;
-    }
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void addAutoStartup() {
+    private void addAutoStartup() { //TODO change this/look into this
 
         try {
             Intent intent = new Intent();
@@ -428,13 +287,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         switch (item.getItemId()) {
-            case R.id.navigation_status:
-                break;
-
-            case R.id.navigation_contacts:
-                fragment = new MyImmediateContactsFragmentCollapsed();
-                break;
-
             case R.id.navigation_activity:
                 fragment = new RecentMessagesFragmentExpanded();
                 break;
@@ -461,16 +313,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void changeColor(){
         if(status2==0){
-            startFadeTransition(false);
+
             status2=1;
             gifImageView.setImageResource(R.drawable.armed);
-            sendArmedMessage();
+
+            //arm device
+            ArmAsyncTask armAsyncTask = new ArmAsyncTask(this);
+            armAsyncTask.execute();
+
         }
         else{
-            startFadeTransition(true);
+
             status2=0;
             gifImageView.setImageResource(R.drawable.disarmed);
-            sendDisarmedMessage();
+            //disarm device
+            DisarmAsyncTask disarmAsyncTask = new DisarmAsyncTask(this);
+            disarmAsyncTask.execute();
         }
     }
     private void changeButtonTransitionState(){
@@ -491,4 +349,126 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
+    //ARM Async Task
+    private static class ArmAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private WeakReference<MainActivity> activityWeakReference;
+
+        ArmAsyncTask(MainActivity activity) {
+            activityWeakReference = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            activity.pleaseWaitDialog.setCancelable(false);
+            activity.pleaseWaitDialog.show(activity.getSupportFragmentManager(), null);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return null;
+            }
+
+            activity.recentMessagesRef = activity.db.collection(activity.code).document("RecentMessages").collection("Messages");
+            RecentMessages message = new RecentMessages(System.currentTimeMillis(), activity.fullName, "Device Armed");
+            activity.db.collection(activity.code).document("RecentMessages").set(message);
+            activity.recentMessagesRef.document().set(message);
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+
+            activity.deviceRef.child("status").setValue(1);
+            activity.pleaseWaitDialog.dismiss();
+
+            Toast.makeText(activity, "Device Armed!", Toast.LENGTH_SHORT).show();  //TODO change this
+        }
+
+    }
+
+    //DISARM Async Task
+    private static class DisarmAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private WeakReference<MainActivity> activityWeakReference;
+
+        DisarmAsyncTask(MainActivity activity) {
+            activityWeakReference = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            activity.pleaseWaitDialog.setCancelable(false);
+            activity.pleaseWaitDialog.show(activity.getSupportFragmentManager(), null);
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return null;
+            }
+
+            activity.recentMessagesRef = activity.db.collection(activity.code).document("RecentMessages").collection("Messages");
+            RecentMessages message = new RecentMessages(System.currentTimeMillis(), activity.fullName, "Device Disarmed");
+            activity.db.collection(activity.code).document("RecentMessages").set(message);
+            activity.recentMessagesRef.document().set(message);
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+
+            activity.deviceRef.child("status").setValue(0);
+            activity.deviceRef.child("detectedStatus").setValue(0);
+            activity.pleaseWaitDialog.dismiss();
+
+            Toast.makeText(activity, "Device Disarmed!", Toast.LENGTH_SHORT).show(); //TODO change this
+        }
+    }
 }

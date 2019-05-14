@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <PreferenceCategory
-        android:key="notifications"
-        android:title="Notifications">
-
-        <SwitchPreference
-            android:key="enable_notifcations"
-            android:title="Enable notifications"
-            android:summary="Tap to enable/disable notifications"
-            android:contentDescription="Disable the notifications"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="alarm"
-        android:title="Alarm">
-        <SwitchPreference
-            android:key="enable_sound"
-            android:title="Sound" />
-        <SwitchPreference
-            android:key="enable_vibrate"
-            android:title="Vibrate" />
-        <ListPreference android:title="Alarm Tone"/>
-    </PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="device"
         android:title="Device">
         <Preference
             android:key="reconfigure_device"
+            android:summary="All device data will be removed and you will be redirected to the device initialisation page"
             android:title="Reconfigure device"/>
     </PreferenceCategory>
     <PreferenceCategory

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Alarm.AlarmActivity"
-    android:background="@drawable/background_gradient3">
+    android:background="@drawable/background_gradient">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_icon1" />
 
     <TextView
         android:id="@+id/label4"
@@ -13,7 +20,7 @@
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/ivIcon"
 
         android:fontFamily="@font/r_bold"
         android:text="Movement Detected"
@@ -31,46 +38,37 @@
         android:text="Ensure everyone is safe"
         android:textSize="18sp"
         android:textColor="@android:color/white"/>
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifCancel"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-
-        android:layout_below="@id/label4"
-
-        android:layout_centerHorizontal="true"
-
-        android:src="@drawable/loading"
-        android:background="@drawable/loading"/>
-    <TextView
-        android:id="@+id/label5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/gifCancel"
-        android:layout_centerHorizontal="true"
-
-        android:text="Press and hold to disarm"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSendMessage"
-        android:layout_width="match_parent"
+        android:id="@+id/btnDisarm"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
 
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:text="Notify Immediate Contacts"
+
+        android:layout_marginTop="20dp"
+
+        android:padding="15dp"
         android:fontFamily="@font/r_bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         android:textSize="15sp"
         android:textColor="@android:color/white"
         android:background="@drawable/button_rectangle"
 
-        android:padding="15dp"/>
+        android:text="Disarm" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/barlow_semi_condensed_semibold"
+        android:text="AJNA"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
 
 </RelativeLayout>

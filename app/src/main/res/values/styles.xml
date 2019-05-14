@@ -3,17 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/sf_family</item>
+        <item name="android:fontFamily">@font/roboto_family</item>
         <item name="android:ambientShadowAlpha">0.15</item>
         <item name="android:spotShadowAlpha">0.15</item>
-        <!--
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item> -->
 
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
         <item name="alertDialogTheme">@style/CustomAlertDialog</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">#353546</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -26,7 +23,8 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:layout_height">100dp</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
     </style>
 
@@ -47,7 +45,7 @@
 
 
     <style name="CustomAlertDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
-        <item name="dialogCornerRadius">14dp</item>
+        <item name="dialogCornerRadius">5dp</item>
         <item name="colorPrimary">@color/b1</item>
         <item name="textAppearanceButton">@style/TextAppearance.AppCompat.Body1</item>
         <item name="android:textSize">17sp</item>
@@ -62,4 +60,5 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">15sp</item>
     </style>
+
 </resources>

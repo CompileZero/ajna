@@ -1,58 +1,57 @@
 package in.ajna.ajnamobile.ajna.Login;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import in.ajna.ajnamobile.ajna.R;
-
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-
-import android.os.Bundle;
-
-import android.view.View;
-import android.widget.Toast;
-
+import com.androidstudy.networkmanager.Monitor;
+import com.androidstudy.networkmanager.Tovuti;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.Result;
-import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
+
+import in.ajna.ajnamobile.ajna.Activity.RecentMessages;
+import in.ajna.ajnamobile.ajna.R;
+import in.ajna.ajnamobile.ajna.WrongQrCodeDialog;
 
 
-public class QRCodeActivity extends AppCompatActivity {
+public class QRCodeActivity extends AppCompatActivity implements WrongQrCodeDialog.ExitListener {
 
     private QRCodeActivity activity;
 
     private MaterialButton btnClickHere;
     private CodeScanner mCodeScanner;
-
+    RelativeLayout layout_2;
     private String fullName,city,phoneNumberIndia, code,token;
 
     private FirebaseFirestore db;
     private CollectionReference collRef;
     private User user;
+    private CodeScannerView scannerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_qrcode);
         db = FirebaseFirestore.getInstance();
+
+        scannerView = findViewById(R.id.scanner_view);
 
         activity=new QRCodeActivity();
         startScanner();
@@ -73,10 +72,23 @@ public class QRCodeActivity extends AppCompatActivity {
                 goToManualCodeEntry();
             }
         });
+        layout_2 = findViewById(R.id.layout_2);
 
-
+        Tovuti.from(this).monitor(new Monitor.ConnectivityListener() {
+            @Override
+            public void onConnectivityChanged(int connectionType, boolean isConnected, boolean isFast) {
+                if (!isConnected) {
+                    mCodeScanner.releaseResources();
+                    scannerView.setVisibility(View.INVISIBLE);
+                    layout_2.setVisibility(View.VISIBLE);
+                } else if (isConnected) {
+                    layout_2.setVisibility(View.GONE);
+                    scannerView.setVisibility(View.VISIBLE);
+                    mCodeScanner.startPreview();
+                }
+            }
+        });
     }
-
     public void goToManualCodeEntry(){
         Intent intent=new Intent(QRCodeActivity.this,ManualCodeEntryActivity.class);
         intent.putExtra("fullName",fullName);
@@ -88,42 +100,30 @@ public class QRCodeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Tovuti.from(this).start();
         mCodeScanner.startPreview();
-
     }
     @Override
     protected void onPause() {
         mCodeScanner.releaseResources();
         super.onPause();
-
     }
 
-    public void buildQRErrorDialog(){
-        new FancyGifDialog.Builder(QRCodeActivity.this)
-                .setTitle("OOPS..")
-                .setMessage("The QR Code scanned is invalid! Please try again")
-                .setGifResource(R.drawable.dialog1)
-                .setPositiveBtnText("Ok")
-                .setNegativeBtnText("Dismiss")
-                .isCancellable(false)
-                .OnPositiveClicked(new FancyGifDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        mCodeScanner.startPreview();
-                    }
-                })
-                .OnNegativeClicked(new FancyGifDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        mCodeScanner.startPreview();
-                    }
-                })
-                .build();
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Tovuti.from(this).stop();
+    }
+
+    public void buildQRErrorDialog() {
+        WrongQrCodeDialog dialog = new WrongQrCodeDialog();
+        dialog.show(getSupportFragmentManager(), "Wrong QR Dialog!");
+
     }
 
     public void checkForExistingAccount(){
 
-        collRef=db.collection(code).document("family").collection("members");
+        collRef = db.collection(code).document("MyFamily").collection("members");
         collRef.whereEqualTo("phoneNumber",phoneNumberIndia)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -132,8 +132,8 @@ public class QRCodeActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             if(task.getResult().getDocuments().isEmpty()){
                                 collRef.document().set(user);
-
-
+                                RecentMessages recentMessages = new RecentMessages(System.currentTimeMillis(), fullName, "Family Member Added");
+                                db.collection(code).document("RecentMessages").collection("Messages").document().set(recentMessages);
 
                                 Toast.makeText(QRCodeActivity.this, "Device Registered!", Toast.LENGTH_SHORT).show();
                             }
@@ -141,6 +141,8 @@ public class QRCodeActivity extends AppCompatActivity {
                                 String id=task.getResult().getDocuments().get(0).getId();
                                 collRef.document(id).delete();
                                 collRef.document().set(user);
+                                RecentMessages recentMessages = new RecentMessages(System.currentTimeMillis(), fullName, "Family Member Added");
+                                db.collection(code).document("RecentMessages").collection("Messages").document().set(recentMessages);
                                 Toast.makeText(QRCodeActivity.this, "Device Registered!", Toast.LENGTH_SHORT).show();
                             }
 
@@ -151,8 +153,9 @@ public class QRCodeActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void startScanner(){
-        CodeScannerView scannerView=findViewById(R.id.scanner_view);
+
         mCodeScanner=new CodeScanner(getApplicationContext(),scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -160,12 +163,10 @@ public class QRCodeActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        code=result.getText().toString().trim();
+                        code = result.getText().trim();
                         if(code.contains("AJNA")){
                             SharedPreferences sp = getSharedPreferences("DEVICE_CODE",MODE_PRIVATE);
                             SharedPreferences.Editor edit = sp.edit();
-
-
 
                             edit.putString("code",code);
                             edit.putString("fullName",fullName);
@@ -173,14 +174,14 @@ public class QRCodeActivity extends AppCompatActivity {
                             edit.putString("isSignedIn","1");
                             edit.apply();
 
-
                             checkForExistingAccount();
+                            DatabaseReference db2 = FirebaseDatabase.getInstance().getReference();
+                            db2.child(code).child("tokens").child("and" + fullName).setValue(token);
 
                             Intent intent = new Intent(QRCodeActivity.this, LoginOptions.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                        }
-                        else{
+                        } else {
                             buildQRErrorDialog();
                         }
                     }
@@ -189,5 +190,10 @@ public class QRCodeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void exitAndStartScanner() {
+        mCodeScanner.startPreview();
     }
 }

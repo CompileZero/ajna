@@ -24,7 +24,7 @@
         android:text="Cannot scan QR code?"
         android:textSize="25sp"
 
-        app:customFont="sf_pro_d_bold.otf"
+        app:customFont="r_bold.ttf"
         app:colors="@array/gradient"
 
         app:angle="0"
@@ -44,44 +44,47 @@
 
         android:fontFamily="@font/r_medium"
         android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:text="Please enter the device code which can be seen below the QR code."/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+
         android:layout_centerHorizontal="true"
         android:layout_above="@id/btnProceed"
         android:layout_marginBottom="10dp">
-        <com.infideap.blockedittext.BlockEditText
+
+        <EditText
             android:id="@+id/etBlocks"
-            android:layout_width="270dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_toEndOf="@+id/tvAjna"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/tvAjna"
+            android:autoLink="none"
+            android:background="@drawable/edit_text_background"
 
-            app:bet_numberOfBlock="3"
-            app:bet_inputType="Integer"
-            app:bet_defaultLength="2"
+            android:fontFamily="@font/r_medium"
+            android:hint="Code (10 digits)"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingStart="10dp"
 
-            app:bet_separatorCharacter="-"
-            app:bet_separatorTextSize="10sp"
-
-            app:bet_editTextBackground="@drawable/rounded_rectangle"/>
-
+            android:paddingEnd="5dp"
+            android:textColor="@color/b1"
+            android:textSize="16sp" />
         <TextView
             android:id="@+id/tvAjna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-
-            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-
-
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
-            android:fontFamily="@font/sf_cd_medium"
+            android:fontFamily="@font/r_bold"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:text="AJNA-"
@@ -92,11 +95,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnProceed"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
 
         android:layout_centerInParent="true"
         android:text="Proceed"
@@ -109,5 +109,28 @@
         android:padding="15dp"
         android:onClick="goToHomePage"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/white"
+        android:tint="#ffFFFF"
+
+        app:borderWidth="0dp"
+        app:fabCustomSize="30dp"
+        app:srcCompat="@drawable/ic_help" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-5dp"
+        android:src="@drawable/design" />
 
 </RelativeLayout>

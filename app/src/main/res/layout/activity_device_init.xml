@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.DeviceInitActivity">
+
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
+        android:id="@+id/tvPressAndHold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/viewStatus"
+        android:layout_centerHorizontal="true"
+
+        android:text="Instructions"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+
+        app:angle="0"
+        app:colors="@array/gradient"
+
+        app:customFont="r_bold.ttf"
+        app:maxFPS="30"
+        app:speed="1000" />
+
+    <TextView
+        android:id="@+id/tvLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tvPressAndHold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/r_medium"
+
+        android:gravity="center"
+        android:text="Follow the below instructions to connect your device to the home WiFi network."
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+
+        android:layout_below="@id/tvLabel1"
+        android:layout_marginStart="20dp"
+
+        android:layout_marginTop="20dp"
+
+        android:src="@drawable/device_init" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/gifImageView"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/r_bold"
+        android:text="Go to Wifi settings and connect to &quot; AJNA8266 &quot;"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLabel1"
+
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_toEndOf="@+id/gifImageView"
+        android:fontFamily="@font/r_bold"
+        android:text="Press and hold the button till the light starts blinking."
+        android:textColor="@color/black" />
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tv2"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp">
+
+    </com.google.android.youtube.player.YouTubePlayerView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnProceed"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+
+        android:background="@drawable/button_rectangle"
+        android:fontFamily="@font/r_medium"
+        android:text="Scan for device"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</RelativeLayout>

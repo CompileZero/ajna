@@ -1,13 +1,16 @@
 package in.ajna.ajnamobile.ajna.Activity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -25,9 +28,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import androidx.annotation.WorkerThread;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import in.ajna.ajnamobile.ajna.R;
 
 public class ClearHistoryDialog extends AppCompatDialogFragment {
@@ -35,6 +35,7 @@ public class ClearHistoryDialog extends AppCompatDialogFragment {
     private SharedPreferences sp;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference messagesRef;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -47,7 +48,6 @@ public class ClearHistoryDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         executeDeletion();
-
                     }
                 })
                 .setNeutralButton("CANCEL", null)
@@ -114,4 +114,5 @@ public class ClearHistoryDialog extends AppCompatDialogFragment {
         return querySnapshot.getDocuments();
     }
     // [END delete_collection]
+
 }

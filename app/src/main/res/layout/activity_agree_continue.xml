@@ -6,13 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Login.AgreeContinueActivity">
 
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
     <com.mursaat.extendedtextview.AnimatedGradientTextView
         android:id="@+id/tvWelcomAjna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/viewStatus"
 
         android:textColor="@android:color/black"
         android:text="Welcome to Ajna"
@@ -25,11 +30,13 @@
         app:speed="1000"
         app:maxFPS="30"/>
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
 
-        android:layout_centerInParent="true"
+        android:layout_below="@id/tvLabel1"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+
 
         android:src="@drawable/agree_continue"
         />
@@ -38,10 +45,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginStart="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvWelcomAjna"
+        android:layout_marginEnd="60dp"
+        android:gravity="center"
 
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:textColor="@android:color/black"
         android:fontFamily="@font/r_medium"
         android:text="The world's simplest security experience."/>
@@ -55,7 +65,8 @@
         android:layout_above="@+id/tvTerms"
         android:text="@string/press_to_accept"
         android:textColor="@android:color/black"
-        />
+        android:fontFamily="@font/r_medium"
+        android:textSize="12sp" />
     <TextView
         android:id="@+id/tvTerms"
         android:layout_width="wrap_content"
@@ -63,29 +74,27 @@
 
         android:layout_centerHorizontal="true"
         android:layout_above="@id/btnAgree"
+        android:layout_marginBottom="50dp"
 
         android:text="@string/terms"
         android:textColor="@android:color/holo_blue_dark"
-
-        />
+        android:textSize="12sp" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAgree"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
 
-        android:text="Agree and Continue"
-        android:fontFamily="@font/barlow_semi_condensed_semibold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
         android:background="@drawable/button_rectangle"
+        android:fontFamily="@font/r_medium"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:text="Agree and continue"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
-        android:padding="15dp"/>
+    <!--android:padding="15dp"/>-->
 
 </RelativeLayout>

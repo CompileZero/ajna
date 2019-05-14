@@ -8,11 +8,12 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name=".App"
@@ -22,9 +23,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_icon1" />
 
-        <activity android:name=".Login.QRCodePermissionsActivity"/>
+        <activity android:name=".Login.WifiManagerActivity"></activity>
+        <activity android:name=".Login.DeviceInitActivity" />
+        <activity android:name=".Login.UserGuideActivity" />
+        <activity
+            android:name=".Login.QRCodePermissionsActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".MessageService"
@@ -35,43 +45,47 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Settings.SettingsActivity" />
-
-        <activity android:name=".Login.AgreeContinueActivity" />
+        <activity
+            android:name=".Settings.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login.AgreeContinueActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Alarm.AlarmActivity"
-            android:excludeFromRecents="true" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.VerifyPhoneActivity" />
-        <activity android:name=".Login.QRCodeActivity" />
-        <activity android:name=".SplashScreenActivity"
+        <activity
+            android:name=".Login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login.VerifyPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login.QRCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.ManualCodeEntryActivity" />
-        <activity android:name=".Login.LoginOptions" />
-
-        <service android:name=".Notification.AlwaysOnService" />
-
-        <activity android:name=".Login.DeviceSetupSelection"
-            android:screenOrientation="portrait">
-
-        </activity>
+        <activity
+            android:name=".Login.ManualCodeEntryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login.LoginOptions"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".Alarm.AlarmReceiver" />
-        <receiver
-            android:name=".ConnectivityReceiver"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

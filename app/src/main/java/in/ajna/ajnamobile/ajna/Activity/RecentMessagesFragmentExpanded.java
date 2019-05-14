@@ -3,40 +3,22 @@ package in.ajna.ajnamobile.ajna.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldPath;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.WriteBatch;
-
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import in.ajna.ajnamobile.ajna.MyImmediateContacts.AddContactDialog;
+
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 import in.ajna.ajnamobile.ajna.R;
 
 public class RecentMessagesFragmentExpanded extends Fragment {
@@ -108,15 +90,22 @@ public class RecentMessagesFragmentExpanded extends Fragment {
                 .build();
         adapter = new RecentMessagesAdapterExpanded(options);
 
-        RecyclerView recyclerView= view.findViewById(R.id.rvRecentMessages2);
+        final RecyclerView recyclerView = view.findViewById(R.id.rvRecentMessages2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
         recyclerView.setAdapter(adapter);}
 
 
     private void startDialog(){
         ClearHistoryDialog addContactDialog=new ClearHistoryDialog();
         addContactDialog.show(getFragmentManager(),"Clear History Dialog");
+
     }
 
 }

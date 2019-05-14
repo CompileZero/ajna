@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.WifiManagerActivity">
+
+    <View
+        android:id="@+id/viewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+    <com.mursaat.extendedtextview.AnimatedGradientTextView
+        android:id="@+id/tvPressAndHold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/viewStatus"
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center"
+        android:text="Connect device to home WiFi network"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:angle="0"
+        app:colors="@array/gradient"
+
+        app:customFont="r_bold.ttf"
+        app:maxFPS="30"
+        app:speed="1000" />
+
+    <TextView
+        android:id="@+id/tvLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tvPressAndHold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/r_medium"
+
+        android:gravity="center"
+        android:text="Follow the below instructions:"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/tvLabel1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/r_bold"
+
+        android:gravity="center"
+        android:text="1) Click on &quot;Configure Wifi&quot; button
+2) Enter your current home wifi ssid and password and click on &quot;Save&quot;
+3) Click on &quot;Proceed&quot; button at the bottom"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_below="@+id/tvLabel2"
+        android:layout_alignBottom="@id/btnProceed">
+
+    </WebView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnProceed"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+
+        android:background="@drawable/button_rectangle"
+        android:fontFamily="@font/r_medium"
+        android:text="Proceed"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</RelativeLayout>

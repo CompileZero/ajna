@@ -47,123 +47,183 @@
         android:text="Please enter your name and mobile number to continue"
         android:fontFamily="@font/r_medium"
         android:textColor="@android:color/black"
-        android:textSize="15sp"/>
+        android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/label_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_above="@+id/editTextRegisterFullName"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="5dp"
-
-        android:text="FULL NAME"
-        android:textSize="12sp"
-        android:fontFamily="@font/r_medium"
-        android:textColor="@color/g1"
-        />
-
-    <EditText
-        android:id="@+id/editTextRegisterFullName"
+    <RelativeLayout
+        android:id="@+id/layout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvWelcome"
+        android:visibility="invisible">
 
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/layout_text"
-        android:layout_marginBottom="10dp"
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="200dp"
 
-        android:background="@drawable/edit_text_background"
-
-
-        android:paddingStart="10dp"
-        android:paddingEnd="5dp"
-        android:inputType="textCapWords|textPersonName"
-
-
-        android:fontFamily="@font/r_medium"
-        android:textSize="20sp"
-        />
-    <LinearLayout
-        android:id="@+id/layout_text"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-
-        android:layout_above="@id/btnLogin"
-        android:layout_marginBottom="15dp"
-
-
-
-        android:orientation="horizontal">
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/no_internet" />
 
         <TextView
-            android:layout_width="60dp"
+            android:id="@+id/tvWhoops"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/img1"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/r_bold"
 
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="+91"
-            android:fontFamily="@font/barlow_semi_condensed_semibold"
-            android:textColor="@android:color/black"
-            android:textSize="19sp"
-            android:background="@drawable/edit_text_background"/>
+            android:text="Oooops!"
+
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_gravity="center"
-
+            android:layout_below="@id/tvWhoops"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
 
-            android:text="-"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+
+            android:text="No internet connection found! \n Check your connection and try again..."
+            android:textColor="#727272" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_above="@id/editTextRegisterFullName"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="5dp"
+
+            android:fontFamily="@font/r_medium"
+            android:text="FULL NAME"
+            android:textColor="@color/g1"
+            android:textSize="12sp" />
+
         <EditText
-            android:id="@+id/editTextPhoneNumber"
+            android:id="@+id/editTextRegisterFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_above="@id/layout_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
 
             android:background="@drawable/edit_text_background"
-            android:autoLink="none"
 
 
-            android:hint="Phone number (10 digits)"
+            android:fontFamily="@font/r_medium"
+            android:inputType="textCapWords|textPersonName"
             android:paddingStart="10dp"
+
+
             android:paddingEnd="5dp"
-            android:inputType="phone"
-            android:maxLength="11"
+            android:textSize="18sp" />
 
-            android:fontFamily="@font/barlow_semi_condensed_semibold"
-            android:textSize="19sp"
-            />
+        <LinearLayout
+            android:id="@+id/layout_text"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
 
-    </LinearLayout>
+            android:layout_above="@id/btnLogin"
+            android:layout_marginBottom="15dp"
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
 
-        android:layout_centerInParent="true"
-        android:text="Get OTP"
-        android:fontFamily="@font/barlow_semi_condensed_semibold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/button_rectangle"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/r_medium"
 
-        android:padding="15dp"/>
+
+                android:gravity="center"
+                android:text="+91"
+                android:textColor="@color/b1"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+
+                android:autoLink="none"
+                android:background="@drawable/edit_text_background"
+
+                android:fontFamily="@font/r_medium"
+                android:hint="Phone number (10 digits)"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingStart="10dp"
+
+                android:paddingEnd="5dp"
+                android:textColor="@color/b1"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+
+
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_rectangle"
+            android:fontFamily="@font/r_medium"
+            android:text="Get OTP"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-5dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/design" />
+
 </RelativeLayout>

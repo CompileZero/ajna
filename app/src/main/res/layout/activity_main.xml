@@ -7,16 +7,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/background_transition"
     android:layout_above="@id/bottomNavigationView"
 
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#293752">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <View
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
                 android:id="@+id/viewStatus"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"/>
@@ -36,17 +45,89 @@
                 app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:titleTextColor="@android:color/white" />
 
-            <pl.droidsonroids.gif.GifImageView
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar1"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/barlow_semi_condensed_semibold"
+
+
+            android:text="Touch and hold to arm/disarm the device"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gifImageView"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
 
-                android:layout_below="@id/toolbar1"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"
+            android:layout_below="@id/tv2"
+            android:layout_centerHorizontal="true"
 
-                android:src="@drawable/disarmed"/>
-        </RelativeLayout>
+            android:layout_marginTop="20dp"
+
+            android:src="@drawable/disarmed" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/gifImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/barlow_semi_condensed_semibold"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="200dp"
+
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/no_internet" />
+
+        <TextView
+            android:id="@+id/tvWhoops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img1"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/r_bold"
+
+            android:text="Oooops!"
+
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/tvWhoops"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+
+
+            android:text="No internet connection found! \n Check your connection and try again..."
+            android:textColor="#727272" />
+    </RelativeLayout>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +140,7 @@
             android:layout_height="wrap_content"
 
             android:background="@drawable/bottom_sheet_background"
-            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:behavior_peekHeight="50dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -83,163 +164,6 @@
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
-    <com.suke.widget.SwitchButton
-        android:id="@+id/btnSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_centerHorizontal="true"
-
-        app:sb_shadow_radius="7dp"
-        app:sb_shadow_offset="2dp"
-        app:sb_shadow_effect="true"
-
-
-        app:sb_show_indicator="false"
-
-        app:sb_background="@color/c9"
-
-        app:sb_checked_color="@color/c5"
-
-        android:visibility="gone"
-
-        />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-
-        android:visibility="gone"
-
-        android:layout_marginBottom="10dp">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:id="@+id/fragmentContainerExpanded"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerHorizontal="true">
-                <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/folding_cell3"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="10dp"
-
-
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-                    ​<FrameLayout
-                    android:id="@+id/cell_content_view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <RelativeLayout
-                        android:id="@+id/fragmentContainerMyFamily"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center">
-
-                    </RelativeLayout>
-                </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/cell_title_view3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        >
-                        <RelativeLayout
-                            android:id="@+id/fragmentContainerMyFamily2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center">
-                        </RelativeLayout>
-                    </FrameLayout>
-                    ​
-                </com.ramotion.foldingcell.FoldingCell>
-                        <RelativeLayout
-                            android:id="@+id/fragmentContainerMyImmediateContacts"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:layout_marginBottom="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center"
-                            android:layout_below="@id/folding_cell3">
-
-                        </RelativeLayout>
-                <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/folding_cell2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    android:layout_below="@id/fragmentContainerMyImmediateContacts"
-                    android:layout_marginBottom="10dp"
-
-
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-                    ​<FrameLayout
-                    android:id="@+id/cell_content_view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:visibility="gone">
-
-                    <RelativeLayout
-                        android:id="@+id/fragmentContainerRecentMessages"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center">
-
-                    </RelativeLayout>
-                </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/cell_title_view2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <RelativeLayout
-                            android:id="@+id/fragmentContainerRecentMessages2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center">
-                        </RelativeLayout>
-                    </FrameLayout>
-                    ​
-                </com.ramotion.foldingcell.FoldingCell>
-
-            </RelativeLayout>
-
-
-        </ScrollView>
-
-    </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -256,10 +180,7 @@
         app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/BarlowNavigation"
         app:itemTextAppearanceInactive="@style/BarlowNavigation"
-        app:elevation="0.5dp"
-
-        />
-
+        app:elevation="0.5dp" />
 
 </RelativeLayout>
 

@@ -1,20 +1,21 @@
 package in.ajna.ajnamobile.ajna.Login;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import in.ajna.ajnamobile.ajna.R;
-
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.geniusforapp.fancydialog.FancyAlertDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import in.ajna.ajnamobile.ajna.R;
 
 public class QRCodePermissionsActivity extends AppCompatActivity {
 
@@ -29,11 +30,22 @@ public class QRCodePermissionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_permissions);
 
+        FloatingActionButton fabHelp = findViewById(R.id.fabHelp);
+        fabHelp.setColorFilter(Color.BLUE);
+
         btnScanCode=findViewById(R.id.btnScanCode);
 
         fullName = getIntent().getStringExtra("fullName");
         city = getIntent().getStringExtra("city");
         phoneNumberIndia = getIntent().getStringExtra("phoneNumberIndia");
+
+        fabHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), UserGuideActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnScanCode.setOnClickListener(new View.OnClickListener() {
             @Override
